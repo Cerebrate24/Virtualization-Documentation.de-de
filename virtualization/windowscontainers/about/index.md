@@ -8,12 +8,12 @@ ms.topic: article
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 8e273856-3620-4e58-9d1a-d1e06550448
-ms.openlocfilehash: 4fad299db2c897a6be860ef0cc71e80969c75357
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: 67ac6e39ca4b3c485d1bb376be1893e871317fac
+ms.sourcegitcommit: 85e257cfd543bf5a37680cde07e184cbdd573bd7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "74909410"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83368011"
 ---
 # <a name="windows-and-containers"></a>Windows und Container
 
@@ -30,7 +30,7 @@ Microsoft bietet eine Reihe von Tools und Plattformen, die Sie beim Entwickeln u
 - <strong>Veröffentlichen Sie Ihre Apps als Containerimages</strong> auf dem öffentlichen DockerHub, damit sie von anderen Benutzern verwendet werden können, oder in einer privaten [Azure Container Registry](https://azure.microsoft.com/services/container-registry/) für eigene Entwicklung und Bereitstellung durch Ihre Organisation, indem Sie Push- und Pullvorgänge direkt in Visual Studio und Visual Studio Code durchführen.
 - <strong>Stellen Sie Container im richtigen Maßstab in Azure</strong> oder anderen Clouds bereit:
 
-  - Pullen Sie Ihre App (Containerimage) aus einer Containerregistrierung, z.B. aus Azure Container Registry, und stellen Sie sie dann im richtigen Maßstab mithilfe eines Orchestrators (etwa [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/azure/aks/intro-kubernetes) (als Vorschau für Windows-basierte Apps verfügbar) oder [Azure Service Fabric](https://docs.microsoft.com/azure/service-fabric/)) bereit, und verwalten Sie sie.
+  - Pullen Sie Ihre App (Containerimage) aus einer Containerregistrierung, z. B. aus Azure Container Registry, und stellen Sie sie dann im richtigen Maßstab mithilfe eines Orchestrators wie [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/azure/aks/intro-kubernetes) oder [Azure Service Fabric](https://docs.microsoft.com/azure/service-fabric/) bereit, und verwalten Sie sie.
   - Azure Kubernetes Service stellt Container auf virtuellen Azure-Computern bereit und verwaltet sie im richtigen Maßstab unabhängig davon, ob es sich um Dutzende, Hunderte oder sogar Tausende von Containern handelt. Die virtuellen Azure-Computer führen entweder ein benutzerdefiniertes Windows Server-Image (wenn Sie eine Windows-basierte App bereitstellen) oder ein benutzerdefiniertes Ubuntu Linux-Image (wenn Sie eine Linux-basierte App bereitstellen) aus.
 - <strong>Stellen Sie Container lokal</strong> mithilfe von [Azure Stack mit der AKS-Engine](https://docs.microsoft.com/azure-stack/user/azure-stack-kubernetes-aks-engine-overview) (als Vorschau mit Linux-Containern verfügbar) oder [Azure Stack mit OpenShift](https://docs.microsoft.com/azure/virtual-machines/linux/openshift-azure-stack) bereit. Sie können Kubernetes auch selbst unter Windows Server einrichten (siehe [Kubernetes unter Windows](../kubernetes/getting-started-kubernetes-windows.md)). Außerdem arbeiten wir an Unterstützung für die Ausführung von [Windows-Containern auf der RedHat OpenShift-Containerplattform](https://techcommunity.microsoft.com/t5/Networking-Blog/Managing-Windows-containers-with-Red-Hat-OpenShift-Container/ba-p/339821).
 
