@@ -8,12 +8,12 @@ ms.date: 11/12/2019
 ms.topic: article
 ms.prod: windows-containers
 ms.service: windows-containers
-ms.openlocfilehash: d81c6cb99b1d12b1df87e83220b39eef80f066c0
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: c9e175a7ced0f328e342f3cdd4f99adc717d5700
+ms.sourcegitcommit: 62f4bcca4e07f2a34a927e5c4d786e505821d559
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "81395763"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82784399"
 ---
 # <a name="containerize-a-net-core-app"></a>Containerisieren einer .NET Core-App
 

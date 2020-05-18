@@ -9,12 +9,12 @@ ms.topic: article
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: bb9bfbe0-5bdc-4984-912f-9c93ea67105f
-ms.openlocfilehash: 551d405d836cfb16b587ef78bc2d5f5abbd8648f
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: 859ef38380e536a79a3dcd63397af8fd841253ee
+ms.sourcegitcommit: 62f4bcca4e07f2a34a927e5c4d786e505821d559
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "78853814"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82784409"
 ---
 # <a name="get-started-run-your-first-windows-container"></a>Erste Schritte: Ausführen Ihres ersten Windows-Containers
 
@@ -89,8 +89,7 @@ In diesem einfachen Beispiel wird ein „Hello World“-Containerimage erstellt 
    ```console
    docker run --rm helloworld cmd.exe /s /c type Hello.txt
    ```
-
-   Das Ergebnis ist, dass ein Container aus dem „HelloWorld“-Image erstellt wurde, eine Instanz von „cmd.exe“ im Container gestartet wurde, die unsere Datei liest und den Dateiinhalt an die Shell ausgibt, und der Container dann beendet und entfernt wurde.
+   Das Ergebnis ist, dass Docker einen Container aus dem „HelloWorld“-Image erstellt, eine Instanz von „cmd.exe“ im Container startet, die cmd.exe unsere Datei dann liest und den Dateiinhalt an die Shell ausgibt. Im letzten Schritt beendet Docker den Container und entfernt ihn.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
