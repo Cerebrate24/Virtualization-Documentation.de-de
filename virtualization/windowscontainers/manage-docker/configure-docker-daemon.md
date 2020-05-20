@@ -137,7 +137,7 @@ Wenn Sie beim Docker-Host angemeldet sind und Docker-Befehle lokal ausführen, w
 
 ## <a name="proxy-configuration"></a>Proxykonfiguration
 
-Erstellen Sie eine Windows-Umgebungsvariable namens `docker search` oder `docker pull` und den Wert der Proxyinformationen, um Proxyinformationen für `HTTP_PROXY` und `HTTPS_PROXY` festzulegen. Sie können dies in PowerShell tun, indem Sie einen Befehl ähnlich dem folgenden verwenden:
+Erstellen Sie eine Windows-Umgebungsvariable namens `HTTP_PROXY` oder `HTTPS_PROXY` und den Wert der Proxyinformationen, um Proxyinformationen für `docker search` und `docker pull` festzulegen. Sie können dies in PowerShell tun, indem Sie einen Befehl ähnlich dem folgenden verwenden:
 
 ```powershell
 [Environment]::SetEnvironmentVariable("HTTP_PROXY", "http://username:password@proxy:port/", [EnvironmentVariableTarget]::Machine)
