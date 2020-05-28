@@ -84,6 +84,7 @@
 ## [Lizenzbedingungen für Containerbetriebssystem-Image](Images_EULA.md)
 
 # Ressourcen
+## [Bekannte Probleme](manage-containers/known-issues.md)
 ## [Containerbeispiele](samples.md)
 ## [Problembehandlung](troubleshooting.md)
 ## [Containerforum](https://social.msdn.microsoft.com/Forums/home?forum=windowscontainers)
