@@ -10,7 +10,7 @@ ms.service: windows-containers
 ms.assetid: 0cc1b621-1a92-4512-8716-956d7a8fe495
 ms.openlocfilehash: 2e1fec6aa7149c801b1c72a0f8a346ca879015c2
 ms.sourcegitcommit: 16744984ede5ec94cd265b6bff20aee2f782ca88
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 02/18/2020
 ms.locfileid: "77439517"
@@ -23,7 +23,7 @@ Die Schritte dazu sind sehr einfach:
 
 * Erstellen Sie die Zertifikate auf dem Server mit [Dockertls](https://hub.docker.com/r/stefanscherer/dockertls-windows/). Wenn Sie Zertifikate mit einer IP-Adresse erstellen, sollten Sie eine statische IP-Adresse verwenden, um zu verhindern, dass die Zertifikate neu erstellt werden müssen, wenn sich die IP-Adresse ändert.
 
-* Starten Sie den docker-Dienst neu `Restart-Service Docker`
+* Starten Sie den Docker-Dienst `Restart-Service Docker` neu.
 * Machen Sie die Docker-TLS-Ports 2375 und 2376 durch Erstellen einer NSG Regel verfügbar, die eingehenden Datenverkehr zulässt. Beachten Sie, dass für sichere Verbindungen nur 2376 erforderlich ist.  
   Das Portal sollte eine NSG-Konfiguration wie folgt anzeigen:  
   ![NGSs](media/nsg.png)  
@@ -33,7 +33,7 @@ Die Schritte dazu sind sehr einfach:
 New-NetFirewallRule -DisplayName 'Docker SSL Inbound' -Profile @('Domain', 'Public', 'Private') -Direction Inbound -Action Allow -Protocol TCP -LocalPort 2376
 ```
 * Kopieren Sie die Dateien `ca.pem`, „cert.pem“ und „key.pem“ aus dem Benutzer-Docker-Ordner auf Ihrem Computer (z. B. `c:\users\chris\.docker`) auf den lokalen Computer. Sie können z. B. mit STRG+C und STRG+V die Dateien einer RDP-Sitzung verwenden. 
-* Stellen Sie sicher, dass Sie eine Verbindung mit dem Remote-Docker-Host herstellen können. Ausführen
+* Stellen Sie sicher, dass Sie eine Verbindung mit dem Remote-Docker-Host herstellen können. Führen Sie
 ```
 docker -D -H tcp://wsdockerhost.southcentralus.cloudapp.azure.com:2376 --tlsverify --tlscacert=c:\
 users\foo\.docker\client\ca.pem --tlscert=c:\users\foo\.docker\client\cert.pem --tlskey=c:\users\foo\.doc

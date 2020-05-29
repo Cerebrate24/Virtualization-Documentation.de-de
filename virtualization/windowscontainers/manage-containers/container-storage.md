@@ -1,28 +1,28 @@
 ---
-title: Übersicht über Container Speicher
+title: Übersicht über Containerspeicher
 description: So können Windows Server-Container Host- und andere Speichertypen verwenden
 keywords: Container, Volume, Speicher, Mount, Binden von Bereitstellungen
 author: cwilhit
 ms.openlocfilehash: f758877f1131813fe4637a01c03b49d7a18a83c4
 ms.sourcegitcommit: db085db8a54664184a2f7cfa01d00598a1c66992
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 03/04/2020
 ms.locfileid: "78288672"
 ---
-# <a name="container-storage-overview"></a>Übersicht über Container Speicher
+# <a name="container-storage-overview"></a>Übersicht über Containerspeicher
 
 <!-- Great diagram would be great! -->
 
-Dieses Thema bietet einen Überblick über die verschiedenen Möglichkeiten, wie Container unter Windows Speicher verwenden. Container Verhalten sich im Hinblick auf den Speicher anders als virtuelle Computer. Naturgemäß werden Container erstellt, um zu verhindern, dass eine in Ihnen ausgelaufende App den Zustand über das Dateisystem des Hosts schreibt. Container verwenden standardmäßig einen "temporären" Speicherplatz, aber Windows bietet auch eine Möglichkeit, den Speicher beizubehalten.
+Dieses Thema bietet eine Übersicht über die verschiedenen Arten, wie Container den Speicher unter Windows verwenden. Container verhalten sich bei der Speicherung anders als virtuelle Computer. Container werden von Natur aus so erstellt, dass eine App, die in ihnen ausgeführt wird, den Zustand nicht in das gesamte Dateisystem des Hosts schreiben kann. Container verwenden standardmäßig einen „sicheren“ Speicherplatz, aber Windows bietet auch eine Möglichkeit zur permanenten Speicherung.
 
 ## <a name="scratch-space"></a>Sicherer Speicherbereich
 
-Windows-Container verwenden standardmäßig kurzlebigen Speicher. Alle Container-e/a-Vorgänge erfolgen in einem "temporären Speicherplatz", und jeder Container erhält einen eigenen Grund. Dateierstellung und Datei Schreibvorgänge werden im temporären Speicherplatz aufgezeichnet und nicht mit dem Host versehen. Wenn eine Container Instanz beendet wird, werden alle Änderungen, die im temporären Bereich aufgetreten sind, entfernt. Wenn eine neue Container Instanz gestartet wird, wird ein neuer temporärer Speicherplatz für die Instanz bereitgestellt.
+Windows-Container verwenden standardmäßig kurzlebigen Speicher. Alle E/A-Vorgänge des Containers erfolgen ein einem „sicheren Speicherbereich“ und jeder Container erhält einen eigenen „sicheren Speicher“. Die Dateierstellung und das Schreiben von Dateien werden im sicheren Speicherbereich erfasst und gelangen nicht zum Host. Wenn eine Containerinstanz beendet wird, werden alle Änderungen, die im sicheren Speicherbereich aufgetreten sind, verworfen. Wenn eine neue Containerinstanz gestartet wird, wird ein neuer sicherer Speicherbereich für die Instanz bereitgestellt.
 
 ## <a name="layer-storage"></a>Schichtspeicher
 
-Wie in der [Übersicht über Container](../about/index.md)beschrieben, handelt es sich bei Container Images um ein Bündel von Dateien, die als eine Reihe von Ebenen ausgedrückt werden. Ebenenspeicher sind alle Dateien, die in den Container integriert sind. Bei jedem `docker pull` und `docker run` des Containers sind diese identisch.
+Wie in der [Containerübersicht](../about/index.md) beschrieben, sind Containerimages ein Bündel von Dateien, die als Folge von Schichten dargestellt werden. Beim Schichtspeicher handelt es sich um die Dateien, die im Container integriert sind. Bei jedem `docker pull` und `docker run` des Containers sind diese identisch.
 
 ### <a name="where-layers-are-stored-and-how-to-change-it"></a>Wo Schichten gespeichert werden und wie Sie diese ändern
 
@@ -43,15 +43,15 @@ Sie sollten keine Dateien der Schichtverzeichnisse ändern – diese werden sorg
 
 Beim Ausführen von Containern können die meisten NTFS-Vorgänge, mit Ausnahme der Transaktionen, verwendet werden. Dies beinhaltet das Festlegen von ACLs, wobei alle ACLs innerhalb des Containers geprüft werden. Wenn Prozesse mit mehreren Benutzern in einem Container ausgeführt werden sollen, können Sie Benutzer in Ihrer `Dockerfile`mit `RUN net user /create ...` erstellen, Dateizugriffssteuerungslisten festlegen und dann Vorgänge für diesen Benutzer mithilfe der [Dockerfile-USER-Direktive](https://docs.docker.com/engine/reference/builder/#user) konfigurieren.
 
-## <a name="persistent-storage"></a>Dauerhafte Speicherung
+## <a name="persistent-storage"></a>Permanenter Speicher
 
-Windows-Container unterstützen Mechanismen zum Bereitstellen von persistentem Speicher über Bindungs Aufstellungen und Volumes. Weitere Informationen finden Sie unter [persistente Speicherung in Containern](./persistent-storage.md).
+Windows-Container unterstützen Mechanismen zur Bereitstellung von permanentem Speicher über das Binden von Bereitstellungen und Volumes. Weitere Informationen finden Sie unter [Permanente Speicherung in Containern](./persistent-storage.md).
 
-## <a name="storage-limits"></a>Speicher Limits
+## <a name="storage-limits"></a>Speichergrenzwerte
 
-Ein gängiges Muster für Windows-Anwendungen ist das Abfragen des Speicherplatzes vor der Installation oder vor dem Erstellen neuer Dateien oder als Auslöser für das Bereinigen temporärer Dateien.  Mit dem Ziel, die Anwendungs Kompatibilität zu maximieren, stellt das Laufwerk "C:" in einem Windows-Container eine virtuelle, kostenlose Größe von 20 GB dar.
+Ein gängiges Muster für Windows-Anwendungen ist das Abfragen des Speicherplatzes vor der Installation oder vor dem Erstellen neuer Dateien oder als Auslöser für das Bereinigen temporärer Dateien.  Zur Maximierung der Anwendungskompatibilität stellt das Laufwerk „C:“ in einem Windows-Container eine virtuelle Größe von 20 GB bereit.
 
-Einige Benutzer können diese Standardeinstellung außer Kraft setzen und den freien Speicherplatz auf einen kleineren oder größeren Wert konfigurieren. Dies kann mit der Option "size" in der Konfiguration "Storage-Opt" erreicht werden.
+Einige Benutzer möchten diesen Standardwert möglicherweise außer Kraft setzen und für den freien Speicherplatz einen kleineren oder größeren Wert konfigurieren. Dies kann durch die „size“-Option innerhalb der „storage-opt“-Konfiguration erreicht werden.
 
 ### <a name="examples"></a>Beispiele
 
@@ -66,4 +66,4 @@ Oder Sie können die Docker-Konfigurationsdatei direkt ändern:
 ```
 
 > [!TIP]
-> Diese Methode funktioniert auch für docker Build. Weitere Informationen zum Ändern der Docker-Konfigurationsdatei finden Sie im Dokument [Konfigurieren von Docker](https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/configure-docker-daemon#configure-docker-with-configuration-file).
+> Diese Methode funktioniert auch für Docker Build. Weitere Informationen zum Ändern der Docker-Konfigurationsdatei finden Sie im Dokument [Konfigurieren von Docker](https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/configure-docker-daemon#configure-docker-with-configuration-file).

@@ -1,20 +1,20 @@
 ---
-title: Persistente Speicherung in Containern
-description: So können Windows-Container persistente Speicherung unterliegen
+title: Permanente Speicherung in Containern
+description: Permanente Speicherung in Windows-Containern
 keywords: Container, Volume, Speicher, Mount, Binden von Bereitstellungen
 author: cwilhit
 ms.openlocfilehash: 945a78d4ecb9c96da4de8f7246f84b6b444dd5b5
 ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 12/04/2019
 ms.locfileid: "74909670"
 ---
-# <a name="persistent-storage-in-containers"></a>Persistente Speicherung in Containern
+# <a name="persistent-storage-in-containers"></a>Permanente Speicherung in Containern
 
 <!-- Great diagram would be great! -->
 
-Möglicherweise gibt es Fälle, in denen es wichtig ist, dass eine APP Daten in einem Container speichern kann, oder wenn Sie Dateien in einem Container anzeigen möchten, der nicht in der Buildzeit des Containers enthalten war. Der persistente Speicher kann auf verschiedene Arten an Container übergeben werden:
+Möglicherweise gibt es Fälle, in denen es wichtig ist, dass eine Anwendung in der Lage ist, Daten permanent in einem Container zu speichern, oder Sie möchten Dateien in einem Container anzeigen, die bei der Erstellung des Containers nicht enthalten waren. Permanenter Speicher kann Containern auf verschiedene Weisen zugewiesen werden:
 
 - Binden von Bereitstellungen
 - Benannte Volumes
@@ -29,20 +29,20 @@ Durch das [Binden von Bereitstellungen](https://docs.docker.com/engine/admin/vol
 
 Das Berechtigungsmodell für das Binden von Bereitstellungen variiert je nach Isolationsstufe für den Container.
 
-Container, die die **Hyper-V-Isolation** verwenden, verwenden ein einfaches Schreib geschütztes oder Lese-/Schreib-Berechtigungs Modell. Der Zugriff auf Dateien erfolgt auf dem Host mithilfe des `LocalSystem`-Kontos. Wenn der Zugriff verweigert auf den Container verweigert wird, stellen Sie sicher, dass `LocalSystem` Zugriff auf das Verzeichnis auf dem Host hat. Wenn das Schreibschutzkennzeichen verwendet wird, sind Änderungen am Volume innerhalb des Containers für das Verzeichnis auf dem Host nicht sichtbar oder nicht beständig.
+Container mit **Hyper-V-Isolation** verwenden ein einfaches schreibgeschütztes oder Lese-/ Schreibberechtigungsmodell. Der Zugriff auf Dateien erfolgt auf dem Host mithilfe des `LocalSystem`-Kontos. Wenn der Zugriff verweigert auf den Container verweigert wird, stellen Sie sicher, dass `LocalSystem` Zugriff auf das Verzeichnis auf dem Host hat. Wenn das Schreibschutzkennzeichen verwendet wird, sind Änderungen am Volume innerhalb des Containers für das Verzeichnis auf dem Host nicht sichtbar oder nicht beständig.
 
-Windows-Container, die die **Prozess Isolation** verwenden, unterscheiden sich geringfügig, da Sie die Prozess Identität innerhalb des Containers für den Zugriff auf Daten verwenden, was bedeutet, dass Datei-ACLs Die Identität des im Container ausgeführten Prozesses (standardmäßig "ContainerAdministrator" auf Windows Server Core und "ContainerUser" auf Nano Server-Containern) wird verwendet, um auf die Dateien und Verzeichnisse in den bereitgestellten Volumes anstelle des `LocalSystem` zuzugreifen. Es muss Ihnen der Zugriff auf die Daten gewährt werden.
+Windows-Container mit **Prozessisolation** sind etwas anders, da sie die Prozess-ID innerhalb des Containers verwenden, um auf Daten zuzugreifen, d. h. die Dateizugriffssteuerungslisten werden berücksichtigt. Die Identität des im Container ausgeführten Prozesses (standardmäßig "ContainerAdministrator" auf Windows Server Core und "ContainerUser" auf Nano Server-Containern) wird verwendet, um auf die Dateien und Verzeichnisse in den bereitgestellten Volumes anstelle des `LocalSystem` zuzugreifen. Es muss Ihnen der Zugriff auf die Daten gewährt werden.
 
-Da diese Identitäten nur im Kontext des Containers vorhanden sind, nicht auf dem Host, auf dem die Dateien gespeichert werden, sollten Sie eine bekannte Sicherheitsgruppe wie `Authenticated Users` verwenden, wenn Sie die ACLs konfigurieren, um Zugriff auf die Container zu gewähren.
+Da diese Identitäten nur im Kontext des Containers vorhanden sind (und nicht auf dem Host, auf dem die Dateien gespeichert sind), sollten Sie eine allgemein bekannte Sicherheitsgruppe wie `Authenticated Users` verwenden, wenn Sie ACLs konfigurieren, um den Zugriff auf die Container zu gewährleisten.
 
 > [!WARNING]
 > Binden Sie keine Bereitstellungen für sensible Verzeichnisse wie z. B. `C:\` in einem nicht vertrauenswürdigen Container. Dadurch könnten diese Dateien auf dem Host geändert werden, auf die normalerweise kein Zugriff gewährleistet ist und es könnte daraus eine Sicherheitsverletzung resultieren.
 
-Beispielanwendung:
+Beispielsyntax:
 
-- `docker run -v c:\ContainerData:c:\data:RO` für schreibgeschützten Zugriff
-- `docker run -v c:\ContainerData:c:\data:RW` für Lese-/Schreibzugriff
-- `docker run -v c:\ContainerData:c:\data` für Lese-/Schreibzugriff (Standard)
+- `docker run -v c:\ContainerData:c:\data:RO` für den schreibgeschützten Zugriff
+- `docker run -v c:\ContainerData:c:\data:RW` für den Schreibzugriff
+- `docker run -v c:\ContainerData:c:\data` für den Schreibzugriff (Standard)
 
 ### <a name="symlinks"></a>Symbolische Verknüpfungen
 
@@ -50,19 +50,19 @@ Symbolische Verknüpfungen werden im Container aufgelöst. Beim Binden von Berei
 
 ### <a name="smb-mounts"></a>SMB-Bereitstellungen
 
-Unter Windows Server, Version 1709 und höher, können Sie mit der Funktion "SMB Global Mapping" eine SMB-Freigabe auf dem Host einbinden und dann Verzeichnisse für diese Freigabe an einen Container übergeben. Der Container muss nicht mit einem bestimmten Server, einer bestimmten Freigabe, einem Nutzernamen oder Kennwort konfiguriert werden – diese Aufgaben werden alle auf dem Host behandelt. Der Container funktioniert so, als ob es einen lokalen Speicher hätte.
+Unter Windows Server Version 1709 und höher ermöglicht ein neues Feature namens „globale Zuordnung in SMB“ eine SMB-Freigabe auf den Host und übergibt diese Verzeichnisse anschließend der Freigabe in einen Container. Der Container muss nicht mit einem bestimmten Server, einer bestimmten Freigabe, einem Nutzernamen oder Kennwort konfiguriert werden – diese Aufgaben werden alle auf dem Host behandelt. Der Container funktioniert so, als ob es einen lokalen Speicher hätte.
 
 #### <a name="configuration-steps"></a>Konfigurationsschritte
 
-1. Ordnen Sie auf dem Container Host Global die SMB-Remote Freigabe zu:
+1. Ordnen Sie auf dem Containerhost die SMB-Remotefreigabe global zu:
     ```
     $creds = Get-Credential
     New-SmbGlobalMapping -RemotePath \\contosofileserver\share1 -Credential $creds -LocalPath G:
     ```
-    Dieser Befehl verwendet die Anmeldeinformationen zum Authentifizieren beim SMB-Remoteserver. Ordnen Sie anschließend den Pfad für die Remotefreigabe auf G: Laufwerkbuchstabe zu (dies kann jeder verfügbare Laufwerkbuchstabe sein). Die auf diesem Containerhost erstellten Container können jetzt ihre Datenvolumes auf einen Pfad auf dem Laufwerk G: zuordnen.
+    Dieser Befehl verwendet die Anmeldeinformationen zur Authentifizierung beim SMB-Remoteserver. Ordnen Sie anschließend den Pfad für die Remotefreigabe auf G: Laufwerkbuchstabe zu (dies kann jeder verfügbare Laufwerkbuchstabe sein). Die auf diesem Containerhost erstellten Container können jetzt ihre Datenvolumes auf einen Pfad auf dem Laufwerk G: zuordnen.
 
     > [!NOTE]
-    > Bei Verwendung der globalen SMB-Zuordnung für Container können alle Benutzer auf dem Container Host auf die Remote Freigabe zugreifen. Jede auf dem Containerhost ausgeführte Anwendung hat außerdem Zugriff auf die zugeordnete Remotefreigabe.
+    > Wenn die globale Zuordnung in SMB für Container verwendet wird, können alle Benutzer auf dem Containerhost auf die Remotefreigabe zugreifen. Jede auf dem Containerhost ausgeführte Anwendung hat außerdem Zugriff auf die zugeordnete Remotefreigabe.
 
 2. Erstellen Sie Container mit Datenvolumes, die global bereitgestellten SMB-Freigaben zugeordnet sind. Führen Sie den Docker aus. Nennen Sie die Demo -v g:\ContainerData:G:\AppData1 microsoft/windowsservercore:1709 cmd.exe
 
@@ -84,11 +84,11 @@ Mit benannten Volumes können Sie anhand des Namens ein Volume erstellen, dieses
 
 Beispielschritte:
 
-1. `docker volume create unwound`: Erstellen Sie ein Volume mit dem Namen "unwound".
-2. `docker run -v unwound:c:\data microsoft/windowsservercore`-Starten eines Containers, bei dem das Volume "c:\Data" zugeordnet ist
+1. `docker volume create unwound` – Erstellen Sie ein Volume mit dem Namen „unwound“.
+2. `docker run -v unwound:c:\data microsoft/windowsservercore` – Starten Sie einen Container, dessen Volume c:\data zugeordnet ist.
 3. Schreiben Sie einige Dateien auf c:\data im Container, und beenden Sie anschließend den Container
-4. `docker run -v unwound:c:\data microsoft/windowsservercore` einen neuen Container starten.
+4. `docker run -v unwound:c:\data microsoft/windowsservercore` – Starten Sie einen neuen Container.
 5. Führen Sie `dir c:\data` im neuen Container aus – die Dateien sind auch weiterhin vorhanden
 
 > [!NOTE]
-> Die Ziel Pfadnamen (der Pfad innerhalb des Containers) werden von Windows Server in Kleinbuchstaben konvertiert. i. e. `-v unwound:c:\MyData`oder `-v unwound:/app/MyData` in Linux-Containern führt zu einem Verzeichnis innerhalb des Containers `c:\mydata`oder `/app/mydata` in Linux-Containern, die zugeordnet (und ggf. erstellt) werden.
+> Windows Server konvertiert Zielpfadnamen (den Pfad innerhalb des Containers) in Kleinbuchstaben (d. h. `-v unwound:c:\MyData`, oder `-v unwound:/app/MyData` in Linux-Containern). Dies führt dazu, dass ein Verzeichnis innerhalb des Containers von `c:\mydata` (oder `/app/mydata` in Linux-Containern) abgebildet wird (und auch erstellt, falls nicht vorhanden).

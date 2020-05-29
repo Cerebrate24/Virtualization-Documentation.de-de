@@ -1,7 +1,7 @@
 ---
-title: Linux-Container unter Windows 10
-description: Erfahren Sie mehr über die verschiedenen Möglichkeiten, wie Sie Hyper-V zum Ausführen von Linux-Containern unter Windows 10 verwenden können, als ob Sie System eigen sind.
-keywords: Lkuh, Linux-Container, Docker, Container, Windows 10
+title: Linux-Container unter Windows 10
+description: Erfahren Sie mehr über verschiedene Möglichkeiten, wie Sie Hyper-V verwenden können, um Linux-Container unter Windows 10 so auszuführen, als wären sie nativ.
+keywords: LCOW, Linux-Container, Docker, Container, Windows 10
 author: scooley
 ms.date: 09/17/2019
 ms.topic: article
@@ -10,62 +10,62 @@ ms.service: windows-containers
 ms.assetid: edfd11c8-ee99-42d8-9878-efc126fe1826
 ms.openlocfilehash: 843bd0ab7ccf3a227482ba3a3d2677e36b395b29
 ms.sourcegitcommit: ac923217ee2f74f08df2b71c2a4c57b694f0d7c3
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 03/06/2020
 ms.locfileid: "78854014"
 ---
-# <a name="linux-containers-on-windows-10"></a>Linux-Container unter Windows 10
+# <a name="linux-containers-on-windows-10"></a>Linux-Container unter Windows 10
 
-Linux-Container bilden einen großen Anteil des gesamten containerökosystems und sind grundlegend für Entwickler-und Produktionsumgebungen.  Da Container einen Kernel mit dem Container Host gemeinsam nutzen, ist das direkte Ausführen von Linux-Containern unter Windows keine Option[*](linux-containers.md#other-options-we-considered).  An dieser Stelle kommt die Virtualisierung ins Spiel.
+Linux-Container machen einen riesigen Prozentsatz des gesamten Containerökosystems aus und sind sowohl für die Erfahrungen von Entwicklern als auch für Produktionsumgebungen von grundlegender Bedeutung.  Da sich die Container jedoch einen Kernel mit dem Containerhost teilen, ist das direkte Ausführen von Linux-Containern unter Windows keine Option[*](linux-containers.md#other-options-we-considered).  Hier kommt die Virtualisierung ins Spiel.
 
-Derzeit gibt es zwei Möglichkeiten zum Ausführen von Linux-Containern mit docker für Windows und Hyper-V:
+Im Moment gibt es zwei Möglichkeiten, Linux-Container mit Docker für Windows und Hyper-V auszuführen:
 
-- Ausführen von Linux-Containern in einer vollständigen Linux-VM: Dies erfolgt in der Regel von Docker.
-- Ausführen von Linux-Containern mit [Hyper-V-Isolation](../manage-containers/hyperv-container.md) (lkuh): Dies ist eine neue Option in docker für Windows.
+- Ausführen von Linux-Containern in einer vollständigen Linux-VM: Dies erfolgt heute in der Regel durch Docker.
+- Ausführen von Linux-Containern mit [Hyper-V-Isolation](../manage-containers/hyperv-container.md) (LCOW): Dies ist eine neue Option in Docker für Windows.
 
-> _Das Ausführen von Linux-Containern unter einem Windows Server-Betriebssystem befindet sich derzeit noch in einer experimentellen Phase. Um dies zu testen, wird eine zusätzliche Lizenzierung für das docker EE-Programm benötigt. **Der Rest dieses Artikels bezieht sich nur auf Windows 10**._
+> _Das Ausführen von Linux-Containern unter einem Windows Server-Betriebssystem befindet sich derzeit noch in einer experimentellen Phase. Es sind zusätzliche Lizenzen für das Docker EE-Programm erforderlich, um dies zu testen. **Der Rest dieses Artikels bezieht sich nur auf Windows 10**._
 
-In diesem Artikel wird die Funktionsweise der einzelnen Ansätze beschrieben. Außerdem erhalten Sie Anleitungen dazu, wann welche Lösung ausgewählt und welche Aufgaben in Bearbeitung sind.
+In diesem Artikel wird die Funktionsweise der einzelnen Ansätze beschrieben. Außerdem erhalten Sie Anleitungen dazu, wann welche Lösung ausgewählt wird sowie entsprechende Informationen, welche Aufgaben in Bearbeitung sind.
 
-## <a name="linux-containers-in-a-moby-vm"></a>Linux-Container in einer VM mit dem virtuellen Computer
+## <a name="linux-containers-in-a-moby-vm"></a>Linux-Container in einer Moby VM
 
-Um Linux-Container auf einer Linux-VM auszuführen, befolgen Sie die Anweisungen im [Leitfaden "Get-Started" von Docker](https://docs.docker.com/docker-for-windows/).
+Zum Ausführen von Linux-Containern auf einem virtuellen Linux-Computer befolgen Sie die Anweisungen im [Leitfaden zu den ersten Schritten mit Docker](https://docs.docker.com/docker-for-windows/).
 
-Docker ist in der Lage, Linux-Container auf Windows-Desktop auszuführen, seit es erstmals in 2016 (vor der Hyper-V-Isolation oder Linux-Containern unter Windows) mit einem [linuxkit](https://github.com/linuxkit/linuxkit) -basierten virtuellen Computer, der unter Hyper-v ausgeführt wird, veröffentlicht wurde.
+Docker kann Linux-Container auf dem Windows-Desktop ausführen, seit es 2016 veröffentlicht wurde (bevor Hyper-V-Isolation oder Linux-Container unter Windows verfügbar waren), wobei ein [LinuxKit](https://github.com/linuxkit/linuxkit)-basierter virtueller Computer unter Hyper-V verwendet wird.
 
-In diesem Modell wird der Docker-Client auf Windows-Desktop ausgeführt, ruft jedoch den docker-Daemon auf dem virtuellen Linux-Computer auf.
+Bei diesem Modell wird der Docker-Client auf dem Windows-Desktop ausgeführt, ruft aber den Docker-Daemon auf dem virtuellen Linux-Computer auf.
 
-![VM Moby als Container Host](media/MobyVM.png)
+![Moby VM als Containerhost](media/MobyVM.png)
 
-In diesem Modell nutzen alle Linux-Container einen einzelnen Linux-basierten Container Host und alle Linux-Container:
+Bei diesem Modell teilen sich alle Linux-Container einen einzelnen Linux-basierten Containerhost und für alle Linux-Container gilt Folgendes:
 
-* Verwenden Sie einen Kernel gemeinsam mit dem virtuellen Computer mit dem Namen "Moby", aber nicht mit dem Windows-Host.
-* Sie verfügen über konsistente Speicher-und Netzwerk Eigenschaften für Linux-Container, die unter Linux ausgeführt werden (da Sie auf einer Linux-VM ausgeführt werden).
+* Sie Teilen sich einen Kernel untereinander und mit der Moby VM, aber nicht mit dem Windows-Host.
+* Sie verfügen über konsistente Speicher- und Netzwerkeigenschaften für Linux-Container, die unter Linux ausgeführt werden (da sie auf einer Linux-VM ausgeführt werden).
 
-Dies bedeutet auch, dass der Linux-Container Host ("Moby VM") den docker-Daemon und alle Abhängigkeiten von Docker-Daemon ausführen muss.
+Das bedeutet auch, dass auf dem Linux-Containerhost (Moby VM) Docker-Daemon und alle Abhängigkeiten von Docker-Daemon ausgeführt werden müssen.
 
-Um festzustellen, ob Sie mit dem virtuellen Computer "Moby" arbeiten, überprüfen Sie die Hyper-v-Manager-Benutzeroberfläche, oder führen Sie `Get-VM` in einem PowerShell-Fenster mit erhöhten Rechten aus.
+Um festzustellen, ob Sie mit Moby VM arbeiten, aktivieren Sie Hyper-V-Manager für Moby VM entweder über die Hyper-V-Manager-Benutzeroberfläche oder durch Ausführen von `Get-VM` in einem PowerShell-Fenster mit erhöhten Rechten.
 
 ## <a name="linux-containers-with-hyper-v-isolation"></a>Linux-Container mit Hyper-V-Isolation
 
-Wenn Sie Linux-Container unter Windows 10 testen möchten (LCOW10), befolgen Sie die Anweisungen für Linux-Container unter Linux-Container [unter Windows 10](../quick-start/quick-start-windows-10-linux.md). 
+Um Linux-Container unter Windows 10 (LCOW10) zu testen, folgen Sie den Anweisungen für Linux-Container in [Linux-Container unter Windows 10](../quick-start/quick-start-windows-10-linux.md). 
 
-Linux-Container mit Hyper-V-Isolation führen jeden Linux-Container in einer optimierten Linux-VM mit nur ausreichend Betriebssystem aus, um Container auszuführen. Im Gegensatz zum "Moby VM"-Ansatz hat jeder Linux-Container seinen eigenen Kernel und seinen eigenen VM-Sandkasten. Sie werden auch direkt von Docker unter Windows verwaltet.
+Linux-Container mit Hyper-V-Isolation führen jeden Linux-Container in einer optimierten Linux-VM mit gerade ausreichenden Betriebssystemfunktionen aus, um Container auszuführen. Im Gegensatz zum Moby VM-Ansatz hat jeder Linux-Container einen eigenen Kernel und eine eigene VM-Sandbox. Sie werden auch direkt von Docker unter Windows verwaltet.
 
-![Linux-Container mit Hyper-V-Isolation (lkuh)](media/lcow-approach.png)
+![Linux-Container mit Hyper-V-Isolation (LCOW)](media/lcow-approach.png)
 
-Wenn Sie sich genauer ansehen, wie sich die Container Verwaltung zwischen dem "Moby VM"-Ansatz und dem lcow unterscheidet, wird die Container Verwaltung im lkuh-Modell unter Windows ausgeführt, und jede lkuh-Verwaltung erfolgt über GrpC und containerd.  Dies bedeutet, dass die Linux-Distribution-Container, die für lkuh verwendet werden, eine viel geringere Inventur aufweisen können  Zurzeit verwenden wir das linuxkit für die optimierten Distribution-Container, aber andere Projekte wie z. b. Kata bauen ähnlich hochoptimierte Linux-Distributionen auf (Clear Linux).
+Wenn Sie sich genauer anschauen, wie sich die Containerverwaltung zwischen dem Moby VM-Ansatz und LCOW unterscheidet, bleibt im LCOW-Modell die Containerverwaltung unter Windows und die gesamte LCOW-Verwaltung erfolgt über GRPC und containerd.  Das bedeutet, dass die Linux-Distributionscontainer, die für LCOW verwendet werden, einen viel kleineren Bestand aufweisen können.  Zurzeit verwenden wir LinuxKit für die Verwendung optimierter Distributionscontainer, aber andere Projekte wie Kata erstellen auch ähnliche hochgradig abgestimmte Linux-Distributionen (Clear Linux).
 
-Im folgenden finden Sie eine genauere Betrachtung der einzelnen lkuh:
+Im Folgenden finden Sie eine genauere LCOW-Betrachtung:
 
-![Lkuh-Architektur](media/lcow.png)
+![LCOW-Architektur](media/lcow.png)
 
-Navigieren Sie zu `C:\Program Files\Linux Containers`, um zu sehen, ob Sie lkuh ausführen. Wenn docker für die Verwendung von lkuh konfiguriert ist, gibt es hier einige Dateien, die die minimale linuxkit-Distribution enthalten, die in jedem Container ausgeführt wird, der unter Hyper-V-Isolation ausgeführt wird.  Beachten Sie, dass es sich bei den optimierten VM-Komponenten um weniger als 100 MB handelt, die wesentlich kleiner als das linuxkit-Image im virtuellen
+Navigieren Sie zu `C:\Program Files\Linux Containers`, um zu prüfen, ob Sie LCOW ausführen. Wenn Docker für die Verwendung von LCOW konfiguriert ist, gibt es hier ein paar Dateien, die die minimale LinuxKit-Distribution enthalten, die in jedem Container ausgeführt wird, der unter Hyper-V-Isolation ausgeführt wird.  Beachten Sie, dass die optimierten VM-Komponenten weniger als 100 MB groß sind, viel kleiner als das LinuxKit-Image in Moby VM.
 
 ### <a name="work-in-progress"></a>In Bearbeitung
 
-Lkuh befindet sich in der aktiven Entwicklung. Verfolgen Sie den fortlaufenden Status im Projekt "Moby" auf [GitHub](https://github.com/moby/moby/issues/33850) .
+LCOW befindet sich in der aktiven Entwicklung. Verfolgen der Fortschritte beim Moby-Projekt auf [GitHub](https://github.com/moby/moby/issues/33850)
 
 #### <a name="bind-mounts"></a>Binden von Bereitstellungen
 
@@ -76,7 +76,7 @@ Folgende Vorgänge funktionieren momentan nicht für gebunden bereitgestellte Vo
 * MkNod
 * XAttrWalk
 * XAttrCreate
-* Sperren
+* Lock
 * Getlock
 * Auth
 * Leerung
@@ -87,7 +87,7 @@ Es gibt auch einige Vorgänge, die nicht vollständig implementiert werden:
 * GetAttr – die Nlink-Zahl wird immer als 2 gemeldet
 * Open – nur ReadWrite-, WriteOnly- und ReadOnly-Flags werden implementiert
 
-Diese Anwendungen erfordern eine volumezuordnung und werden nicht ordnungsgemäß gestartet oder ausgeführt.
+Diese Anwendungen erfordern alle eine Volumezuordnung und werden nicht ordnungsgemäß gestartet oder ausgeführt.
 
 * MySQL
 * PostgreSQL
@@ -98,33 +98,33 @@ Diese Anwendungen erfordern eine volumezuordnung und werden nicht ordnungsgemä�
 
 ### <a name="extra-information"></a>Zusätzliche Informationen
 
-[Docker-Blog zum Beschreiben von lkuh](https://blog.docker.com/2017/11/docker-for-windows-17-11/)
+[Docker-Blog zur Beschreibung von LCOW](https://blog.docker.com/2017/11/docker-for-windows-17-11/)
 
-[Linux-Container-Video](https://sec.ch9.ms/ch9/1e5a/08ff93f2-987e-4f8d-8036-2570dcac1e5a/LinuxContainer.mp4)
+[Linux-Containervideo](https://sec.ch9.ms/ch9/1e5a/08ff93f2-987e-4f8d-8036-2570dcac1e5a/LinuxContainer.mp4)
 
-[Linuxkit lkuh-Kernel Plus Build-Anweisungen](https://github.com/linuxkit/lcow)
+[LinuxKit LCOW-Kernel plus Erstellungsanweisungen](https://github.com/linuxkit/lcow)
 
-## <a name="when-to-use-moby-vm-vs-lcow"></a>Verwendung von "Moby VM vs lkuh"
+## <a name="when-to-use-moby-vm-vs-lcow"></a>Verwenden von Moby VM oder LCOW
 
-### <a name="when-to-use-moby-vm"></a>Verwendung von "Moby VM"
+### <a name="when-to-use-moby-vm"></a>Verwenden von Moby VM
 
-Zurzeit wird die Methode "Moby VM" zum Ausführen von Linux-Containern für Personen empfohlen, die Folgendes ausführen:
+Zurzeit empfehlen wir die Moby VM-Methode zum Ausführen von Linux-Containern für Personen, für die Folgendes gilt:
 
-- Sie möchten eine stabile Container Umgebung.  Dies ist der Docker für Windows Standard.
-- Führen Sie Windows-oder Linux-Container aus, aber nur selten gleichzeitig.
-- Sie verfügen über komplizierte oder benutzerdefinierte Netzwerk Anforderungen zwischen Linux-Containern.
-- Sie benötigen keine Kernel Isolation (Hyper-V-Isolation) zwischen Linux-Containern.
+- Sie wünschen eine stabile Containerumgebung.  Dies ist der Standard für Docker für Windows.
+- Sie führen Windows- oder Linux-Container aus, aber selten beide gleichzeitig.
+- Sie verfügen über komplizierte oder benutzerdefinierte Netzwerkanforderungen zwischen Linux-Containern.
+- Sie benötigen keine Kernelisolation (Hyper-V-Isolation) zwischen Linux-Containern.
 
-### <a name="when-to-use-lcow"></a>Verwendung von lkuh
+### <a name="when-to-use-lcow"></a>Verwenden von LCOW
 
-Zurzeit wird die lkuh für Personen empfohlen, die Folgendes:
+Zurzeit wird LCOW für Personen empfohlen, für die Folgendes gilt:
 
-- Wir möchten unsere neueste Technologie testen.
-- Führen Sie Windows-und Linux-Container gleichzeitig aus.
-- Sie benötigen eine Kernel Isolation (Hyper-V-Isolation) zwischen Linux-Containern.
+- Sie möchten unsere neueste Technologie testen.
+- Sie führen Windows- und Linux-Container gleichzeitig aus.
+- Sie benötigen die Kernelisolation (Hyper-V-Isolation) zwischen Linux-Containern.
 
-## <a name="other-options-we-considered"></a>Andere von uns berücksichtigte Optionen
+## <a name="other-options-we-considered"></a>Andere berücksichtigte Optionen
 
-Als wir uns mit Möglichkeiten zum Ausführen von Linux-Containern unter Windows aussuchten, haben wir WSL in Erwägung gezogen. Letztendlich haben wir uns für einen virtualisierungsbasierten Ansatz entschieden, damit Linux-Container unter Windows mit Linux-Containern unter Linux konsistent sind. Durch die Verwendung von Hyper-V wird lkuh auch sicherer. Wir werden uns möglicherweise in Zukunft neu auswerten, aber vorerst verwendet lkuh weiterhin Hyper-V.
+Als wir nach Möglichkeiten suchten, Linux-Container unter Windows auszuführen, haben wir WSL in Erwägung gezogen. Letztendlich haben wir uns für einen auf der Virtualisierung basierten Ansatz entschieden, sodass Linux-Container unter Windows mit Linux-Containern unter Linux konsistent sind. Durch die Verwendung von Hyper-V wird auch LCOW sicherer. Möglicherweise werden wir in Zukunft eine Neubewertung vornehmen, aber im Moment wird LCOW weiterhin Hyper-V verwenden.
 
-Wenn Sie Gedanken haben, senden Sie uns Feedback über GitHub oder UserVoice.  Wir freuen uns besonders über Feedback zu den spezifischen Funktionen, die Sie sehen möchten.
+Wenn Sie Ideen oder Meinungen hierzu haben, senden Sie Ihr Feedback über GitHub oder UserVoice.  Wir freuen uns besonders über Feedback zu den konkreten Erfahrungen, die Sie erwarten.

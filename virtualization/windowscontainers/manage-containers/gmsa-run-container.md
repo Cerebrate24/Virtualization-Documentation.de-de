@@ -1,7 +1,7 @@
 ---
-title: Ausführen eines Containers mit einem GMSA
-description: Ausführen eines Windows-Containers mit einem Gruppen verwalteten Dienst Konto (Group Managed Service Account, GMSA)
-keywords: docker, Container, Active Directory, GMSA, Gruppen verwaltetes Dienst Konto, Gruppen verwaltete Dienst Konten
+title: Ausführen eines Containers mit einem gMSA
+description: Ausführen eines Windows-Containers mit einem gruppenverwalteten Dienstkonto (gMSA)
+keywords: Docker, Container, aktives Verzeichnis, gMSA, gruppenverwaltetes Dienstkonto, gruppenverwaltete Dienstkonten
 author: rpsqrd
 ms.date: 09/10/2019
 ms.topic: article
@@ -10,14 +10,14 @@ ms.service: windows-containers
 ms.assetid: 9e06ad3a-0783-476b-b85c-faff7234809c
 ms.openlocfilehash: b997cf79cdf7f1782b6299198859714563c45f8c
 ms.sourcegitcommit: ac923217ee2f74f08df2b71c2a4c57b694f0d7c3
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 03/06/2020
 ms.locfileid: "78853934"
 ---
-# <a name="run-a-container-with-a-gmsa"></a>Ausführen eines Containers mit einem GMSA
+# <a name="run-a-container-with-a-gmsa"></a>Ausführen eines Containers mit einem gMSA
 
-Um einen Container mit einem Gruppen verwalteten Dienst Konto (Group Managed Service Account, GMSA) auszuführen, geben Sie die Datei mit den Anmelde Informationen für den `--security-opt`-Parameter von [docker Run](https://docs.docker.com/engine/reference/run)an:
+Stellen Sie zum Ausführen eines Containers mit einem gruppenverwalteten Dienstkonto (gMSA) die Spezifikationsdatei für die Anmeldeinformationen dem Parameter `--security-opt` von [docker run](https://docs.docker.com/engine/reference/run) zur Verfügung:
 
 ```powershell
 # For Windows Server 2016, change the image name to mcr.microsoft.com/windows/servercore:ltsc2016
@@ -25,13 +25,13 @@ docker run --security-opt "credentialspec=file://contoso_webapp01.json" --hostna
 ```
 
 >[!IMPORTANT]
->Unter Windows Server 2016, Version 1709 und 1803, muss der Hostname des Containers mit dem Namen des GMSA-Kurznamens identisch sein.
+>Unter Windows Server 2016, Version 1709 und 1803, muss der Hostname des Containers mit dem Namen des gMSA-Kurznamens identisch sein.
 
-Im vorherigen Beispiel lautet der Name des GMSA SAM-Kontos "webapp01", sodass der Container Hostname auch "webapp01" genannt wird.
+Im vorherigen Beispiel lautet der gMSA SAM-Kontoname „webapp01“, sodass der Containerhostname ebenfalls „webapp01“ genannt wird.
 
-Unter Windows Server 2019 und höher ist das Feld Hostname nicht erforderlich, aber der Container identifiziert sich immer noch durch den GMSA-Namen anstelle des Hostnamens, auch wenn Sie explizit einen anderen angeben.
+Unter Windows Server 2019 und höher ist das Feld „Hostname“ nicht erforderlich, aber der Container identifiziert sich immer noch über den gMSA-Namen anstelle des Hostnamens, auch wenn Sie explizit einen anderen angeben.
 
-Führen Sie das folgende Cmdlet im Container aus, um zu überprüfen, ob das GMSA ordnungsgemäß funktioniert:
+Führen Sie das folgende Cmdlet im Container aus, um zu überprüfen, ob das gMSA ordnungsgemäß funktioniert:
 
 ```powershell
 # Replace contoso.com with your own domain
@@ -44,9 +44,9 @@ Trust Verification Status = 0 0x0 NERR_Success
 The command completed successfully
 ```
 
-Wenn der Verbindungsstatus des vertrauenswürdigen Domänen Controllers und der Status der Vertrauens Überprüfung nicht `NERR_Success`sind, befolgen Sie die [Anweisungen](gmsa-troubleshooting.md#check-the-container) zur Problembehandlung.
+Wenn der vertrauenswürdige DC-Verbindungsstatus und der Überprüfungsstatus der Vertrauensstellung nicht `NERR_Success` sind, befolgen Sie die [Anweisungen zur Problembehandlung](gmsa-troubleshooting.md#check-the-container), um das Problem zu beheben.
 
-Sie können die GMSA-Identität innerhalb des Containers überprüfen, indem Sie den folgenden Befehl ausführen und den Client Namen überprüfen:
+Sie können die gMSA-Identität aus dem Container heraus überprüfen, indem Sie den folgenden Befehl ausführen und den Clientnamen überprüfen:
 
 ```powershell
 PS C:\> klist get webapp01
@@ -70,14 +70,14 @@ Cached Tickets: (2)
 [...]
 ```
 
-Wenn Sie PowerShell oder eine andere Konsolen-App als GMSA-Konto öffnen möchten, können Sie den Container zur Unterstützung des NETZWERKDIENST Kontos anstelle des normalen Kontos "containeradministrator" (oder "containeruser für NanoServer") auffordern:
+Zum Öffnen von PowerShell oder einer anderen Konsolenanwendung als gMSA-Konto können Sie den Container auffordern, unter dem Netzwerkdienstkonto statt unter dem normalen ContainerAdministrator-Konto (oder ContainerUser für NanoServer) ausgeführt zu werden:
 
 ```powershell
 # NOTE: you can only run as Network Service or SYSTEM on Windows Server 1709 and later
 docker run --security-opt "credentialspec=file://contoso_webapp01.json" --hostname webapp01 --user "NT AUTHORITY\NETWORK SERVICE" -it mcr.microsoft.com/windows/servercore:ltsc2019 powershell
 ```
 
-Wenn Sie als Netzwerkdienst ausführen, können Sie die Netzwerk Authentifizierung als GMSA testen, indem Sie versuchen, eine Verbindung mit SYSVOL auf einem Domänen Controller herzustellen:
+Wenn Sie als Netzwerkdienst ausführen, können Sie die Netzwerkauthentifizierung als gMSA testen, indem Sie versuchen, eine Verbindung zu SYSVOL auf einem Domänencontroller herzustellen:
 
 ```powershell
 # This command should succeed if you're successfully running as the gMSA
@@ -94,9 +94,9 @@ d----l        2/27/2019   8:09 PM                contoso.com
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Zusätzlich zum Ausführen von Containern können Sie gmsas auch für Folgendes verwenden:
+Zusätzlich zum Ausführen von Containern können Sie gMSAs auch zu Folgendem verwenden:
 
-- [Konfigurieren von apps](gmsa-configure-app.md)
+- [Konfigurieren von Apps](gmsa-configure-app.md)
 - [Orchestrieren von Containern](gmsa-orchestrate-containers.md)
 
-Wenn während des Setups Probleme auftreten, finden Sie in unserem [Handbuch zur Problem](gmsa-troubleshooting.md) Behandlung mögliche Lösungen.
+Wenn während des Setups Probleme auftreten, überprüfen Sie unseren [Leitfaden zur Problembehandlung](gmsa-troubleshooting.md) auf mögliche Lösungen.
