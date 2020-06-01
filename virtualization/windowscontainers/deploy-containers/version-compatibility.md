@@ -3,12 +3,12 @@ title: Versionskompatibilität von Windows-Containern
 description: Hier erfahren Sie, wie Windows Container versionsübergreifend erstellen und ausführen kann.
 keywords: Metadaten, Container, Version
 author: taylorb-microsoft
-ms.openlocfilehash: 917c07e13d6a0ec5b5e73213da4dc4f04ec0d9bb
-ms.sourcegitcommit: 8eedfdc1fda9d0abb36e28dc2b5fb39891777364
+ms.openlocfilehash: 4a219fe614500e06dbeeb82f20e0b3f32eda0ccf
+ms.sourcegitcommit: dd80813679df2de89fe523a26600cfe58a2d39a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/10/2020
-ms.locfileid: "79027865"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84023155"
 ---
 # <a name="windows-container-version-compatibility"></a>Versionskompatibilität von Windows-Containern
 
@@ -19,10 +19,21 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 ## <a name="windows-server-host-os-compatibility"></a>Betriebssystemkompatibilität des Windows Server-Hosts
 
 <!-- start tab view -->
+# <a name="windows-server-version-2004"></a>[Windows Server, Version 2004](#tab/windows-server-2004)
+
+|Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
+|---|:---:|:---:|
+|Windows Server, Version 2004|&#10004;|&#10004;|
+|Windows Server, Version 1909|&#10004;|&#10060;|
+|Windows Server, Version 1903|&#10004;|&#10060;|
+|Windows Server 2019|&#10004;|&#10060;|
+|Windows Server 2016|&#10004;|&#10060;|
+
 # <a name="windows-server-version-1909"></a>[Windows Server, Version 1909](#tab/windows-server-1909)
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10004;|&#10004;|
 |Windows Server, Version 1903|&#10004;|&#10060;|
 |Windows Server 2019|&#10004;|&#10060;|
@@ -32,6 +43,7 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10060;|&#10060;|
 |Windows Server, Version 1903|&#10004;|&#10004;|
 |Windows Server 2019|&#10004;|&#10060;|
@@ -41,6 +53,7 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10060;|&#10060;|
 |Windows Server, Version 1903|&#10060;|&#10060;|
 |Windows Server 2019|&#10004;|&#10004;|
@@ -50,6 +63,7 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10060;|&#10060;|
 |Windows Server, Version 1903|&#10060;|&#10060;|
 |Windows Server 2019|&#10060;|&#10060;|
@@ -62,10 +76,21 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 
 <!-- start tab view -->
 
+# <a name="windows-10-version-2004"></a>[Windows 10, Version 2004](#tab/windows-10-2004)
+
+|Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
+|---|:---:|:---:|
+|Windows Server, Version 2004|&#10004;|&#10004;|
+|Windows Server, Version 1909|&#10004;|&#10060;|
+|Windows Server, Version 1903|&#10004;|&#10060;|
+|Windows Server 2019|&#10004;|&#10060;|
+|Windows Server 2016|&#10004;|&#10060;|
+
 # <a name="windows-10-version-1909"></a>[Windows 10, Version 1909](#tab/windows-10-1909)
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10004;|&#10060;|
 |Windows Server, Version 1903|&#10004;|&#10060;|
 |Windows Server 2019|&#10004;|&#10060;|
@@ -75,6 +100,7 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10060;|&#10060;|
 |Windows Server, Version 1903|&#10004;|&#10060;|
 |Windows Server 2019|&#10004;|&#10060;|
@@ -84,6 +110,7 @@ Da wir die Windows-Containerfeatures stetig verbessern, mussten wir einige Ände
 
 |Betriebssystemversion für Containerbasisimage|Unterstützt die Hyper-V-Isolation|Unterstützt die Prozessisolation|
 |---|:---:|:---:|
+|Windows Server, Version 2004|&#10060;|&#10060;|
 |Windows Server, Version 1909|&#10060;|&#10060;|
 |Windows Server, Version 1903|&#10060;|&#10060;|
 |Windows Server 2019|&#10004;|&#10060;|

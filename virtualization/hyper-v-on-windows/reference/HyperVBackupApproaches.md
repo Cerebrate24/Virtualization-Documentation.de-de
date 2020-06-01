@@ -17,7 +17,7 @@ Entwickler können die Sicherungsdaten über die Hyper-V-WMI-Schnittstellen expo
 ### <a name="win32-apis"></a>Win32-APIs
 Entwickler können die SetVirtualDiskInformation-, GetVirtualDiskInformation- und QueryChangesVirtualDisk-APIs für den Win32-API-Satz der virtuellen Festplatte verwenden, wie hier dokumentiert: https://docs.microsoft.com/windows/desktop/api/_vhd/ Beachten Sie, dass zur Verwendung dieser APIs noch Hyper-V-WMI verwendet werden muss, um Referenzpunkte auf zugehörigen virtuellen Computern zu erstellen.  Diese Win32-APIs ermöglichen dann effizienten Zugriff auf die Daten des gesicherten virtuellen Computers.  Die Win32-APIs weisen einige Einschränkungen auf:
 * Auf sie kann nur lokal zugegriffen werden.
-* Das Lesen von Daten aus freigegebenen virtuellen Festplattendateien wird von ihnen nicht unterstützt.
+* Sie unterstützen das Lesen von Daten aus freigegebenen virtuellen Festplattendateien nicht.
 * Sie geben Datenadressen zurück, die relativ zur internen Struktur der virtuellen Festplatte sind.
 
 ### <a name="remote-shared-virtual-disk-protocol"></a>RSVD-Protokoll (Remote Shared Virtual Disk)
