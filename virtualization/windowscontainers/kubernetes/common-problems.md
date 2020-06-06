@@ -7,12 +7,12 @@ ms.topic: troubleshooting
 ms.prod: containers
 description: Lösungen für allgemeine Probleme beim Bereitstellen von Kubernetes und beim Beitritt zu Windows-Knoten.
 keywords: kubernetes, 1,14, Linux, kompilieren
-ms.openlocfilehash: 19b467b657708627dcb6ca93b64fa292d3db8de8
-ms.sourcegitcommit: 8eedfdc1fda9d0abb36e28dc2b5fb39891777364
+ms.openlocfilehash: dfb9be5bb5a5dd3507ee7266346634579df503c0
+ms.sourcegitcommit: 7f3d98da46c73e428565268683691f383c72221f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402921"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84461608"
 ---
 # <a name="troubleshooting-kubernetes"></a>Problembehandlung für Kubernetes #
 Diese Seite führt Sie durch mehrere Probleme beim Setup, Networking oder der Bereitstellung von Kubernetes.
@@ -52,15 +52,20 @@ Policy creation failed: hcnCreateLoadBalancer failed in Win32: The specified por
 
 Benutzer können dieses Problem erkennen, indem Sie das Skript [collectlogs. ps1](https://github.com/microsoft/SDN/blob/master/Kubernetes/windows/debug/collectlogs.ps1) ausführen und die `*portrange.txt` Dateien konsultieren.
 
-Der `CollectLogs.ps1` imitiert auch die Zuordnungs Logik von HNS, um die Verfügbarkeit von Port Pool Zuordnungen im kurzlebigen TCP-Port Bereich zu testen, und meldet Erfolg/Fehler in `reservedports.txt`. Das Skript reserviert 10 Bereiche von 64 TCP-kurzlebigen Ports (zum Emulieren des HNS-Verhaltens), zählt die Erfolgs & Fehlern und gibt dann die zugewiesenen Port Bereiche frei. Eine Erfolgs Nummer kleiner als 10 gibt an, dass der kurzlebige Pool nicht über genügend freien Speicherplatz verfügt. Eine heuristische Zusammenfassung, wie viele 64-Block-Port Reservierungen ungefähr verfügbar sind, werden ebenfalls in `reservedports.txt`generiert.
+Das `CollectLogs.ps1` imitiert auch die Zuordnungs Logik von HNS, um die Verfügbarkeit von Port Pool Zuordnungen im kurzlebigen TCP-Port Bereich zu testen, und meldet Erfolg/Fehler in `reservedports.txt` . Das Skript reserviert 10 Bereiche von 64 TCP-kurzlebigen Ports (zum Emulieren des HNS-Verhaltens), zählt die Erfolgs & Fehlern und gibt dann die zugewiesenen Port Bereiche frei. Eine Erfolgs Nummer kleiner als 10 gibt an, dass der kurzlebige Pool nicht über genügend freien Speicherplatz verfügt. Eine heuristische Zusammenfassung dazu, wie viele 64-Block-Port Reservierungen ungefähr verfügbar sind, werden auch in generiert `reservedports.txt` .
 
 Um dieses Problem zu beheben, können einige Schritte ausgeführt werden:
 1.  Für eine permanente Lösung sollte der Kube-Proxy-Lastenausgleich auf den [DSR-Modus](https://techcommunity.microsoft.com/t5/Networking-Blog/Direct-Server-Return-DSR-in-a-nutshell/ba-p/693710)festgelegt werden. Der DSR-Modus ist vollständig implementiert und nur auf einem neueren [Windows Server-Insider-Build 18945](https://blogs.windows.com/windowsexperience/2019/07/30/announcing-windows-server-vnext-insider-preview-build-18945/#o1bs7T2DGPFpf7HM.97) (oder höher) verfügbar.
-2. Um dieses Problem zu umgehen, können Benutzer auch die standardmäßige Windows-Konfiguration von kurzlebigen Ports erhöhen, die mithilfe eines Befehls wie `netsh int ipv4 set dynamicportrange TCP <start_port> <port_count>`verfügbar sind. *Warnung:* Das Überschreiben des dynamischen Standard Port Bereichs kann auf andere Prozesse/Dienste auf dem Host folgen, die sich auf verfügbare TCP-Ports aus dem nicht kurzlebigen Bereich stützen, daher sollte dieser Bereich sorgfältig ausgewählt werden.
+2. Um dieses Problem zu umgehen, können Benutzer auch die standardmäßige Windows-Konfiguration der kurzlebigen Ports erhöhen, die mithilfe eines Befehls wie verfügbar sind `netsh int ipv4 set dynamicportrange TCP <start_port> <port_count>` . *Warnung:* Das Überschreiben des dynamischen Standard Port Bereichs kann auf andere Prozesse/Dienste auf dem Host folgen, die sich auf verfügbare TCP-Ports aus dem nicht kurzlebigen Bereich stützen, daher sollte dieser Bereich sorgfältig ausgewählt werden.
 3. Es gibt eine Verbesserung der Skalierbarkeit für Lasten Ausgleichs Module ohne DSR-Modus, die eine intelligente Port Pool Freigabe verwenden, die für die Veröffentlichung durch ein kumulatives Update in Q1 2020 geplant ist.
 
 ### <a name="hostport-publishing-is-not-working"></a>Die hostport Veröffentlichung funktioniert nicht. ###
-Es ist derzeit nicht möglich, Ports mit dem Feld Kubernetes `containers.ports.hostPort` zu veröffentlichen, da dieses Feld von Windows cni-Plug-ins nicht berücksichtigt wird. Verwenden Sie zum Veröffentlichen von Ports auf dem Knoten die nodeport-Veröffentlichung.
+Stellen Sie sicher, dass die cni-Plug-Ins [v 0.8.6 installieren](https://github.com/containernetworking/plugins/releases/tag/v0.8.6) Release oder höher sind und dass die cni-Konfigurationsdatei über die folgenden Funktionen verfügt, um die hostport Funktion zu verwenden `portMappings` :
+```
+"capabilities": {
+    "portMappings":  true
+}
+```
 
 ### <a name="i-am-seeing-errors-such-as-hnscall-failed-in-win32-the-wrong-diskette-is-in-the-drive"></a>Ich sehe Fehler wie "hnscall failed in Win32: die falsche Diskette befindet sich im Laufwerk". ###
 Dieser Fehler kann auftreten, wenn Sie benutzerdefinierte Änderungen an HNS-Objekten vornehmen oder neue Windows Update installieren, die Änderungen an HNS einleiten, ohne alte HNS-Objekte zu zerreißen. Gibt an, dass ein HNS-Objekt, das zuvor vor einem Update erstellt wurde, nicht mit der aktuell installierten HNS-Version kompatibel ist.
@@ -81,7 +86,7 @@ hnsdiag delete networks <id>
 Restart-Service HNS
 ```
 
-Benutzer unter Windows Server, Version 1903, können den folgenden Registrierungs Speicherort aufrufen und alle NICs löschen, die mit dem Netzwerknamen beginnen (z. b. `vxlan0` oder `cbr0`):
+Benutzer unter Windows Server, Version 1903, können den folgenden Registrierungs Speicherort aufrufen und alle NICs löschen, die mit dem Netzwerknamen beginnen (z. b. `vxlan0` oder `cbr0` ):
 ```
 \\Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmsmp\parameters\NicList
 ```
@@ -97,12 +102,12 @@ az network route-table route create  --resource-group <my_resource_group> --add
 > Wenn Sie Kubernetes in Azure oder IaaS-VMS von anderen cloudanbietern selbst bereitstellen, können Sie stattdessen auch das [Überlagerungs Netzwerk](./network-topologies.md#flannel-in-vxlan-mode) verwenden.
 
 ### <a name="my-windows-pods-cannot-ping-external-resources"></a>Meine Windows-Pods können externe Ressourcen nicht pingen ###
-Für Windows-Pods gibt es keine ausgehenden Regeln, die heute für das ICMP-Protokoll programmiert sind. TCP/UDP wird jedoch unterstützt. Wenn Sie versuchen, die Konnektivität mit Ressourcen außerhalb des Clusters zu demonstrieren, ersetzen Sie `ping <IP>` durch entsprechende `curl <IP>` Befehle.
+Für Windows-Pods gibt es keine ausgehenden Regeln, die heute für das ICMP-Protokoll programmiert sind. TCP/UDP wird jedoch unterstützt. Wenn Sie versuchen, die Konnektivität mit Ressourcen außerhalb des Clusters zu demonstrieren, ersetzen Sie `ping <IP>` durch die entsprechenden `curl <IP>` Befehle.
 
 Wenn weiterhin Probleme auftreten, verdient die Netzwerkkonfiguration in " [cni. conf](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/cni/config/cni.conf) " eine gewisse Aufmerksamkeit. Diese statische Datei kann immer bearbeitet werden, die Konfiguration wird auf alle neu erstellten Kubernetes-Ressourcen angewendet.
 
 Warum?
-Eine der Kubernetes-Netzwerk Anforderungen (siehe [Kubernetes-Modell](https://kubernetes.io/docs/concepts/cluster-administration/networking/)) ist, dass die Cluster Kommunikation intern ohne NAT erfolgt. Um diese Anforderung zu erfüllen, haben wir eine [Ausnahmeliste](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/cni/config/cni.conf#L20) für die gesamte Kommunikation, bei der wir nicht möchten, dass ausgehende NAT stattfindet. Dies bedeutet jedoch auch, dass Sie die externe IP-Adresse ausschließen müssen, die Sie aus der ExceptionList Abfragen möchten. Nur dann wird der Datenverkehr, der von Ihren Windows-Pods stammt, ordnungsgemäß entfernt, um eine Antwort von der Außenwelt zu erhalten. In diesem Zusammenhang sollte die ExceptionList in `cni.conf` wie folgt aussehen:
+Eine der Kubernetes-Netzwerk Anforderungen (siehe [Kubernetes-Modell](https://kubernetes.io/docs/concepts/cluster-administration/networking/)) ist, dass die Cluster Kommunikation intern ohne NAT erfolgt. Um diese Anforderung zu erfüllen, haben wir eine [Ausnahmeliste](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/cni/config/cni.conf#L20) für die gesamte Kommunikation, bei der wir nicht möchten, dass ausgehende NAT stattfindet. Dies bedeutet jedoch auch, dass Sie die externe IP-Adresse ausschließen müssen, die Sie aus der ExceptionList Abfragen möchten. Nur dann wird der Datenverkehr, der von Ihren Windows-Pods stammt, ordnungsgemäß entfernt, um eine Antwort von der Außenwelt zu erhalten. In dieser Hinsicht sollte die ExceptionList in `cni.conf` wie folgt aussehen:
 ```conf
 "ExceptionList": [
   "10.244.0.0/16",  # Cluster subnet
@@ -118,7 +123,7 @@ Der lokale nodeport-Zugriff über den Knoten selbst schlägt aufgrund einer Entw
 Aufgrund einer Entwurfs Beschränkung muss mindestens ein Pod auf dem Windows-Knoten ausgeführt werden, damit die nodeport-Weiterleitung funktioniert.
 
 ### <a name="after-some-time-vnics-and-hns-endpoints-of-containers-are-being-deleted"></a>Nach einiger Zeit werden vNICs und HNS-Endpunkte von Containern gelöscht. ###
-Dieses Problem kann verursacht werden, wenn der `hostname-override`-Parameter nicht an [Kube-Proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/)übergeben wird. Um dieses Problem zu beheben, müssen Benutzer den Hostnamen wie folgt an den Kube-Proxy übergeben:
+Dieses Problem kann verursacht werden, wenn der- `hostname-override` Parameter nicht an [Kube-Proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/)übergeben wird. Um dieses Problem zu beheben, müssen Benutzer den Hostnamen wie folgt an den Kube-Proxy übergeben:
 ```
 C:\k\kube-proxy.exe --hostname-override=$(hostname)
 ```
@@ -141,7 +146,7 @@ Es gibt auch einen [PR](https://github.com/coreos/flannel/pull/1042) , der diese
 
 
 ### <a name="my-windows-pods-cannot-launch-because-of-missing-runflannelsubnetenv"></a>Meine Windows-Pods können aufgrund fehlender/Run/Flannel/Subnet.env nicht gestartet werden. ###
-Dies gibt an, dass der Flannel nicht ordnungsgemäß gestartet wurde. Sie können auch versuchen, die Datei "flanneld. exe" neu zu starten, oder Sie können die Dateien manuell von `/run/flannel/subnet.env` auf dem Kubernetes-Master kopieren, um Sie auf dem Windows-workerknoten zu `C:\run\flannel\subnet.env` und die `FLANNEL_SUBNET` Zeile in das zugewiesene Subnetz zu ändern. Beispiel: Wenn node Subnetz 10.244.4.1/24 zugewiesen wurde:
+Dies gibt an, dass der Flannel nicht ordnungsgemäß gestartet wurde. Sie können entweder die Datei "flanneld. exe" neu starten, oder Sie können die Dateien manuell von `/run/flannel/subnet.env` auf dem Kubernetes `C:\run\flannel\subnet.env` -Master auf den Windows-workerknoten kopieren und die `FLANNEL_SUBNET` Zeile in das zugewiesene Subnetz ändern. Beispiel: Wenn node Subnetz 10.244.4.1/24 zugewiesen wurde:
 ```
 FLANNEL_NETWORK=10.244.0.0/16
 FLANNEL_SUBNET=10.244.4.1/24
@@ -191,7 +196,7 @@ New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Paramet
 New-ItemPropery -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxNegativeCacheTtl -Value 0 -Type DWord
 ```
 
-### <a name="i-am-still-seeing-problems-what-should-i-do"></a>Ich sehe weiterhin Probleme. Wie gehe ich vor? ### 
+### <a name="i-am-still-seeing-problems-what-should-i-do"></a>Ich sehe weiterhin Probleme. Wie sollte ich vorgehen? ### 
 Möglicherweise gibt es weitere vorhandene Einschränkungen auf Ihrem Netzwerk oder auf Hosts, die bestimmte Kommunikationsarten zwischen Knoten verhindern. Stellen Sie Folgendes sicher:
   - Sie haben die ausgewählte [Netzwerktopologie](./network-topologies.md) ordnungsgemäß konfiguriert.
   - Datenverkehr, der offensichtlich von Pods stammt, ist zulässig.
