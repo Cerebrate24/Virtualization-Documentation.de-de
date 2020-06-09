@@ -3,12 +3,12 @@ title: Permanente Speicherung in Containern
 description: Permanente Speicherung in Windows-Containern
 keywords: Container, Volume, Speicher, Mount, Binden von Bereitstellungen
 author: cwilhit
-ms.openlocfilehash: 945a78d4ecb9c96da4de8f7246f84b6b444dd5b5
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: 8bdf45a46f2e88a2206894f7d412cb93d4491cac
+ms.sourcegitcommit: 57b1c0931a464ad040a7af81b749c7d66c0bc899
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74909670"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84421006"
 ---
 # <a name="persistent-storage-in-containers"></a>Permanente Speicherung in Containern
 
@@ -64,9 +64,9 @@ Unter Windows Server Version 1709 und höher ermöglicht ein neues Feature namen
     > [!NOTE]
     > Wenn die globale Zuordnung in SMB für Container verwendet wird, können alle Benutzer auf dem Containerhost auf die Remotefreigabe zugreifen. Jede auf dem Containerhost ausgeführte Anwendung hat außerdem Zugriff auf die zugeordnete Remotefreigabe.
 
-2. Erstellen Sie Container mit Datenvolumes, die global bereitgestellten SMB-Freigaben zugeordnet sind. Führen Sie den Docker aus. Nennen Sie die Demo -v g:\ContainerData:G:\AppData1 microsoft/windowsservercore:1709 cmd.exe
+2. Erstellen Sie Container mit Datenvolumes, die global bereitgestellten SMB-Freigaben zugeordnet sind. Führen Sie den Docker aus. Nennen Sie die Demo -v g:\ContainerData:c:\AppData1 mcr.microsoft.com/windows/servercore:ltsc2019 cmd.exe
 
-    Innerhalb des Containers wird G:\AppData1 dem Verzeichnis der Remotefreigabe "ContainerData" zugeordnet. Alle Daten, die auf global zugeordneter Remotefreigabe gespeichert sind, sind für Anwendungen innerhalb des Containers verfügbar. Mehrere Container können mit dem gleichen Befehl Lese-/Schreibzugriff auf diese gemeinsam genutzten Daten erhalten.
+    Innerhalb des Containers wird „c:\AppData1“ dem Verzeichnis der Remotefreigabe „ContainerData“ zugeordnet. Alle Daten, die auf global zugeordneter Remotefreigabe gespeichert sind, sind für Anwendungen innerhalb des Containers verfügbar. Mehrere Container können mit dem gleichen Befehl Lese-/Schreibzugriff auf diese gemeinsam genutzten Daten erhalten.
 
 Diese Unterstützung für die globale Zuordnung von SMB ist eine Feature für SMB-Clients, mit auf allen kompatiblen SMB-Servern funktioniert, einschließlich:
 

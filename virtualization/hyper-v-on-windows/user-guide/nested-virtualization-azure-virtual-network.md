@@ -8,12 +8,12 @@ ms.topic: article
 ms.prod: windows-10-hyperv
 ms.service: windows-10-hyperv
 ms.assetid: 1ecb85a6-d938-4c30-a29b-d18bd007ba08
-ms.openlocfilehash: 63007d21fcc046f384405c7d85143bfc576ecc07
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: b287ea091ad283ddf57727f315c7086865375ce7
+ms.sourcegitcommit: e9b3c9dcf7b5c9b9222edbc344764fb038529739
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "81395753"
+ms.lasthandoff: 06/03/2020
+ms.locfileid: "84334100"
 ---
 # <a name="configure-nested-vms-to-communicate-with-resources-in-an-azure-virtual-network"></a>Konfigurieren geschachtelter VMs für die Kommunikation mit Ressourcen in einem Azure Virtual Network
 
@@ -49,7 +49,7 @@ Bevor Sie mit diesem Leitfaden beginnen, sollten folgendermaßen vorgehen:
 
 ## <a name="creating-the-host"></a>Erstellen des Hosts
 
-Ich werde alle Konfigurationswerte, die auf persönliche Einstellungen basieren (z. B. VM-Name, Ressourcengruppe usw.), vermeiden.
+Ich werde alle Konfigurationswerte, die auf persönlichen Einstellungen basieren (z. B. VM-Name, Ressourcengruppe usw.), vermeiden.
 
 1. Navigieren Sie zu portal.Azure.com.
 2. Klicken Sie oben links auf „Ressource erstellen“.
@@ -124,7 +124,7 @@ Ich werde alle Konfigurationswerte, die auf persönliche Einstellungen basieren 
 3. Klicken Sie im Assistenten auf „Weiter“, aktivieren Sie „Benutzerdefinierte Konfiguration“, und wählen Sie dann „Weiter“ aus.
 4. Aktivieren Sie „NAT“ und „LAN-Routing“, und wählen Sie dann „Weiter“ und „Fertig stellen“ aus. Wenn Sie aufgefordert werden, den Dienst zu starten, starten Sie ihn.
 5. Navigieren Sie nun zum Knoten „IPv4“, und erweitern Sie ihn so, dass der Knoten „NAT“ verfügbar wird.
-6. Klicken Sie mit der rechten Maustaste auf „NAT“, und wählen Sie „Neue Schnittstelle“ und „Ethernet“ aus. Dies sollte Ihre erste NIC mit der IP-Adresse „10.0.0.4“ sein. Wählen Sie „Öffentliche Schnittstelle mit dem Internet verbinden“ und „NAT für diese Schnittstelle aktivieren“ aus. 
+6. Klicken Sie mit der rechten Maustaste auf „NAT“, und wählen Sie „Neue Schnittstelle“ und „Ethernet“ aus. Dies sollte Ihre erste NIC mit der IP-Adresse „10.0.0.4“ sein. Wählen Sie „Öffentliche Schnittstelle“ aus, stellen Sie die Internetverbindung her, und aktivieren Sie NAT für diese Schnittstelle. 
 7. Nun müssen wir einige statische Routen erstellen, um LAN-Datenverkehr aus der zweiten NIC zu entfernen. Zu diesem Zweck navigieren Sie zum Knoten „Statische Routen“ unter „IPv4“.
 8. Anschließend erstellen wir die folgenden Routen.
     * Route 1
@@ -168,7 +168,8 @@ Ausführliche Informationen zum Erstellen und Verwalten von Routen in Azure find
 8. Wählen Sie „Zuordnen“ aus, und wählen Sie dann das VNET „Nested-Fun“ aus. Wählen Sie anschließend das Subnetz „Azure-VMs“ aus, und klicken Sie auf „OK“.
 9. Führen Sie den gleichen Vorgang für das Subnetz aus, in dem sich der Hyper-V-Host befindet, sowie für alle anderen Subnetze, die auf die geschachtelten VMs zugreifen müssen. Wenn verbunden 
 
-# <a name="end-state-configuration-reference"></a>Referenz zur Endzustandskonfiguration
+## <a name="end-state-configuration-reference"></a>Referenz zur Endzustandskonfiguration
+
 Die Umgebung in diesem Leitfaden weist die folgenden Konfigurationen auf. Dieser Abschnitt soll als Referenz verwendet werden.
 
 1. Azure Virtual Network-Informationen.
