@@ -7,12 +7,12 @@ ms.topic: troubleshooting
 ms.prod: containers
 description: Lösungen für allgemeine Probleme beim Bereitstellen von Kubernetes und beim Beitritt zu Windows-Knoten.
 keywords: kubernetes, 1,14, Linux, kompilieren
-ms.openlocfilehash: dfb9be5bb5a5dd3507ee7266346634579df503c0
-ms.sourcegitcommit: 7f3d98da46c73e428565268683691f383c72221f
+ms.openlocfilehash: eb8162a55eb1a639cde40faed7b01a48f0c50ad3
+ms.sourcegitcommit: fed735dafbe40179b1e1c46840655248b52617b0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84461608"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84614870"
 ---
 # <a name="troubleshooting-kubernetes"></a>Problembehandlung für Kubernetes #
 Diese Seite führt Sie durch mehrere Probleme beim Setup, Networking oder der Bereitstellung von Kubernetes.
@@ -57,7 +57,7 @@ Das `CollectLogs.ps1` imitiert auch die Zuordnungs Logik von HNS, um die Verfüg
 Um dieses Problem zu beheben, können einige Schritte ausgeführt werden:
 1.  Für eine permanente Lösung sollte der Kube-Proxy-Lastenausgleich auf den [DSR-Modus](https://techcommunity.microsoft.com/t5/Networking-Blog/Direct-Server-Return-DSR-in-a-nutshell/ba-p/693710)festgelegt werden. Der DSR-Modus ist vollständig implementiert und nur auf einem neueren [Windows Server-Insider-Build 18945](https://blogs.windows.com/windowsexperience/2019/07/30/announcing-windows-server-vnext-insider-preview-build-18945/#o1bs7T2DGPFpf7HM.97) (oder höher) verfügbar.
 2. Um dieses Problem zu umgehen, können Benutzer auch die standardmäßige Windows-Konfiguration der kurzlebigen Ports erhöhen, die mithilfe eines Befehls wie verfügbar sind `netsh int ipv4 set dynamicportrange TCP <start_port> <port_count>` . *Warnung:* Das Überschreiben des dynamischen Standard Port Bereichs kann auf andere Prozesse/Dienste auf dem Host folgen, die sich auf verfügbare TCP-Ports aus dem nicht kurzlebigen Bereich stützen, daher sollte dieser Bereich sorgfältig ausgewählt werden.
-3. Es gibt eine Verbesserung der Skalierbarkeit für Lasten Ausgleichs Module ohne DSR-Modus, die eine intelligente Port Pool Freigabe verwenden, die für die Veröffentlichung durch ein kumulatives Update in Q1 2020 geplant ist.
+3. Es gibt eine Skalierbarkeits Erweiterung für Lasten Ausgleichs Module ohne DSR-Modus, die eine intelligente Port Pool Freigabe verwenden, die in kumulativem Update [KB4551853](https://support.microsoft.com/en-us/help/4551853) (und alle neueren kumulativen Updates) enthalten ist.
 
 ### <a name="hostport-publishing-is-not-working"></a>Die hostport Veröffentlichung funktioniert nicht. ###
 Stellen Sie sicher, dass die cni-Plug-Ins [v 0.8.6 installieren](https://github.com/containernetworking/plugins/releases/tag/v0.8.6) Release oder höher sind und dass die cni-Konfigurationsdatei über die folgenden Funktionen verfügt, um die hostport Funktion zu verwenden `portMappings` :
