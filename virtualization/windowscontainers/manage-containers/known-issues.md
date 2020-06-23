@@ -6,12 +6,12 @@ author: weijuans
 ms. author: weijuans
 manager: taylob
 ms.date: 05/26/2020
-ms.openlocfilehash: e1c461a1f28954fb558f0629e0fafd4a7934ca14
-ms.sourcegitcommit: 564a9226064077998020bfae721a17a8e0d9142e
+ms.openlocfilehash: f53ff0c8c07e86b25358a3acba09622fdd3a6bbb
+ms.sourcegitcommit: 82f45088d8b39e2c1f3f2a33bf359d18a88f975a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84106890"
+ms.lasthandoff: 06/18/2020
+ms.locfileid: "84978332"
 ---
 # <a name="known-issues"></a>Bekannte Probleme
 
@@ -24,8 +24,13 @@ Dies sind die damals beobachteten Symptome:
 
 Wenn Sie das Server Core-Containerimage verwenden, um ein eigenes Image zu erstellen und es auf eine Container-Remoteregistrierung wie etwa Azure Container Registry hochzuladen, dieses Image dann bei der Registrierung abrufen und es ausführen, werden Sie eine geringere Leistung des Containers feststellen. Wenn Sie das Image jedoch lokal erstellen und ausführen, tritt dieser Leistungsunterschied nicht auf.
 
-Nächste Schritte: Wir haben einige mögliche Grundursachen identifiziert und arbeiten aktiv an einer Korrektur.  
+Dies ist ein grundsätzliches Problem, und wir arbeiten an seiner Behebung. Sie können das Problem über die folgenden Links nachverfolgen: [microsoft/hcsshim#830](https://github.com/microsoft/hcsshim/issues/830);
 
+[moby/moby#41066](https://github.com/moby/moby/issues/41066);
+
+[containerd/containerd#4301](https://github.com/containerd/containerd/issues/4301).
+
+Wir arbeiten außerdem aktiv mit unserem Partner Mirantis daran, diesen Fix in Docker EE bereitzustellen.
 
 ## <a name="know-issues-of-windows-server-version-1909"></a>Bekannte Probleme bei Windows Server, Version 1909
 
