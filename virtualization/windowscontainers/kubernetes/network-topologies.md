@@ -3,17 +3,17 @@ title: Netzwerktopologien
 author: daschott
 ms.author: daschott
 ms.date: 02/09/2018
-ms.topic: get-started-article
+ms.topic: how-to
 ms.prod: containers
 description: Unterstützte Netzwerktopologien unter Windows und Linux.
 keywords: kubernetes, 1,14, Windows, Getting Started
 ms.assetid: 3b05d2c2-4b9b-42b4-a61b-702df35f5b17
-ms.openlocfilehash: 6b0e13258b749ad3dfd5c8349200ca8a54908952
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: c322edb6a5ead34d7988f83d8cb8fba7c99cec0d
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74910310"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192537"
 ---
 # <a name="network-solutions"></a>Network Solutions #
 
@@ -23,7 +23,7 @@ Nachdem Sie [einen Kubernetes-Master Knoten eingerichtet](./creating-a-linux-mas
 2. Verwenden Sie ein cni-Plug-in, z. b. den [Flannel](#flannel-in-host-gateway-mode) , um Routen für Sie zu programmieren (verwendet den l2bridge
 3. Konfigurieren Sie einen intelligenten [Top-of-Rack-Switch (Tor)](#configuring-a-tor-switch) , um das Subnetz weiterzuleiten.
 
-> [!tip]  
+> [!tip]
 > Es gibt eine vierte Netzwerklösung unter Windows, die Open Vswitch (OVS) und Open Virtual Network (OVN) nutzt. Das dokumentieren dieses Dokuments ist nicht im Gültigkeitsbereich, aber Sie können [diese Anweisungen](https://kubernetes.io/docs/getting-started-guides/windows/#for-3-open-vswitch-ovs-open-virtual-network-ovn-with-overlay) lesen, um es einzurichten.
 
 ## <a name="flannel-in-vxlan-mode"></a>Flannel im vxlan-Modus
@@ -46,13 +46,13 @@ wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-
 
 Zum Aktivieren des vxlan-Netzwerk-Back-Ends sollten Sie zwei Abschnitte ändern:
 
-1. Überprüfen Sie im `net-conf.json` Abschnitt Ihrer `kube-flannel.yml`Folgendes:
+1. `net-conf.json`Überprüfen Sie im Abschnitt Ihrer den folgenden `kube-flannel.yml` doppelten:
  * Das Clustersubnetz (z. b. "10.244.0.0/16") wird wie gewünscht festgelegt.
  * Vni 4096 wird im Back-End festgelegt
  * Port 4789 wird im Back-End festgelegt
-2. Ändern Sie im `cni-conf.json` Abschnitt Ihrer `kube-flannel.yml`den Netzwerknamen in `"vxlan0"`.
+2. Ändern Sie im `cni-conf.json` Abschnitt Ihres `kube-flannel.yml` den Netzwerknamen in `"vxlan0"` .
 
-Nachdem Sie die obigen Schritte ausgeführt haben, sollte Ihr `net-conf.json` wie folgt aussehen:
+Nachdem Sie die obigen Schritte ausgeführt haben, `net-conf.json` sollte Ihr wie folgt aussehen:
 ```json
   net-conf.json: |
     {
@@ -65,10 +65,10 @@ Nachdem Sie die obigen Schritte ausgeführt haben, sollte Ihr `net-conf.json` wi
     }
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Die vni muss auf 4096 und Port 4789 für den Flannel unter Linux festgelegt werden, damit Sie mit dem Flannel unter Windows zusammenarbeiten kann. Die Unterstützung für andere vnis ist demnächst verfügbar. Eine Erläuterung dieser Felder finden Sie unter [vxlan](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#vxlan) .
 
-Die `cni-conf.json` sollte wie folgt aussehen:
+Ihr `cni-conf.json` sollte wie folgt aussehen:
 ```json
 cni-conf.json: |
     {
@@ -90,7 +90,7 @@ cni-conf.json: |
       ]
     }
 ```
-> [!tip]  
+> [!tip]
 > Weitere Informationen zu den oben aufgeführten Optionen finden Sie in den offiziellen cni- [Flannel](https://github.com/containernetworking/plugins/tree/master/plugins/meta/flannel#network-configuration-reference)-, [portmap](https://github.com/containernetworking/plugins/tree/master/plugins/meta/portmap#port-mapping-plugin)-und [Bridge](https://github.com/containernetworking/plugins/tree/master/plugins/main/bridge#network-configuration-reference) -Plug-in-Dokumentation für Linux.
 
 ### <a name="launch-flannel--validate"></a>Flannel starten & validieren ###
@@ -100,13 +100,13 @@ Starten Sie den Flannel mithilfe von:
 kubectl apply -f kube-flannel.yml
 ```
 
-Da die Flannel-Pods auf Linux basieren, wenden Sie den Linux [nodeselector](https://github.com/Microsoft/SDN/tree/master/Kubernetes/flannel/l2bridge/manifests/node-selector-patch.yml) -Patch auf `kube-flannel-ds` daemonset nur auf Linux an. (der "flanneld"-Host-Agent-Prozess wird später beim beitreten in Windows gestartet.)
+Da die Flannel-Pods auf Linux basieren, wenden Sie den Linux- [nodeselector](https://github.com/Microsoft/SDN/tree/master/Kubernetes/flannel/l2bridge/manifests/node-selector-patch.yml) -Patch auf `kube-flannel-ds` daemonset nur auf Linux an. (der "flanneld"-Host-Agent-Prozess wird später beim beitreten in Windows gestartet.)
 
 ```
 kubectl patch ds/kube-flannel-ds-amd64 --patch "$(cat node-selector-patch.yml)" -n=kube-system
 ```
-> [!tip]  
-> Wenn Knoten nicht auf x86-64 basieren, ersetzen Sie `-amd64` oben durch die Prozessorarchitektur.
+> [!tip]
+> Wenn Knoten nicht auf x86-64 basieren, ersetzen `-amd64` Sie oben durch die Prozessorarchitektur.
 
 Nach einigen Minuten sollten alle Pods als ausgeführt angezeigt werden, wenn das Flannel Pod-Netzwerk bereitgestellt wurde.
 
@@ -116,7 +116,7 @@ kubectl get pods --all-namespaces
 
 ![Text](media/kube-master.png)
 
-Für das Flannel-daemonset sollte auch das NoDebug-`beta.kubernetes.io/os=linux` angewendet werden.
+Für das Flannel-daemonset sollte auch "NoDebug Selector" `beta.kubernetes.io/os=linux` angewendet werden.
 
 ```bash
 kubectl get ds -n kube-system
@@ -124,11 +124,11 @@ kubectl get ds -n kube-system
 
 ![Text](media/kube-daemonset.png)
 
-> [!tip]  
+> [!tip]
 > Für die verbleibenden Flannel-DS-*-daemonsets können diese entweder ignoriert oder gelöscht werden, da Sie nicht geplant werden, wenn keine Knoten vorhanden sind, die mit der Prozessorarchitektur übereinstimmen.
 
-> [!tip]  
-> Lassen Sie sich hierdurch nicht verwirren. Im folgenden finden Sie ein vollständiges [Beispiel Kube-Flannel. yml](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/overlay/manifests/kube-flannel-example.yml) für Flannel v 0.11.0 mit diesen Schritten, die für die standardmäßige Clustersubnetz`10.244.0.0/16`vorab angewendet werden.
+> [!tip]
+> Tem? Im folgenden finden Sie ein vollständiges [Beispiel Kube-Flannel. yml](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/overlay/manifests/kube-flannel-example.yml) für Flannel v 0.11.0, wobei diese Schritte bereits für das standardmäßige Clustersubnetz angewendet wurden `10.244.0.0/16` .
 
 Fahren Sie nach der erfolgreichen Ausführung mit den [nächsten Schritten](#next-steps)fort.
 
@@ -154,11 +154,11 @@ wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-
 
 Es gibt eine Datei, die Sie ändern müssen, um Host-GW-Netzwerke über Windows/Linux hinweg zu aktivieren.
 
-Überprüfen Sie im `net-conf.json` Abschnitt der Kube-Flannel. yml Folgendes:
-1. Der Typ des verwendeten Netzwerk-Back-Ends wird auf `host-gw` anstatt auf `vxlan`festgelegt.
+`net-conf.json`Überprüfen Sie im Abschnitt der Kube-Flannel. yml Folgendes:
+1. Der Typ des verwendeten Netzwerk-Back-Ends wird `host-gw` anstelle von auf festgelegt `vxlan` .
 2. Das Clustersubnetz (z. b. "10.244.0.0/16") wird wie gewünscht festgelegt.
 
-Nachdem Sie die beiden Schritte ausgeführt haben, sollte Ihr `net-conf.json` wie folgt aussehen:
+Nachdem Sie die beiden Schritte ausgeführt haben, `net-conf.json` sollte Ihr wie folgt aussehen:
 ```json
 net-conf.json: |
     {
@@ -176,12 +176,12 @@ Starten Sie den Flannel mithilfe von:
 kubectl apply -f kube-flannel.yml
 ```
 
-Da die Flannel-Pods auf Linux basieren, wenden Sie den Linux [nodeselector](https://github.com/Microsoft/SDN/tree/master/Kubernetes/flannel/l2bridge/manifests/node-selector-patch.yml) -Patch auf `kube-flannel-ds` daemonset nur auf Linux an. (der "flanneld"-Host-Agent-Prozess wird später beim beitreten in Windows gestartet.)
+Da die Flannel-Pods auf Linux basieren, wenden Sie das Linux [nodeselector](https://github.com/Microsoft/SDN/tree/master/Kubernetes/flannel/l2bridge/manifests/node-selector-patch.yml) -Patch auf `kube-flannel-ds` daemonset nur auf Linux an. (der "flanneld"-Host-Agent-Prozess wird später beim beitreten in Windows gestartet.)
 
 ```
 kubectl patch ds/kube-flannel-ds-amd64 --patch "$(cat node-selector-patch.yml)" -n=kube-system
 ```
-> [!tip]  
+> [!tip]
 > Wenn Knoten nicht auf x86-64 basieren, ersetzen Sie `-amd64` oben durch die gewünschte Prozessorarchitektur.
 
 Nach einigen Minuten sollten alle Pods als ausgeführt angezeigt werden, wenn das Flannel Pod-Netzwerk bereitgestellt wurde.
@@ -200,11 +200,11 @@ kubectl get ds -n kube-system
 
 ![Text](media/kube-daemonset.png)
 
-> [!tip]  
+> [!tip]
 > Für die verbleibenden Flannel-DS-*-daemonsets können diese entweder ignoriert oder gelöscht werden, da Sie nicht geplant werden, wenn keine Knoten vorhanden sind, die mit der Prozessorarchitektur übereinstimmen.
 
-> [!tip]  
-> Lassen Sie sich hierdurch nicht verwirren. Im folgenden finden Sie ein vollständiges [Beispiel Kube-Flannel. yml](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/manifests/kube-flannel-example.yml) für Flannel v 0.11.0 mit diesen zwei Schritten, die für das standardmäßige Clustersubnetz `10.244.0.0/16`vorangewendet werden.
+> [!tip]
+> Tem? Im folgenden finden Sie ein vollständiges [Beispiel Kube-Flannel. yml](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/manifests/kube-flannel-example.yml) für Flannel v 0.11.0 mit diesen zwei Schritten, die vorab für das standardmäßige Clustersubnetz angewendet werden `10.244.0.0/16` .
 
 Fahren Sie nach der erfolgreichen Ausführung mit den [nächsten Schritten](#next-steps)fort.
 
@@ -214,7 +214,7 @@ Fahren Sie nach der erfolgreichen Ausführung mit den [nächsten Schritten](#nex
 Die Konfiguration des Tor-Schalters erfolgt außerhalb der eigentlichen Knoten. Weitere Informationen hierzu finden Sie unter [Official Kubernetes docs](https://kubernetes.io/docs/getting-started-guides/windows/#upstream-l3-routing-topology).
 
 
-## <a name="next-steps"></a>Nächste Schritte ## 
+## <a name="next-steps"></a>Nächste Schritte ##
 In diesem Abschnitt wird beschrieben, wie Sie eine Netzwerklösung auswählen und konfigurieren. Nun sind Sie bereit für Schritt 4:
 
 > [!div class="nextstepaction"]

@@ -7,12 +7,12 @@ ms.topic: troubleshooting
 ms.prod: containers
 description: Lösungen für allgemeine Probleme beim Bereitstellen von Kubernetes und beim Beitritt zu Windows-Knoten.
 keywords: kubernetes, 1,14, Linux, kompilieren
-ms.openlocfilehash: eb8162a55eb1a639cde40faed7b01a48f0c50ad3
-ms.sourcegitcommit: fed735dafbe40179b1e1c46840655248b52617b0
+ms.openlocfilehash: 2e8074fa018b85a6628280a0dfdbce7c8cd553cb
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84614870"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192696"
 ---
 # <a name="troubleshooting-kubernetes"></a>Problembehandlung für Kubernetes #
 Diese Seite führt Sie durch mehrere Probleme beim Setup, Networking oder der Bereitstellung von Kubernetes.
@@ -28,14 +28,14 @@ Diese Seite ist in die folgenden Kategorien unterteilt:
 
 ## <a name="general-questions"></a>Allgemeine Fragen ##
 
-### <a name="how-do-i-know-startps1-on-windows-completed-successfully"></a>Gewusst wie wussten Sie, dass Start. ps1 unter Windows erfolgreich abgeschlossen wurde? ###
+### <a name="how-do-i-know-startps1-on-windows-completed-successfully"></a>Gewusst wie wussten Sie, dass start.ps1 unter Windows erfolgreich abgeschlossen wurde? ###
 Sie sollten kubelet, Kube-Proxy und (wenn Sie "Flannel As Your Network Solution" ausgewählt haben) auf dem Knoten ausgestellte cluneld-Host-Agent-Prozesse ausführen, wobei ausgestellte Protokolle in separaten Posh-Fenstern angezeigt werden. Außerdem sollte der Windows-Knoten in Ihrem Kubernetes-Cluster als "bereit" aufgeführt werden.
 
 ### <a name="can-i-configure-to-run-all-of-this-in-the-background-instead-of-posh-windows"></a>Kann ich so konfigurieren, dass all dies anstelle von Posh-Fenstern im Hintergrund ausgeführt wird? ###
-Ab Kubernetes, Version 1,11, kann kubelet & Kube-Proxy als Native Windows- [Dienste](https://kubernetes.io/docs/getting-started-guides/windows/#kubelet-and-kube-proxy-can-now-run-as-windows-services)ausgeführt werden. Sie können auch immer Alternative Dienst-Manager wie " [nssm. exe](https://nssm.cc/) " verwenden, um diese Prozesse (flanneld, kubelet & Kube-Proxy) im Hintergrund für Sie auszuführen. Weitere Informationen finden Sie [unter Windows-Dienste auf Kubernetes](./kube-windows-services.md) .
+Ab Kubernetes, Version 1,11, kann kubelet & Kube-Proxy als Native Windows- [Dienste](https://kubernetes.io/docs/getting-started-guides/windows/#kubelet-and-kube-proxy-can-now-run-as-windows-services)ausgeführt werden. Sie können auch immer Alternative Service Manager wie [nssm.exe](https://nssm.cc/) verwenden, um diese Prozesse (flanneld, kubelet & Kube-Proxy) immer im Hintergrund auszuführen. Weitere Informationen finden Sie [unter Windows-Dienste auf Kubernetes](./kube-windows-services.md) .
 
 ### <a name="i-have-problems-running-kubernetes-processes-as-windows-services"></a>Ich habe Probleme beim Ausführen von Kubernetes-Prozessen als Windows-Dienste ###
-Zur anfänglichen Problembehandlung können Sie die folgenden Flags in [nssm. exe](https://nssm.cc/) verwenden, um stdout und stderr in eine Ausgabedatei umzuleiten:
+Zur anfänglichen Problembehandlung können Sie die folgenden Flags in [nssm.exe](https://nssm.cc/) verwenden, um stdout und stderr in eine Ausgabedatei umzuleiten:
 ```
 nssm set <Service Name> AppStdout C:\k\mysvc.log
 nssm set <Service Name> AppStderr C:\k\mysvc.log
@@ -50,7 +50,7 @@ Unter Windows erstellt Kube-Proxy einen HNS Load Balancer für jeden Kubernetes-
 Policy creation failed: hcnCreateLoadBalancer failed in Win32: The specified port already exists.
 ```
 
-Benutzer können dieses Problem erkennen, indem Sie das Skript [collectlogs. ps1](https://github.com/microsoft/SDN/blob/master/Kubernetes/windows/debug/collectlogs.ps1) ausführen und die `*portrange.txt` Dateien konsultieren.
+Benutzer können dieses Problem erkennen, indem Sie [CollectLogs.ps1](https://github.com/microsoft/SDN/blob/master/Kubernetes/windows/debug/collectlogs.ps1) Skript ausführen und die `*portrange.txt` Dateien konsultieren.
 
 Das `CollectLogs.ps1` imitiert auch die Zuordnungs Logik von HNS, um die Verfügbarkeit von Port Pool Zuordnungen im kurzlebigen TCP-Port Bereich zu testen, und meldet Erfolg/Fehler in `reservedports.txt` . Das Skript reserviert 10 Bereiche von 64 TCP-kurzlebigen Ports (zum Emulieren des HNS-Verhaltens), zählt die Erfolgs & Fehlern und gibt dann die zugewiesenen Port Bereiche frei. Eine Erfolgs Nummer kleiner als 10 gibt an, dass der kurzlebige Pool nicht über genügend freien Speicherplatz verfügt. Eine heuristische Zusammenfassung dazu, wie viele 64-Block-Port Reservierungen ungefähr verfügbar sind, werden auch in generiert `reservedports.txt` .
 
@@ -70,7 +70,7 @@ Stellen Sie sicher, dass die cni-Plug-Ins [v 0.8.6 installieren](https://github.
 ### <a name="i-am-seeing-errors-such-as-hnscall-failed-in-win32-the-wrong-diskette-is-in-the-drive"></a>Ich sehe Fehler wie "hnscall failed in Win32: die falsche Diskette befindet sich im Laufwerk". ###
 Dieser Fehler kann auftreten, wenn Sie benutzerdefinierte Änderungen an HNS-Objekten vornehmen oder neue Windows Update installieren, die Änderungen an HNS einleiten, ohne alte HNS-Objekte zu zerreißen. Gibt an, dass ein HNS-Objekt, das zuvor vor einem Update erstellt wurde, nicht mit der aktuell installierten HNS-Version kompatibel ist.
 
-Unter Windows Server 2019 (und niedriger) können Benutzer die HNS-Objekte löschen, indem Sie die Datei HNS. Data löschen. 
+Unter Windows Server 2019 (und niedriger) können Benutzer die HNS-Objekte löschen, indem Sie die Datei HNS. Data löschen.
 ```
 Stop-Service HNS
 rm C:\ProgramData\Microsoft\Windows\HNS\HNS.data
@@ -81,7 +81,7 @@ Benutzer sollten in der Lage sein, alle inkompatiblen HNS-Endpunkte oder Netzwer
 ```
 hnsdiag list endpoints
 hnsdiag delete endpoints <id>
-hnsdiag list networks 
+hnsdiag list networks
 hnsdiag delete networks <id>
 Restart-Service HNS
 ```
@@ -92,7 +92,7 @@ Benutzer unter Windows Server, Version 1903, können den folgenden Registrierung
 ```
 
 ### <a name="containers-on-my-flannel-host-gw-deployment-on-azure-cannot-reach-the-internet"></a>Container auf meinem Flannel-Host: die GW-Bereitstellung in Azure kann das Internet nicht erreichen. ###
-Wenn Sie den Flannel im Host-GW-Modus in Azure bereitstellen, müssen die Pakete über den physischen Azure-Host-Vswitch geleitet werden. Benutzer sollten [benutzerdefinierte Routen](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#user-defined) vom Typ "virtuelles Gerät" für jedes Subnetz programmieren, das einem Knoten zugewiesen ist. Dies kann über die Azure-Portal erfolgen (siehe [hier](https://docs.microsoft.com/en-us/azure/virtual-network/tutorial-create-route-table-portal)ein Beispiel) oder über `az` Azure CLI. Im folgenden finden Sie ein Beispiel für eine UDR mit dem Namen "MyRoute", wobei AZ Commands für einen Knoten mit IP 10.0.0.4 und das entsprechende Pod-Subnetz 10.244.0.0/24 verwendet wird:
+Wenn Sie den Flannel im Host-GW-Modus in Azure bereitstellen, müssen die Pakete über den physischen Azure-Host-Vswitch geleitet werden. Benutzer sollten [benutzerdefinierte Routen](https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview#user-defined) vom Typ "virtuelles Gerät" für jedes Subnetz programmieren, das einem Knoten zugewiesen ist. Dies kann über die Azure-Portal erfolgen (siehe [hier](https://docs.microsoft.com/azure/virtual-network/tutorial-create-route-table-portal)ein Beispiel) oder über `az` Azure CLI. Im folgenden finden Sie ein Beispiel für eine UDR mit dem Namen "MyRoute", wobei AZ Commands für einen Knoten mit IP 10.0.0.4 und das entsprechende Pod-Subnetz 10.244.0.0/24 verwendet wird:
 ```
 az network route-table create --resource-group <my_resource_group> --name BridgeRoute 
 az network route-table route create  --resource-group <my_resource_group> --address-prefix 10.244.0.0/24 --route-table-name BridgeRoute  --name MyRoute --next-hop-type VirtualAppliance --next-hop-ip-address 10.0.0.4 
@@ -135,8 +135,8 @@ Remove-Item C:\k\SourceVip.json
 Remove-Item C:\k\SourceVipRequest.json
 ```
 
-### <a name="after-launching-startps1-flanneld-is-stuck-in-waiting-for-the-network-to-be-created"></a>Nach dem Start von "Start. ps1" bleibt flanneld in "warten auf die Erstellung des Netzwerks". ###
-Es gibt zahlreiche Berichte zu diesem Problem, die untersucht werden. höchstwahrscheinlich handelt es sich um ein Zeit Steuerungs Problem, wenn die Verwaltungs-IP des Flannel-Netzwerks festgelegt ist. Eine Problem Umgehung besteht darin, einfach "Start. ps1" neu zu starten oder Sie wie folgt manuell neu zu starten
+### <a name="after-launching-startps1-flanneld-is-stuck-in-waiting-for-the-network-to-be-created"></a>Nachdem Sie start.ps1 gestartet haben, bleibt flanneld in "warten auf die Erstellung des Netzwerks". ###
+Es gibt zahlreiche Berichte zu diesem Problem, die untersucht werden. höchstwahrscheinlich handelt es sich um ein Zeit Steuerungs Problem, wenn die Verwaltungs-IP des Flannel-Netzwerks festgelegt ist. Eine Problem Umgehung besteht darin, start.ps1 neu zu starten oder Sie wie folgt manuell neu zu starten:
 ```
 PS C:> [Environment]::SetEnvironmentVariable("NODE_NAME", "<Windows_Worker_Hostname>")
 PS C:> C:\flannel\flanneld.exe --kubeconfig-file=c:\k\config --iface=<Windows_Worker_Node_IP> --ip-masq=1 --kube-subnet-mgr=1
@@ -146,22 +146,22 @@ Es gibt auch einen [PR](https://github.com/coreos/flannel/pull/1042) , der diese
 
 
 ### <a name="my-windows-pods-cannot-launch-because-of-missing-runflannelsubnetenv"></a>Meine Windows-Pods können aufgrund fehlender/Run/Flannel/Subnet.env nicht gestartet werden. ###
-Dies gibt an, dass der Flannel nicht ordnungsgemäß gestartet wurde. Sie können entweder die Datei "flanneld. exe" neu starten, oder Sie können die Dateien manuell von `/run/flannel/subnet.env` auf dem Kubernetes `C:\run\flannel\subnet.env` -Master auf den Windows-workerknoten kopieren und die `FLANNEL_SUBNET` Zeile in das zugewiesene Subnetz ändern. Beispiel: Wenn node Subnetz 10.244.4.1/24 zugewiesen wurde:
+Dies gibt an, dass der Flannel nicht ordnungsgemäß gestartet wurde. Sie können entweder versuchen, flanneld.exe neu zu starten, oder Sie können die Dateien manuell von `/run/flannel/subnet.env` auf dem Kubernetes-Master auf `C:\run\flannel\subnet.env` den Windows-workerknoten kopieren und die `FLANNEL_SUBNET` Zeile in das zugewiesene Subnetz ändern. Beispiel: Wenn node Subnetz 10.244.4.1/24 zugewiesen wurde:
 ```
 FLANNEL_NETWORK=10.244.0.0/16
 FLANNEL_SUBNET=10.244.4.1/24
 FLANNEL_MTU=1500
 FLANNEL_IPMASQ=true
 ```
-Es ist sicherer, dass "flanneld. exe" diese Datei für Sie generiert.
+Es ist sicherer, flanneld.exe diese Datei für Sie zu generieren.
 
 
-### <a name="pod-to-pod-connectivity-between-hosts-is-broken-on-my-kubernetes-cluster-running-on-vsphere"></a>Pod-zu-Pod-Konnektivität zwischen Hosts ist auf meinem Kubernetes-Cluster, der auf vSphere ausgeführt wird, beschädigt. 
-Da sowohl vSphere als auch der Flannel Port 4789 (vxlan-Standardport) für Überlagerungs Netzwerke reserviert, können Pakete am Ende abgefangen werden. Wenn vSphere für Überlagerungs Netzwerke verwendet wird, sollte es für die Verwendung eines anderen Ports konfiguriert werden, um 4789 freizugeben.  
+### <a name="pod-to-pod-connectivity-between-hosts-is-broken-on-my-kubernetes-cluster-running-on-vsphere"></a>Pod-zu-Pod-Konnektivität zwischen Hosts ist auf meinem Kubernetes-Cluster, der auf vSphere ausgeführt wird, beschädigt.
+Da sowohl vSphere als auch der Flannel Port 4789 (vxlan-Standardport) für Überlagerungs Netzwerke reserviert, können Pakete am Ende abgefangen werden. Wenn vSphere für Überlagerungs Netzwerke verwendet wird, sollte es für die Verwendung eines anderen Ports konfiguriert werden, um 4789 freizugeben.
 
 
 ### <a name="my-endpointsips-are-leaking"></a>Meine Endpunkte/IPS sind nicht freigegeben. ###
-Es gibt zwei derzeit bekannte Probleme, die dazu führen können, dass Endpunkte nicht mehr vorhanden sind. 
+Es gibt zwei derzeit bekannte Probleme, die dazu führen können, dass Endpunkte nicht mehr vorhanden sind.
 1.  Das erste [bekannte Problem](https://github.com/kubernetes/kubernetes/issues/68511) ist ein Problem in Kubernetes, Version 1,11. Vermeiden Sie die Verwendung der Kubernetes-Version 1.11.0-1.11.2.
 2. Das zweite [bekannte Problem](https://github.com/docker/libnetwork/issues/1950) , das zu einem Fehler bei Endpunkten führen kann, ist ein Parallelitäts Problem beim Speichern von Endpunkten. Um die Behebung zu erhalten, müssen Sie docker EE 18,09 oder höher verwenden.
 
@@ -184,7 +184,7 @@ Get-HnsNetwork | ? Name -ieq "cbr0"
 Get-NetAdapter | ? Name -Like "vEthernet (Ethernet*"
 ```
 
-Häufig ist es sinnvoll, den Parameter " [InterfaceName](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/start.ps1#L6) " des Skripts "Start. ps1" zu ändern, in Fällen, in denen der Netzwerkadapter des Hosts nicht "Ethernet" ist. Überprüfen Sie andernfalls die Ausgabe des `start-kubelet.ps1` Skripts, um zu ermitteln, ob bei der Erstellung des virtuellen Netzwerks Fehler vorliegen. 
+Häufig ist es sinnvoll, den Parameter " [InterfaceName](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/start.ps1#L6) " des start.ps1 Skripts zu ändern, in Fällen, in denen der Netzwerkadapter des Hosts nicht "Ethernet" ist. Überprüfen Sie andernfalls die Ausgabe des `start-kubelet.ps1` Skripts, um zu ermitteln, ob bei der Erstellung des virtuellen Netzwerks Fehler vorliegen.
 
 ### <a name="pods-stop-resolving-dns-queries-successfully-after-some-time-alive"></a>Pods stoppen nach einiger Zeit die erfolgreiche Auflösung von DNS-Abfragen. ###
 Es gibt ein bekanntes Problem mit der DNS-Zwischenspeicherung im Netzwerk Stapel von Windows Server, Version 1803 und höher, die mitunter zu Fehlern bei DNS-Anforderungen führen können. Um dieses Problem zu umgehen, können Sie die maximale Gültigkeitsdauer Cache Werte mithilfe der folgenden Registrierungsschlüssel auf 0 (null) festlegen:
@@ -192,11 +192,11 @@ Es gibt ein bekanntes Problem mit der DNS-Zwischenspeicherung im Netzwerk Stapel
 ```Dockerfile
 FROM microsoft/windowsservercore:<your-build>
 SHELL ["powershell', "-Command", "$ErrorActionPreference = 'Stop';"]
-New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxCacheTtl -Value 0 -Type DWord 
+New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxCacheTtl -Value 0 -Type DWord
 New-ItemPropery -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxNegativeCacheTtl -Value 0 -Type DWord
 ```
 
-### <a name="i-am-still-seeing-problems-what-should-i-do"></a>Ich sehe weiterhin Probleme. Wie sollte ich vorgehen? ### 
+### <a name="i-am-still-seeing-problems-what-should-i-do"></a>Ich sehe weiterhin Probleme. Wie sollte ich vorgehen? ###
 Möglicherweise gibt es weitere vorhandene Einschränkungen auf Ihrem Netzwerk oder auf Hosts, die bestimmte Kommunikationsarten zwischen Knoten verhindern. Stellen Sie Folgendes sicher:
   - Sie haben die ausgewählte [Netzwerktopologie](./network-topologies.md) ordnungsgemäß konfiguriert.
   - Datenverkehr, der offensichtlich von Pods stammt, ist zulässig.
@@ -229,7 +229,7 @@ Führen Sie `kubectl get pods -n kube-system` durch, um die durch Kubernetes ers
 ### <a name="cannot-connect-to-the-api-server-at-httpsaddressport"></a>Verbindung mit dem API-Server unter `https://[address]:[port]` ist nicht möglich. ###
 In den meisten Fällen deutet dieser Fehler auf Probleme mit dem Sicherheitszertifikat hin. Stellen Sie sicher, dass Sie die Konfigurationsdatei ordnungsgemäß generiert haben, dass die darin enthaltenen IP-Adressen denen Ihres Host entsprechen und dass Sie diese in das Verzeichnis kopiert haben, das vom API-Server bereitgestellt wird.
 
-Wenn Sie die [Anweisungen](./creating-a-linux-master.md)befolgen, finden Sie hier folgende gute Möglichkeiten:   
+Wenn Sie die [Anweisungen](./creating-a-linux-master.md)befolgen, finden Sie hier folgende gute Möglichkeiten:
 * `~/kube/kubelet/`
 * `$HOME/.kube/config`
 *  `/etc/kubernetes/admin.conf`

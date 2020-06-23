@@ -3,17 +3,17 @@ title: Beitreten zu Linux-Knoten
 author: daschott
 ms.author: daschott
 ms.date: 02/09/2018
-ms.topic: get-started-article
+ms.topic: how-to
 ms.prod: containers
 description: Hinzufügen eines Linux-Knotens zu einem Kubernetes-Cluster mit v 1,14.
 keywords: kubernetes, 1,14, Windows, Getting Started
 ms.assetid: 3b05d2c2-4b9b-42b4-a61b-702df35f5b17
-ms.openlocfilehash: 88207939c82bfe8ffa0b088cfd61cf4ab22cb10a
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: 88ad448796702b3cebe71bb9d0189ea86f72635e
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74909950"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192777"
 ---
 # <a name="joining-linux-nodes-to-a-cluster"></a>Hinzufügen von Linux-Knoten zu einem Cluster
 
@@ -40,7 +40,7 @@ apt-get update && apt-get upgrade
 
 ## <a name="install-docker"></a>Installieren von Docker
 
-Um Container verwenden zu können, benötigen Sie eine Container-Engine, z. b. Docker. Um die neueste Version zu erhalten, können Sie [diese Anweisungen](https://docs.docker.com/install/linux/docker-ce/ubuntu/) für die Docker-Installation verwenden. Sie können überprüfen, ob docker ordnungsgemäß installiert ist, indem Sie `hello-world` Abbild ausführen:
+Um Container verwenden zu können, benötigen Sie eine Container-Engine, z. b. Docker. Um die neueste Version zu erhalten, können Sie [diese Anweisungen](https://docs.docker.com/install/linux/docker-ce/ubuntu/) für die Docker-Installation verwenden. Sie können überprüfen, ob docker ordnungsgemäß installiert ist, indem Sie Folgendes `hello-world` Image ausführen:
 
 ```bash
 docker run hello-world
@@ -50,7 +50,7 @@ docker run hello-world
 
 Laden Sie `kubeadm` Binärdateien für Ihre Linux-Distribution herunter, und initialisieren Sie Ihren Cluster.
 
-> [!Important]  
+> [!Important]
 > Abhängig von Ihrer Linux-Distribution müssen Sie möglicherweise `kubernetes-xenial` unten durch den richtigen [Codenamen](https://wiki.ubuntu.com/Releases)ersetzen.
 
 ``` bash
@@ -58,7 +58,7 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
-apt-get update && apt-get install -y kubelet kubeadm kubectl 
+apt-get update && apt-get install -y kubelet kubeadm kubectl
 ```
 
 ## <a name="disable-swap"></a>Austausch deaktivieren
@@ -88,7 +88,7 @@ Führen Sie die folgenden drei Schritte **als regulärer Benutzer (Benutzer ohne
 mkdir -p $HOME/.kube
 ```
 
-2. Kopieren Sie die Kubernetes-Zertifikatsdatei (`$HOME/.kube/config`) [vom Master](./creating-a-linux-master.md#collect-cluster-information) , und speichern Sie Sie als `$HOME/.kube/config` auf dem Worker.
+2. Kopieren Sie die Kubernetes-Zertifikat Datei ( `$HOME/.kube/config` ) [vom Master](./creating-a-linux-master.md#collect-cluster-information) , und speichern Sie Sie unter `$HOME/.kube/config` auf dem Worker.
 
 > [!tip]
 > Sie können SCP-basierte Tools wie [WinSCP](https://winscp.net/eng/download.php) verwenden, um die Konfigurationsdatei zwischen Knoten zu übertragen.
@@ -101,7 +101,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ## <a name="joining-node"></a>Beitreten zum Knoten
 
-Zum Schluss führen Sie den `kubeadm join` Befehl aus, den [Sie zuvor notiert](./creating-a-linux-master.md#initialize-master) haben, um den Cluster zu **erhalten:**
+Zum Schluss führen Sie den Befehl aus, den `kubeadm join` [Sie zuvor notiert](./creating-a-linux-master.md#initialize-master) **as root**haben, um den Cluster zu verbinden:
 
 ```bash
 kubeadm join <Master_IP>:6443 --token <some_token> --discovery-token-ca-cert-hash <some_hash>
