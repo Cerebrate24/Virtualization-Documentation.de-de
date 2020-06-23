@@ -9,17 +9,17 @@ ms.topic: landing-page
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 74c9d604-0915-4d89-bc69-0263b76bc66b
-ms.openlocfilehash: 9a5b08f87983e285418ae333e3a948af9911d73d
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: 132cfd872eff5a7d626d0241381061cdf2a33f34
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "74909160"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192367"
 ---
 <div id="main" class="v2">
     <ul class="cardsY panelContent featuredContent">
         <li>
-            <a href="https://docs.microsoft.com/en-us/azure/aks/windows-container-cli" data-linktype="external">
+            <a href="https://docs.microsoft.com/azure/aks/windows-container-cli" data-linktype="external">
                 <div class="cardSize">
                     <div class="cardPadding">
                         <div class="card">
@@ -89,9 +89,9 @@ ms.locfileid: "74909160"
                         <div class="cardText">
                             <h3 style="margin: 8px 0 2px 0;">Übersicht</h3>
                             <ul>
-                                <li><a href="/en-us/virtualization/windowscontainers/about/index" data-linktype="absolute-path">Informationen zu Windows-Containern</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/deploy-containers/system-requirements" data-linktype="absolute-path">Systemanforderungen</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/about/faq" data-linktype="absolute-path">Häufig gestellte Fragen</a></li>
+                                <li><a href="/virtualization/windowscontainers/about/index" data-linktype="absolute-path">Informationen zu Windows-Containern</a></li>
+                                <li><a href="/virtualization/windowscontainers/deploy-containers/system-requirements" data-linktype="absolute-path">Systemanforderungen</a></li>
+                                <li><a href="/virtualization/windowscontainers/about/faq" data-linktype="absolute-path">Häufig gestellte Fragen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -110,9 +110,9 @@ ms.locfileid: "74909160"
                         <div class="cardText">
                             <h3 style="margin: 8px 0 2px 0;">Erste Schritte</h3>
                             <ul>
-                                <li><a href="/en-us/virtualization/windowscontainers/quick-start/set-up-environment" data-linktype="external">Einrichten der Umgebung</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/quick-start/run-your-first-container" data-linktype="external">Ausführen Ihres ersten Containers</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/quick-start/building-sample-app" data-linktype="external">Containerisieren einer Beispiel-App</a></li>
+                                <li><a href="/virtualization/windowscontainers/quick-start/set-up-environment" data-linktype="external">Einrichten der Umgebung</a></li>
+                                <li><a href="/virtualization/windowscontainers/quick-start/run-your-first-container" data-linktype="external">Ausführen Ihres ersten Containers</a></li>
+                                <li><a href="/virtualization/windowscontainers/quick-start/building-sample-app" data-linktype="external">Containerisieren einer Beispiel-App</a></li>
                             </ul>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ ms.locfileid: "74909160"
                         <div class="cardText">
                             <h3 style="margin: 8px 0 2px 0;">Lernprogramme</h3>
                             <ul>
-                                <li><a href="/en-us/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile" data-linktype="external">Erstellen eines Windows-Containers</a></li>
+                                <li><a href="/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile" data-linktype="external">Erstellen eines Windows-Containers</a></li>
                                 <li><a href="/azure/aks/windows-container-cli" data-linktype="external">Ausführung unter AKS</a></li>
                                 <li><a href="/azure/service-fabric/service-fabric-quickstart-containers" data-linktype="external">Ausführung unter Service Fabric</a></li>
                                 <li><a href="/azure/app-service/app-service-web-get-started-windows-container" data-linktype="external">Ausführung unter Azure App Service</a></li>
@@ -153,7 +153,7 @@ ms.locfileid: "74909160"
                         <div class="cardText">
                             <h3 style="margin: 8px 0 2px 0;">Konzepte</h3>
                             <ul>
-                                <li><a href="/en-us/virtualization/windowscontainers/manage-docker/configure-docker-daemon" data-linktype="external">Docker</a></li>
+                                <li><a href="/virtualization/windowscontainers/manage-docker/configure-docker-daemon" data-linktype="external">Docker</a></li>
                                 <li><a href="/virtualization/windowscontainers/about/overview-container-orchestrators" data-linktype="external">Containerorchestrierung</a></li>
                                 <li><a href="/virtualization/windowscontainers/manage-containers/container-base-images" data-linktype="external">Grundlagen von Windows-Containern</a></li>
                             </ul>
@@ -174,9 +174,9 @@ ms.locfileid: "74909160"
                         <div class="cardText">
                             <h3 style="margin: 8px 0 2px 0;">Verweis</h3>
                             <ul>
-                                <li><a href="/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility" data-linktype="external">Versionskompatibilität</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/deploy-containers/base-image-lifecycle" data-linktype="external">Wartungslebenszyklen von Images</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/images-eula" data-linktype="external">Lizenzbedingungen für Containerbetriebssystem-Image</a></li>
+                                <li><a href="/virtualization/windowscontainers/deploy-containers/version-compatibility" data-linktype="external">Versionskompatibilität</a></li>
+                                <li><a href="/virtualization/windowscontainers/deploy-containers/base-image-lifecycle" data-linktype="external">Wartungslebenszyklen von Images</a></li>
+                                <li><a href="/virtualization/windowscontainers/images-eula" data-linktype="external">Lizenzbedingungen für Containerbetriebssystem-Image</a></li>
                             </ul>
                         </div>
                     </div>
@@ -195,9 +195,9 @@ ms.locfileid: "74909160"
                         <div class="cardText">
                             <h3 style="margin: 8px 0 2px 0;">Ressourcen</h3>
                             <ul>
-                                <li><a href="/en-us/virtualization/windowscontainers/samples" data-linktype="external">Beispiele</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/troubleshooting" data-linktype="external">Problembehandlung</a></li>
-                                <li><a href="/en-us/virtualization/windowscontainers/communitylinks" data-linktype="external">Videos und Blogs der Community</a></li>
+                                <li><a href="/virtualization/windowscontainers/samples" data-linktype="external">Beispiele</a></li>
+                                <li><a href="/virtualization/windowscontainers/troubleshooting" data-linktype="external">Problembehandlung</a></li>
+                                <li><a href="/virtualization/windowscontainers/communitylinks" data-linktype="external">Videos und Blogs der Community</a></li>
                             </ul>
                         </div>
                     </div>
