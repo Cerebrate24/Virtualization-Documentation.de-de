@@ -4,16 +4,16 @@ description: Optimieren Sie Dockerfile-Dateien für Windows-Container.
 keywords: Docker, Container
 author: cwilhit
 ms.date: 05/03/2019
-ms.topic: article
+ms.topic: tutorial
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: bb2848ca-683e-4361-a750-0d1d14ec8031
-ms.openlocfilehash: ae633c7ba5d9672335addcc582988fc47c13ed79
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: 25297432a3e515a130c9710431fd550f2efd8226
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "74910150"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192357"
 ---
 # <a name="optimize-windows-dockerfiles"></a>Optimieren von Windows-Dockerfile-Dateien
 
@@ -136,19 +136,19 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019
 RUN powershell -Command \
 
   # Download software ; \
-    
+
   wget https://www.apachelounge.com/download/VC11/binaries/httpd-2.4.18-win32-VC11.zip -OutFile c:\apache.zip ; \
   wget "https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe" -OutFile c:\vcredist.exe ; \
   wget -Uri http://windows.php.net/downloads/releases/php-5.5.33-Win32-VC11-x86.zip -OutFile c:\php.zip ; \
 
   # Install Software ; \
-    
+
   Expand-Archive -Path c:\php.zip -DestinationPath c:\php ; \
   Expand-Archive -Path c:\apache.zip -DestinationPath c:\ ; \
   start-Process c:\vcredist.exe -ArgumentList '/quiet' -Wait ; \
-    
+
   # Remove unneeded files ; \
-     
+
   Remove-Item c:\apache.zip -Force; \
   Remove-Item c:\vcredist.exe -Force; \
   Remove-Item c:\php.zip
@@ -206,7 +206,7 @@ Es ist wichtig, wie Sie die Anweisungen anordnen, wenn Sie mit Imagecaches arbei
 
 Eine Dockerfile-Datei wird von oben nach unten verarbeitet und jede Anweisung mit den zwischengespeicherten Ebenen verglichen. Wenn eine Anweisung gefunden wird, der keine zwischengespeicherte Ebene zugeordnet ist, werden diese Anweisung und alle nachfolgenden Anweisungen in neuen Containerimageebenen verarbeitet. Aus diesem Grund ist die Reihenfolge wichtig, in der die Anweisungen platziert werden. Platzieren Sie Anweisungen, die konstant bleiben werden, im oberen Teil der Dockerfile-Datei. Platzieren Sie Anweisungen, die sich ändern könnten, im unteren Teil der Dockerfile-Datei. Dies reduziert die Wahrscheinlichkeit, dass der vorhandene Cache negiert wird.
 
-Die folgenden Beispiele zeigen, wie die Reihenfolge von Dockerfile-Anweisungen die Wirksamkeit des Zwischenspeichers beeinflussen kann. Diese einfache Dockerfile-Beispieldatei weist vier nummerierte Ordner auf.  
+Die folgenden Beispiele zeigen, wie die Reihenfolge von Dockerfile-Anweisungen die Wirksamkeit des Zwischenspeichers beeinflussen kann. Diese einfache Dockerfile-Beispieldatei weist vier nummerierte Ordner auf.
 
 ```dockerfile
 FROM mcr.microsoft.com/windows/servercore:ltsc2019

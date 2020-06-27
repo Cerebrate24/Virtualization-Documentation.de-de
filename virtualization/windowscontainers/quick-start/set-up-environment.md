@@ -5,16 +5,16 @@ keywords: Docker, Container, LCOW
 author: cwilhit
 ms.author: crwilhit
 ms.date: 11/12/2019
-ms.topic: article
+ms.topic: quickstart
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: bb9bfbe0-5bdc-4984-912f-9c93ea67105f
-ms.openlocfilehash: 13d8f1ead90b2c2c86afe9f596717c1c09905895
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: 52cc32171ffdaf3e27476923ebdda3bc226ce4c9
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "80929982"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192607"
 ---
 # <a name="get-started-prep-windows-for-containers"></a>Erste Schritte: Vorbereiten von Windows für Container
 
@@ -41,8 +41,8 @@ Zum Ausführen von Containern unter Windows 10 benötigen Sie Folgendes:
 - [Hyper-V](https://docs.microsoft.com/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) sollte aktiviert sein.
 
 > [!NOTE]
->  Ab dem Windows 10-Update von Oktober 2018 ist es nicht mehr zulässig, dass Benutzer einen Windows-Container im Prozessisolationsmodus unter Windows 10 Enterprise oder Professional für Entwicklungs-/Testzwecke ausführen. Weitere Informationen finden Sie in den [FAQ](../about/faq.md). 
-> 
+>  Ab dem Windows 10-Update von Oktober 2018 ist es nicht mehr zulässig, dass Benutzer einen Windows-Container im Prozessisolationsmodus unter Windows 10 Enterprise oder Professional für Entwicklungs-/Testzwecke ausführen. Weitere Informationen finden Sie in den [FAQ](../about/faq.md).
+>
 > Windows Server-Container verwenden standardmäßig Hyper-V-Isolation unter Windows 10, damit Entwickler die gleiche Kernelversion und -konfiguration nutzen können, die in der Produktion verwendet wird. Weitere Informationen zur Hyper-V-Isolation finden Sie im Bereich [Konzepte](../manage-containers/hyperv-container.md) unserer Dokumentation.
 
 ---
@@ -88,7 +88,7 @@ Wenn Sie Docker später aktualisieren möchten:
 
 # <a name="windows-10"></a>[Windows 10](#tab/Windows-10-Client)
 
-Mithilfe der folgenden Schritte können Sie Docker unter Windows 10 Professional und Enterprise Edition installieren. 
+Mithilfe der folgenden Schritte können Sie Docker unter Windows 10 Professional und Enterprise Edition installieren.
 
 1. Laden Sie [Docker Desktop](https://store.docker.com/editions/community/docker-ce-desktop-windows) herunter, installieren Sie die Anwendung, und erstellen Sie ein kostenloses Docker- Konto, wenn Sie noch kein Konto besitzen. Weitere Informationen finden Sie in der [Docker-Dokumentation](https://docs.docker.com/docker-for-windows/install).
 

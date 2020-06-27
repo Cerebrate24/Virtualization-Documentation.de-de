@@ -4,16 +4,16 @@ description: Konfigurieren von Docker unter Windows
 keywords: Docker, Container
 author: PatrickLang
 ms.date: 05/03/2019
-ms.topic: article
+ms.topic: overview
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 6885400c-5623-4cde-8012-f6a00019fafa
-ms.openlocfilehash: c84a6652b5918238ee8ef6e1fa7a9b2aa596aefd
-ms.sourcegitcommit: 16ebc4f00773d809fae84845208bd1dcf08a889c
+ms.openlocfilehash: b0a89bfcae6a78c28603444a682cecf7c667e477
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "79402881"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192717"
 ---
 # <a name="docker-engine-on-windows"></a>Docker-Modul unter Windows
 
@@ -46,7 +46,7 @@ Die bevorzugte Methode zum Konfigurieren des Docker-Moduls in Windows ist die Ve
     "storage-driver": "",
     "storage-opts": [],
     "labels": [],
-    "log-driver": "", 
+    "log-driver": "",
     "mtu": 0,
     "pidfile": "",
     "data-root": "",
@@ -81,7 +81,7 @@ Der Konfigurationsdatei müssen nur die gewünschten Konfigurationsänderungen h
 Entsprechend konfiguriert das folgende Beispiel den Docker-Daemon, um Images und Container in einem alternativen Pfad zu speichern. Ohne Angabe wird standardmäßig `c:\programdata\docker` verwendet.
 
 ```json
-{    
+{   
     "data-root": "d:\\docker"
 }
 ```

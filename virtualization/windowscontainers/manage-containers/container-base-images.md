@@ -4,16 +4,16 @@ description: Eine Übersicht über die Windows-Containerbasisimages und wann sie
 keywords: Docker, Container, Hashes
 author: patricklang
 ms.date: 09/25/2019
-ms.topic: article
+ms.topic: conceptual
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 88e6e080-cf8f-41d8-a301-035959dc5ce0
-ms.openlocfilehash: 9884cc0ae2d2f398d2dc2fb1997a70493a6de6c0
-ms.sourcegitcommit: 16744984ede5ec94cd265b6bff20aee2f782ca88
+ms.openlocfilehash: 6fc7f2b01af84004fb87e708b0f792c06cb3a569
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76764177"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192307"
 ---
 # <a name="container-base-images"></a>Containerbasisimages
 
@@ -104,7 +104,7 @@ Windows bietet vier Containerbasisimages, die Benutzer für die Erstellung verwe
 
 ## <a name="image-discovery"></a>Imageermittlung
 
-Alle Windows-Containerbasisimages können über [Docker Hub](https://hub.docker.com/_/microsoft-windows-base-os-images) ermittelt werden. Die Windows-Containerbasisimages selbst werden von [mcr.microsoft.com](https://azure.microsoft.com/en-us/services/container-registry/), der Microsoft Container Registry (MCR), bereitgestellt. Aus diesem Grund sehen die Pull-Befehle für die Windows-Containerbasisimages wie folgt aus:
+Alle Windows-Containerbasisimages können über [Docker Hub](https://hub.docker.com/_/microsoft-windows-base-os-images) ermittelt werden. Die Windows-Containerbasisimages selbst werden von [mcr.microsoft.com](https://azure.microsoft.com/services/container-registry/), der Microsoft Container Registry (MCR), bereitgestellt. Aus diesem Grund sehen die Pull-Befehle für die Windows-Containerbasisimages wie folgt aus:
 
 ```code
 docker pull mcr.microsoft.com/windows/servercore:ltsc2019

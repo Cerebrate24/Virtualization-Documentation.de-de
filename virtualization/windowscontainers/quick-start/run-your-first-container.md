@@ -5,16 +5,16 @@ keywords: Docker, Container, LCOW
 author: cwilhit
 ms.author: crwilhit
 ms.date: 11/12/2019
-ms.topic: article
+ms.topic: quickstart
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: bb9bfbe0-5bdc-4984-912f-9c93ea67105f
-ms.openlocfilehash: 859ef38380e536a79a3dcd63397af8fd841253ee
-ms.sourcegitcommit: 62f4bcca4e07f2a34a927e5c4d786e505821d559
+ms.openlocfilehash: 950097bae359ce717e1f4427aaec0b87198fef42
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82784409"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192897"
 ---
 # <a name="get-started-run-your-first-windows-container"></a>Erste Schritte: Ausführen Ihres ersten Windows-Containers
 
@@ -56,7 +56,7 @@ In diesem einfachen Beispiel wird ein „Hello World“-Containerimage erstellt 
    ```cmd
    echo "Hello World!" > Hello.txt
    exit
-   ```   
+   ```
 
 3. Rufen Sie die Container-ID für den Container ab, den Sie soeben beendet haben, indem Sie den Befehl [docker ps](https://docs.docker.com/engine/reference/commandline/ps/) ausführen:
 

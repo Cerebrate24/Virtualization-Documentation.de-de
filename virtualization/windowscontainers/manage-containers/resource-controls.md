@@ -4,21 +4,21 @@ description: Details zur Ressourcensteuerung für Windows-Container
 keywords: Docker, Container, cpu, Arbeitsspeicher, Datenträger, Ressourcen
 author: taylorb-microsoft
 ms.date: 11/21/2017
-ms.topic: article
+ms.topic: conceptual
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 8ccd4192-4a58-42a5-8f74-2574d10de98e
-ms.openlocfilehash: 3e9f7e3208222cd6c0f512c5f892453ac6e6980c
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: c435f793371bc71c720784416a367e2c7483e9ff
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74910170"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192577"
 ---
 # <a name="implementing-resource-controls-for-windows-containers"></a>Implementieren von Ressourcensteuerungen für Windows-Container
 Pro Container und pro Ressource können diverse Steuerungen implementiert werden.  Standardmäßig unterliegen ausgeführte Container einer typischen Windows-Ressourcenverwaltung, die im Allgemeinen auf einer gleichberechtigten Verteilung basiert. Ein Entwickler oder Administrator kann die Ressourcennutzung jedoch durch die Konfiguration der einzelnen Steuerungselemente begrenzen oder beeinflussen.  Zu den steuerbaren Ressourcen gehören: CPU/Prozessor, Arbeitsspeicher/RAM, Datenträger/Speicher und Netzwerk/Durchsatz.
 
-Windows-Container nutzen [Auftragsobjekte](https://docs.microsoft.com/windows/desktop/ProcThread/job-objects) zum Gruppieren und Nachverfolgen der Prozesse, die jedem Container zugeordnet sind.  Steuerungselemente für Ressourcen werden für das dem Container zugeordnete übergeordnete Auftragsobjekt implementiert. 
+Windows-Container nutzen [Auftragsobjekte](https://docs.microsoft.com/windows/desktop/ProcThread/job-objects) zum Gruppieren und Nachverfolgen der Prozesse, die jedem Container zugeordnet sind.  Steuerungselemente für Ressourcen werden für das dem Container zugeordnete übergeordnete Auftragsobjekt implementiert.
 
 Im Fall der [Hyper-V-Isolation](./hyperv-container.md) werden die Ressourcensteuerelemente automatisch sowohl auf den virtuellen Computer als auch auf das Auftragsobjekt des Containers innerhalb der virtuellen Maschine angewendet. Dies stellt sicher, dass selbst dann, wenn ein im Container ausgeführter Prozess die Steuerelemente des Auftragsobjekts umgeht, der virtuelle Computer dafür sorgen kann, dass die definierten Ressourcenbegrenzungen nicht überschritten werden.
 

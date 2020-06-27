@@ -4,16 +4,16 @@ description: Erfahren Sie mehr über neue Containerbausteine, die in Windows ver
 keywords: LCOW, Linux-Container, Docker, Container, containerd, cri, runhcs, runc
 author: scooley
 ms.date: 11/19/2018
-ms.topic: article
+ms.topic: conceptual
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: a0e62b32-0c4c-4dd4-9956-8056e9abd9e5
-ms.openlocfilehash: 3107eb48dc9c75224b0c9dd9b436af6f0f451871
-ms.sourcegitcommit: 16744984ede5ec94cd265b6bff20aee2f782ca88
+ms.openlocfilehash: dd7ddbc3784eee67fd67bba20533d520e172ebd3
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/18/2020
-ms.locfileid: "77439277"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192258"
 ---
 # <a name="container-platform-tools-on-windows"></a>Containerplattformtools unter Windows
 
@@ -63,7 +63,7 @@ runhcs run [ -b bundle ] <container-id>
 
 `<container-id>` ist Ihr Name für die Containerinstanz, die Sie starten. Der Name muss auf Ihrem Containerhost eindeutig sein.
 
-Das Paketverzeichnis (mit `-b bundle`) ist optional.  
+Das Paketverzeichnis (mit `-b bundle`) ist optional.
 Wie bei runc werden Container über Bündel konfiguriert. Das Bündel eines Containers ist das Verzeichnis mit der OCI-Spezifikationsdatei des Containers, „config.json“.  Der Standardwert für das Bündel ist das aktuelle Verzeichnis.
 
 Die OCI-Spezifikationsdatei „config.json“ muss zwei Felder besitzen, um ordnungsgemäß ausgeführt werden zu können:
@@ -93,7 +93,7 @@ Der einzige Befehl, der als Befehl für mehrere Container angesehen werden könn
 
 ### <a name="hcs"></a>HCS
 
-Auf GitHub sind zwei Wrapper als Schnittstelle mit dem HCS verfügbar. Da es sich bei dem HCS um eine C-API handelt, erleichtern Wrapper den Aufruf des Hostcomputediensts (HCS) über Sprachen höherer Ebene.  
+Auf GitHub sind zwei Wrapper als Schnittstelle mit dem HCS verfügbar. Da es sich bei dem HCS um eine C-API handelt, erleichtern Wrapper den Aufruf des Hostcomputediensts (HCS) über Sprachen höherer Ebene.
 
 * [hcsshim](https://github.com/microsoft/hcsshim): HCSShim ist in Go geschrieben und bildet die Grundlage für runhcs.
 Holen Sie sich das Neueste von AppVeyor oder erstellen Sie es selbst.

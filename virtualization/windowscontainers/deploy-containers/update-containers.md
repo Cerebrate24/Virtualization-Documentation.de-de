@@ -5,13 +5,14 @@ keywords: Metadaten, Container, Version
 author: heidilohr
 ms. author: helohr
 manager: lizross
+ms.topic: conceptual
 ms.date: 03/10/2020
-ms.openlocfilehash: 84413f27bfce66e7d259c05795a280ed34b582ab
-ms.sourcegitcommit: 6f216408434a437da87a72d582500a4ca6c2679c
+ms.openlocfilehash: 829705e338667910e50578591ad2c065daecfa5f
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2020
-ms.locfileid: "80112693"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192837"
 ---
 # <a name="update-windows-server-containers"></a>Aktualisieren von Windows Server-Containern
 
@@ -30,14 +31,14 @@ Neue Containerimages des Windows Server-Basisbetriebssystems werden kurz nach 10
 - ltsc2019 [(LTSC)](/windows-server/get-started-19/servicing-channels-19#long-term-servicing-channel-ltsc): docker pull mcr.microsoft.com/windows/servercore:ltsc2019
 - 1909 [(SAC)](/windows-server/get-started-19/servicing-channels-19#semi-annual-channel): docker pull mcr.microsoft.com/windows/servercore:1909
 
-Wenn Sie mit Docker Hub besser vertraut sind als mit MCR, finden Sie in [diesem Blogbeitrag](https://azure.microsoft.com/blog/microsoft-syndicates-container-catalog/) eine ausführlichere Erklärung.  
+Wenn Sie mit Docker Hub besser vertraut sind als mit MCR, finden Sie in [diesem Blogbeitrag](https://azure.microsoft.com/blog/microsoft-syndicates-container-catalog/) eine ausführlichere Erklärung.
 
 Für jede Version wird auch das jeweilige Containerimage mit zwei zusätzlichen Tags für die Revisionsnummer und die KB-Artikelnummer veröffentlicht, um bestimmte Revisionen von Containerimages gezielt anzusprechen. Beispiel:
 
 - docker pull mcr.microsoft.com/windows/servercore:10.0.17763.1040
 - docker pull mcr.microsoft.com/windows/servercore:1809-KB4546852
 
-Diese Beispiele übertragen beide das Windows Server 2019 Server Core-Containerimage mit dem Sicherheitsreleaseupdate vom 18. Februar mit Pull.  
+Diese Beispiele übertragen beide das Windows Server 2019 Server Core-Containerimage mit dem Sicherheitsreleaseupdate vom 18. Februar mit Pull.
 
 Eine vollständige Liste der Containerimages des Windows Server-Basisbetriebssystems, der Versionen und der entsprechenden Tags finden Sie in diesen [Windows-Basisbetriebssystem-Containerimages](https://hub.docker.com/_/microsoft-windows-base-os-images) auf Docker Hub.
 
@@ -96,7 +97,7 @@ Wenn Sie auf Ihren Containerhost zugreifen können, können Sie den Befehl `ver`
 Microsoft Windows [Version 10.0.17763.1039]
 (c) 2018 Microsoft Corporation. All rights reserved.
 
-C:\>ver 
+C:\>ver
 
 Microsoft Windows [Version 10.0.17763.1039]
 ```

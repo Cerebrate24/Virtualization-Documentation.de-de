@@ -5,15 +5,15 @@ keywords: Docker, Container
 author: cwilhit
 ms.author: crwilhit
 ms.date: 11/12/2019
-ms.topic: article
+ms.topic: quickstart
 ms.prod: windows-containers
 ms.service: windows-containers
-ms.openlocfilehash: c9e175a7ced0f328e342f3cdd4f99adc717d5700
-ms.sourcegitcommit: 62f4bcca4e07f2a34a927e5c4d786e505821d559
+ms.openlocfilehash: 79de3f520e6d22c338fc95473200286b77cb4467
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82784399"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192517"
 ---
 # <a name="containerize-a-net-core-app"></a>Containerisieren einer .NET Core-App
 
@@ -87,7 +87,7 @@ RUN dotnet publish -c Release -o out
 
 Nachdem .NET alle Abhängigkeiten in den `build-env`-Container gepullt hat, kopiert die nächste Anweisung alle Projektquelldateien in den Container. Wir weisen .NET anschließend an, unsere Anwendung mit einer Releasekonfiguration zu veröffentlichen, und geben den Ausgabepfad an.
 
-Die Kompilierung sollte erfolgreich sein. Nun müssen wir das endgültige Image erstellen. 
+Die Kompilierung sollte erfolgreich sein. Nun müssen wir das endgültige Image erstellen.
 
 > [!TIP]
 > In dieser Schnellstartanleitung wird ein .NET Core-Projekt aus der Quelle erstellt. Beim Entwickeln von Containerimages empfiehlt es sich, _nur_ die Produktionsnutzlast und ihre Abhängigkeiten in das Containerimage einzubeziehen. Wir möchten nicht, dass das .NET Core SDK in unser endgültiges Image integriert ist, da wir nur die .NET Core-Laufzeit benötigen. Daher wird die Dockerfile-Datei so geschrieben, dass sie einen temporären Container namens `build-env` verwendet, der mit dem SDK verpackt ist, um die App zu erstellen.
@@ -121,7 +121,7 @@ Nachdem die Dockerfile-Datei erstellt wurde, können wir Docker auf unsere Docke
 
    Sehen wir uns diesen Befehl genauer an:
 
-   * `-d` weist Docker an, den Container „getrennt“ auszuführen. Dies bedeutet, dass keine Konsole mit der Konsole im Container verknüpft ist. Der Container wird im Hintergrund ausgeführt. 
+   * `-d` weist Docker an, den Container „getrennt“ auszuführen. Dies bedeutet, dass keine Konsole mit der Konsole im Container verknüpft ist. Der Container wird im Hintergrund ausgeführt.
    * `-p 5000:80` weist Docker an, Port 5000 auf dem Host Port 80 im Container zuzuordnen. Jeder Container erhält seine eigene IP-Adresse. ASP.NET lauscht standardmäßig an Port 80. Mithilfe von Portzuordnung können wir die IP-Adresse des Hosts am zugeordneten Port aufrufen, und Docker leitet den gesamten Datenverkehr an den Zielport innerhalb des Containers weiter.
    * `--name myapp` weist Docker an, diesem Container einen geeigneten Namen für die Abfrage zu geben (anstatt die von Docker zur Laufzeit zugewiesene Container-ID nachzuschlagen).
    * `my-asp-app` ist das Image, das Docker ausführen soll. Dies ist das Containerimage, das als Höhepunkt des `docker build`-Prozesses generiert wird.

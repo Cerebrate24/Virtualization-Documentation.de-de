@@ -4,16 +4,16 @@ description: Hier wird erläutert, wie sich die Hyper-V-Isolation von prozessiso
 keywords: Docker, Container
 author: crwilhit
 ms.date: 09/26/2019
-ms.topic: article
+ms.topic: conceptual
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 42154683-163b-47a1-add4-c7e7317f1c04
-ms.openlocfilehash: 362805fa230f461414ccc53643644f6c1b3474a8
-ms.sourcegitcommit: ac923217ee2f74f08df2b71c2a4c57b694f0d7c3
+ms.openlocfilehash: 3102def94d6565f162210ac53e3a80666ed5d485
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78853954"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192797"
 ---
 # <a name="isolation-modes"></a>Isolationsmodi
 
@@ -50,7 +50,7 @@ Unter Windows Server ausgeführte Windows-Container werden standardmäßig mit P
 
 > [!WARNING]
 > Die Ausführung mit Prozessisolation unter Windows 10 Pro und Enterprise ist für die Entwicklung bzw. für Tests gedacht. Auf dem Host muss Windows 10 Build 17763 oder höher ausgeführt werden, und Sie müssen über ein Docker-Modul mit der Version 18.09 oder höher verfügen.
-> 
+>
 > Sie sollten weiterhin Windows Server als Host für Produktionsbereitstellungen verwenden. Wenn Sie dieses Feature unter Windows 10 Pro und Enterprise verwenden, müssen Sie auch sicherstellen, dass die Host- und Containerversionstags übereinstimmen, da andernfalls der Container ggf. nicht gestartet wird oder nicht definiertes Verhalten aufweist.
 
 ### <a name="isolation-explanation"></a>Erläuterung zur Isolation

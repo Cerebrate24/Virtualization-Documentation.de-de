@@ -5,20 +5,20 @@ keywords: Windows-Container, Container, Lebenszyklus, Versionsinformationen, Bas
 author: Heidilohr
 ms.author: helohr
 ms.date: 05/12/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: windows-containers
 ms.service: windows-containers
-ms.openlocfilehash: c6276db89f093b62a01cadc095f5357d2e5a8eba
-ms.sourcegitcommit: dd80813679df2de89fe523a26600cfe58a2d39a2
+ms.openlocfilehash: b3c519ef3ed93a0c8e20f5b927c34f70cd1677f8
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84023145"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192077"
 ---
 # <a name="base-image-servicing-lifecycles"></a>Wartungslebenszyklen von Basisimages
 
-> [!Note]  
-> Microsoft hat das geplante Ende der Support- und Wartungstermine für eine Reihe von Produkten verschoben, um Personen und Organisationen dabei zu unterstützen, ihre Aufmerksamkeit auf die Aufrechterhaltung der Geschäftskontinuität zu richten. Weitere Informationen finden Sie unter dem Eintrag [Lebenszyklusänderungen für das Ende der Support- und Wartungstermine](https://support.microsoft.com/en-us/help/4557164/lifecycle-changes-to-end-of-support-and-servicing-dates) vom 14. April 2020.
+> [!Note]
+> Microsoft hat das geplante Ende der Support- und Wartungstermine für eine Reihe von Produkten verschoben, um Personen und Organisationen dabei zu unterstützen, ihre Aufmerksamkeit auf die Aufrechterhaltung der Geschäftskontinuität zu richten. Weitere Informationen finden Sie unter dem Eintrag [Lebenszyklusänderungen für das Ende der Support- und Wartungstermine](https://support.microsoft.com/help/4557164/lifecycle-changes-to-end-of-support-and-servicing-dates) vom 14. April 2020.
 
 Windows-Containerbasisimages basieren entweder auf Releases im halbjährlichen Kanal (Semi-Annual Channel) oder des „Long-Term Servicing Channel“ von Windows Server. In diesem Artikel erfahren Sie, wie lange der Support für verschiedene Versionen von Basisimages aus beiden Kanälen andauern wird.
 

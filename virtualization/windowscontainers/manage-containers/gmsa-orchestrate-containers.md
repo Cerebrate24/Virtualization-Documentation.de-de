@@ -4,16 +4,16 @@ description: Orchestrieren von Windows-Containern mit einem gruppenverwalteten D
 keywords: Docker, Container, aktives Verzeichnis, gMSA, Orchestrierung, Kubernetes, gruppenverwaltetes Dienstkonto, gruppenverwaltete Dienstkonten
 author: rpsqrd
 ms.date: 09/10/2019
-ms.topic: article
+ms.topic: how-to
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 9e06ad3a-0783-476b-b85c-faff7234809c
-ms.openlocfilehash: 3d102aac45a1becf1879a718bb255d753b215006
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: 6c659a124a95393c173b15d9423491349ebe1462
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74910260"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192857"
 ---
 # <a name="orchestrate-containers-with-a-gmsa"></a>Orchestrieren von Containern mit einem gMSA
 

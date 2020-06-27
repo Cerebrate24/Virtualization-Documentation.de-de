@@ -3,12 +3,13 @@ title: Druckspooler in Windows-Containern
 description: Erläutert das aktuelle Arbeitsverhalten für den Druckspoolerdienst in Windows-Containern
 keywords: Docker, Container, Drucker, Spooler
 author: cwilhit
-ms.openlocfilehash: e104a87046545b90d244783aafb62ad9d151e14b
-ms.sourcegitcommit: 16744984ede5ec94cd265b6bff20aee2f782ca88
+ms.topic: conceptual
+ms.openlocfilehash: 3348fc4665a9fe88d1cd299df665e564fa176a7e
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/18/2020
-ms.locfileid: "77439537"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192218"
 ---
 # <a name="print-spooler-in-windows-containers"></a>Druckspooler in Windows-Containern
 
@@ -57,7 +58,7 @@ PS C:\>
 Aufgrund der Tatsache, dass prozessisolierte Container einen gemeinsamen Kernel verwenden, beschränkt das aktuelle Verhalten den Benutzer darauf, nur **eine Instanz** des Druckerspoolerdienstes auf dem Host und allen seinen untergeordneten Containern auszuführen. Wenn der Druckerspooler auf dem Host ausgeführt wird, müssen Sie den Dienst auf dem Host beenden, bevor Sie versuchen, den Druckerdienst im Gast zu starten.
 
 > [!TIP]
-> Wenn Sie einen Container und eine Abfrage für den Spoolerdienst gleichzeitig sowohl im Container als auch im Host starten, melden beide ihren Status als „Wird ausgeführt“. Aber lassen Sie sich nicht täuschen – der Container wird nicht in der Lage sein, eine Liste der verfügbaren Drucker abzufragen. Der Spoolerdienst des Hosts darf nicht ausgeführt werden. 
+> Wenn Sie einen Container und eine Abfrage für den Spoolerdienst gleichzeitig sowohl im Container als auch im Host starten, melden beide ihren Status als „Wird ausgeführt“. Aber lassen Sie sich nicht täuschen – der Container wird nicht in der Lage sein, eine Liste der verfügbaren Drucker abzufragen. Der Spoolerdienst des Hosts darf nicht ausgeführt werden.
 
 Verwenden Sie die unten stehende Abfrage in PowerShell, um zu prüfen, ob der Host den Druckerdienst ausführt:
 

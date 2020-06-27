@@ -4,16 +4,16 @@ description: Behandeln von Problemen mit gruppenverwalteten Dienstkonten (Group 
 keywords: Docker, Container, aktives Verzeichnis, gMSA, gruppenverwaltetes Dienstkonto, gruppenverwaltete Dienstkonten, Problembehandlung, behandeln von Problemen
 author: rpsqrd
 ms.date: 10/03/2019
-ms.topic: article
+ms.topic: troubleshooting
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 9e06ad3a-0783-476b-b85c-faff7234809c
-ms.openlocfilehash: 89f255e307c2a48fd743d5abd1a49bba7703aaf3
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: e7cf5685620d3cb50c93f48e5aa6917d9044b860
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74910240"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192827"
 ---
 # <a name="troubleshoot-gmsas-for-windows-containers"></a>Problembehandlung bei gMSAs für Windows-Container
 
@@ -170,7 +170,7 @@ Eine vollständige Liste der von Active Directory verwendeten Ports finden Sie u
     Get-ADObject -Filter 'sAMAccountName -like "GMSANAMEHERE*"'
     ```
 
-4. Wenn Sie die uneingeschränkte Delegierung für das gMSA-Konto aktiviert haben, stellen Sie sicher, dass für das [UserAccountControl-Attribut](https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties) immer noch das `WORKSTATION_TRUST_ACCOUNT`-Flag aktiviert ist. Dieses Flag ist erforderlich, damit NETLOGON im Container mit dem Domänencontroller kommunizieren kann, wie es der Fall ist, wenn eine App einen Namen in eine SID auflösen muss oder umgekehrt. Sie können mit den folgenden Befehlen überprüfen, ob das Flag ordnungsgemäß konfiguriert ist:
+4. Wenn Sie die uneingeschränkte Delegierung für das gMSA-Konto aktiviert haben, stellen Sie sicher, dass für das [UserAccountControl-Attribut](https://support.microsoft.com/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties) immer noch das `WORKSTATION_TRUST_ACCOUNT`-Flag aktiviert ist. Dieses Flag ist erforderlich, damit NETLOGON im Container mit dem Domänencontroller kommunizieren kann, wie es der Fall ist, wenn eine App einen Namen in eine SID auflösen muss oder umgekehrt. Sie können mit den folgenden Befehlen überprüfen, ob das Flag ordnungsgemäß konfiguriert ist:
 
     ```powershell
     $gMSA = Get-ADServiceAccount -Identity 'yourGmsaName' -Properties UserAccountControl
