@@ -4,27 +4,27 @@ description: Initialisieren einen Schwarmclusters, Erstellen eines Überlagerung
 keywords: Docker, Container, Schwarm, Orchestrierung
 author: kallie-b
 ms.date: 02/9/2017
-ms.topic: article
+ms.topic: how-to
 ms.prod: windows-containers
 ms.service: windows-containers
 ms.assetid: 5ceb9626-7c48-4d42-81f8-9c936595ad85
-ms.openlocfilehash: 560e9ffc92728628268d7d557b8fa8428316c8ec
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: 1576b7c102c0320fafbbe129d9937f2593432e3e
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74909680"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85191997"
 ---
-# <a name="getting-started-with-swarm-mode"></a>Erste Schritte mit dem Schwarmmodus 
+# <a name="getting-started-with-swarm-mode"></a>Erste Schritte mit dem Schwarmmodus
 
 ## <a name="what-is-swarm-mode"></a>Was ist der Schwarmmodus?
 Der Schwarmmodus ist ein Docker-Feature, das Funktionen zur Orchestrierung von Containern bereitstellt, beispielsweise das systemeigene Clustering von Docker-Hosts und die Planung der Containerarbeitslasten. Eine Gruppe von Docker-Hosts bildet einen „Schwarmcluster“, wenn ihre Docker-Computer zusammen im „Schwarmmodus“ arbeiten. Zusätzliche Informationen zum Schwarmmodus finden auf der [Website für die Docker-Dokumentation](https://docs.docker.com/engine/swarm/).
 
 ## <a name="manager-nodes-and-worker-nodes"></a>Verwaltungsknoten und Arbeitsknoten
-Ein Schwarm besteht aus zwei Arten von Containerhosts: *Verwaltungsknoten* und *Arbeitsknoten*. Jeder Schwarm wird über einen Verwaltungsknoten initialisiert, und alle Docker-CLI-Befehle zur Steuerung und Überwachung eines Schwarms müssen auf einem seiner Verwaltungsknoten ausgeführt werden. Verwaltungsknoten können als „Wächter“ für den Schwarmstatus betrachtet werden. Sie bilden eine Konsensgruppe, die den Zustand der Dienste überwacht, die im Schwarm ausgeführt werden, und die dafür sorgt, dass der tatsächliche Zustand des Schwarms immer mit seinem beabsichtigten, vom Entwickler oder Admin definierten Zustand übereinstimmt. 
+Ein Schwarm besteht aus zwei Arten von Containerhosts: *Verwaltungsknoten* und *Arbeitsknoten*. Jeder Schwarm wird über einen Verwaltungsknoten initialisiert, und alle Docker-CLI-Befehle zur Steuerung und Überwachung eines Schwarms müssen auf einem seiner Verwaltungsknoten ausgeführt werden. Verwaltungsknoten können als „Wächter“ für den Schwarmstatus betrachtet werden. Sie bilden eine Konsensgruppe, die den Zustand der Dienste überwacht, die im Schwarm ausgeführt werden, und die dafür sorgt, dass der tatsächliche Zustand des Schwarms immer mit seinem beabsichtigten, vom Entwickler oder Admin definierten Zustand übereinstimmt.
 
 >[!NOTE]
->Jeder Schwarm kann mehrere Verwaltungsknoten besitzen, muss aber über *mindestens einen* verfügen. 
+>Jeder Schwarm kann mehrere Verwaltungsknoten besitzen, muss aber über *mindestens einen* verfügen.
 
 Arbeitsknoten werden vom Docker-Schwarm über Verwaltungsknoten orchestriert. Um einem Schwarm beizutreten, muss ein Arbeitsknoten ein „Beitrittstoken“ verwenden, das vom Verwaltungsknoten bei der Initialisierung des Schwarms generiert wurde. Arbeitsknoten erhalten einfach nur Aufgaben von Verwaltungsknoten und führen sie aus, sodass sie keine Kenntnis vom Schwarmzustand besitzen (und benötigen).
 
@@ -46,7 +46,7 @@ Offene Ports: Die folgenden Ports müssen auf jedem Host verfügbar sein. Auf ei
 Um einen Schwarm zu initialisieren, führen Sie einfach den folgenden Befehl auf einem der Containerhosts aus (ersetzen Sie dabei \<HOSTIPADDRESS\> durch die lokale IPv4-Adresse des Hostcomputers):
 
 ```
-# Initialize a swarm 
+# Initialize a swarm
 C:\> docker swarm init --advertise-addr=<HOSTIPADDRESS> --listen-addr <HOSTIPADDRESS>:2377
 ```
 Wenn dieser Befehl auf einem Containerhost ausgeführt wird, beginnt das Docker-Modul auf diesem Host als Verwaltungsknoten im Schwarmmodus zu arbeiten.
@@ -80,7 +80,7 @@ Zusätzliche Verwaltungsknoten können einem Schwarmcluster mit dem folgenden Be
 C:\> docker swarm join --token <MANAGERJOINTOKEN> <MANAGERIPADDRESS>
 ```
 
-Auch in diesem Fall ist \<MANAGERIPADDRESS\> die lokale IP-Adresse eines Verwaltungsknotens im Schwarm. Das Beitrittstoken \<MANAGERJOINTOKEN\> ist ein Token eines *Verwaltungsknotens* im Schwarm, das durch die Ausführung eines der folgenden Befehle auf einem Verwaltungsknoten abgerufen werden kann:
+Auch in diesem Fall ist \<MANAGERIPADDRESS\> die lokale IP-Adresse eines Verwaltungsknotens im Schwarm. Das Beitrittstoken \<MANAGERJOINTOKEN\> ist ein *Manager*-Jointoken für Schwarm, das durch die Ausführung eines der folgenden Befehle auf einem Verwaltungsknoten abgerufen werden kann:
 
 ```
 # Get the full command required to join a **manager** node to the swarm
@@ -95,7 +95,7 @@ C:\> docker swarm join-token manager -q
 Nach ein Schwarmcluster konfiguriert wurde, können im Schwarm Überlagerungsnetzwerke erstellt werden. Ein Überlagerungsnetzwerk kann durch Ausführen des folgenden Befehls auf einem Schwarmverwaltungsknoten erstellt werden:
 
 ```
-# Create an overlay network 
+# Create an overlay network
 C:\> docker network create --driver=overlay <NETWORKNAME>
 ```
 
@@ -154,7 +154,7 @@ C:\> docker service ls
 ```
 
 ### <a name="list-the-container-instances-that-define-a-service"></a>Liste der Containerinstanzen, die einen Dienst definieren
-Verwenden Sie den folgenden Befehl, um Details zu den Containerinstanzen anzuzeigen, die für einen bestimmten Dienst ausgeführt werden. Die Ausgabe dieses Befehl umfasst die Knoten (und IDs), auf denen jeder Container ausgeführt wird, sowie Informationen über den Zustand der Container.  
+Verwenden Sie den folgenden Befehl, um Details zu den Containerinstanzen anzuzeigen, die für einen bestimmten Dienst ausgeführt werden. Die Ausgabe dieses Befehl umfasst die Knoten (und IDs), auf denen jeder Container ausgeführt wird, sowie Informationen über den Zustand der Container.
 
 ```
 C:\> docker service ps <SERVICENAME>
@@ -173,12 +173,12 @@ C:\> docker swarm join --token <JOINTOKEN> <MANAGERIPADDRESS>
 ```
 Sie können auch einen Schwarm von einem Linux-Host mit dem gleichen Befehl initialisieren, den Sie ausführen würden, wenn der Schwarm von einem Windows-Host aus initialisiert würde:
 ```
-# Initialize a swarm 
+# Initialize a swarm
 C:\> docker swarm init --advertise-addr=<HOSTIPADDRESS> --listen-addr <HOSTIPADDRESS>:2377
 ```
 
 ### <a name="adding-labels-to-swarm-nodes"></a>Hinzufügen von Beschriftungen zu einem Knoten
-Um einen Dockerdienst auf einem vermischten OS-Schwarm-Cluster zu starten, muss unterscheiden werden können, welche Schwarm-Knoten auf dem Betriebssystems ausgeführt werden, das diesen Dienst unterstützten, und welche nicht. [Docker-Objektbeschriftungen](https://docs.docker.com/engine/userguide/labels-custom-metadata/) bieten eine praktische Möglichkeit zum Beschriften von Knoten, damit diese Dienste erstellt und so konfiguriert werden können, um nur auf den Knoten ausgeführt zu werden, die dem Betriebssystem entsprechen. 
+Um einen Dockerdienst auf einem vermischten OS-Schwarm-Cluster zu starten, muss unterscheiden werden können, welche Schwarm-Knoten auf dem Betriebssystems ausgeführt werden, das diesen Dienst unterstützten, und welche nicht. [Docker-Objektbeschriftungen](https://docs.docker.com/engine/userguide/labels-custom-metadata/) bieten eine praktische Möglichkeit zum Beschriften von Knoten, damit diese Dienste erstellt und so konfiguriert werden können, um nur auf den Knoten ausgeführt zu werden, die dem Betriebssystem entsprechen.
 
 >[!NOTE]
 >[Docker-Objektbeschriftungen](https://docs.docker.com/engine/userguide/labels-custom-metadata/) werden zum Anwenden von Metadaten auf eine Vielzahl von Docker-Objekten (einschließlich Containerimages, Container, Volumes und Netzwerke) und eine Vielzahl von Zwecken verwendet (z. B. Bezeichnungen können verwendet werden, um Front-End- und Back-End-Komponenten einer Anwendung zu trennen, indem Front-End-Microservices nur auf Knoten mit der Bezeichnung „Front-End” und Back-End-Microservices nur auf Knoten mit der Bezeichnung „Back-End” geplant werden). In diesem Fall verwenden wir Beschriftungen für Knoten, um Knoten auf dem Windows-Betriebssystem von denen des Linux-Betriebssystems zu unterscheiden.
@@ -189,7 +189,7 @@ Verwenden Sie die folgende Syntax, um Ihre vorhandenen Schwarm-Knoten zu beschri
 C:\> docker node update --label-add <LABELNAME>=<LABELVALUE> <NODENAME>
 ```
 
-Dabei ist `<LABELNAME>` der Name der erstellten Beschriftung – beispielsweise unterscheiden wir in diesem Fall Knoten je nach Betriebssystem, also wäre ein logischer Namen für die Bezeichnung hier „Betriebssystem”. `<LABELVALUE>` ist der Wert der Bezeichnung – in diesem Fall können Sie die Werte „Windows“ und „Linux“ verwenden. (Natürlich können Sie die Beschriftung und Label-Werte so benennen, wie Sie möchten, solange Sie dabei konsistent bleiben). `<NODENAME>` ist der Name des Knotens, den Sie beschriften. Sie können die Namen der Knoten durch Ausführen von `docker node ls` aufrufen, wenn Sie sich nicht daran erinnern können. 
+Dabei ist `<LABELNAME>` der Name der erstellten Beschriftung – beispielsweise unterscheiden wir in diesem Fall Knoten je nach Betriebssystem, also wäre ein logischer Namen für die Bezeichnung hier „Betriebssystem”. `<LABELVALUE>` ist der Wert der Bezeichnung – in diesem Fall können Sie die Werte „Windows“ und „Linux“ verwenden. (Natürlich können Sie die Beschriftung und Label-Werte so benennen, wie Sie möchten, solange Sie dabei konsistent bleiben). `<NODENAME>` ist der Name des Knotens, den Sie beschriften. Sie können die Namen der Knoten durch Ausführen von `docker node ls` aufrufen, wenn Sie sich nicht daran erinnern können.
 
 **Beispiel**: Wenn Sie über vier Schwarm-Knoten im Cluster verfügen, einschließlich zwei Windows-Knoten und zwei Linux-Knoten, können die Aktualisierungsbefehle für die Beschriftung wie folgt aussehen:
 
@@ -227,10 +227,10 @@ Momentan gelten unter Windows noch folgende Einschränkungen für den Schwarmmod
 - [Routing-Mesh](https://docs.docker.com/engine/swarm/ingress/) für Windows-Docker-Hosts wird unter Windows Server 2016 nicht unterstützt, sondern erst ab Windows Server 2019. Benutzer, die schon jetzt eine alternative Lastenausgleichsstrategie wünschen, können ein externes Lastenausgleichssystem (z. B. NGINX) einrichten und den [publish-Portmodus](https://docs.docker.com/engine/reference/commandline/service_create/#/publish-service-ports-externally-to-the-swarm--p---publish) des Schwarms verwenden, um Containerhostports für den Lastenausgleich verfügbar zu machen. Weitere Informationen dazu finden Sie weiter unten.
 
  >[!NOTE]
->Weitere Informationen zur Routing-Mesh-Einrichtung für Docker Swarm finden Sie in diesem [Blogbeitrag](https://docs.microsoft.com/en-us/virtualization/community/team-blog/2017/20170926-docker-s-routing-mesh-available-with-windows-server-version-1709).
+>Weitere Informationen zur Routing-Mesh-Einrichtung für Docker Swarm finden Sie in diesem [Blogbeitrag](https://docs.microsoft.com/virtualization/community/team-blog/2017/20170926-docker-s-routing-mesh-available-with-windows-server-version-1709).
 
 ## <a name="publish-ports-for-service-endpoints"></a>Veröffentlichen von Ports für Dienstendpunkte
- Benutzer, die Ports für ihre Dienstendpunkte veröffentlichen möchten, können dazu heute den publish-Portmodus oder das Feature [Routing-Mesh](https://docs.docker.com/engine/swarm/ingress/) von Docker Swarm verwenden. 
+ Benutzer, die Ports für ihre Dienstendpunkte veröffentlichen möchten, können dazu heute den publish-Portmodus oder das Feature [Routing-Mesh](https://docs.docker.com/engine/swarm/ingress/) von Docker Swarm verwenden.
 
 Um Host-Ports für die einzelnen Aufgaben-/Container-Endpunkte, die einen Dienst definieren, zu veröffentliche, verwenden Sie das `--publish mode=host,target=<CONTAINERPORT>`-Argument für den `docker service create`-Befehl:
 
@@ -250,13 +250,13 @@ Nachdem ein Dienstes durch den publish-Portmodus erstellt wurde, kann der Dienst
 ```
 C:\ > docker service ps <SERVICENAME>
 ```
-Der oben genannten Befehl gibt Details für jede Container-Instanz zurück, die für Ihren Dienst ausgeführt wird (für alle Schwarm-Hosts). Eine Spalte der Ausgabe, die Spalte „Ports“, enthält die Portinformationen für jeden Host in der Form \<HOSTPORT\>->\<CONTAINERPORT\>/tcp. Die Werte des \<HOSTPORT\> sind für jede Containerinstanz unterschiedlich, da jeder Container auf seinem eigenen Hostport veröffentlicht wird.
+Der oben genannten Befehl gibt Details für jede Container-Instanz zurück, die für Ihren Dienst ausgeführt wird (für alle Schwarm-Hosts). Eine Spalte der Ausgabe, die Spalte „Ports“, enthält die Portinformationen für jeden Host in der Form \<HOSTPORT\>->\<CONTAINERPORT\>/tcp. Die Werte von \<HOSTPORT\> sind für jede Containerinstanz unterschiedlich, da jeder Container auf seinem eigenen Hostport veröffentlicht wird.
 
 
-## <a name="tips--insights"></a>Tipps und Einblicke 
+## <a name="tips--insights"></a>Tipps und Einblicke
 
-#### <a name="existing-transparent-network-can-block-swarm-initializationoverlay-network-creation"></a>*Bereits vorhandene transparente Netzwerke können die Schwarminitialisierung bzw. die Erstellung des Überlagerungsnetzwerks blockieren.* 
-Unter Windows erfordern die Überlagerungs- und die transparenten Netzwerktreiber einen externen vSwitch, der an einen (virtuellen) Host des Netzwerkadapters angeschlossen ist. Wenn ein Überlagerungsnetzwerk erstellt wird, wird ein neuer Switch erstellt und einem offenen Netzwerkadapter hinzugefügt. Der transparente Netzwerkmodus verwendet einen Host-Netzwerkadapter. Gleichzeitig kann jeder Netzwerkadapter nur an einen Switch angebunden werden –wenn der Host nur über einen Netzwerkadapter verfügt, kann er jeweils nur an einen externen vSwitch angefügt werden, egal ob der vSwitch für ein Overlay-Netzwerk oder für ein transparentes Netzwerk gilt. 
+#### <a name="existing-transparent-network-can-block-swarm-initializationoverlay-network-creation"></a>*Bereits vorhandene transparente Netzwerke können die Schwarminitialisierung bzw. die Erstellung des Überlagerungsnetzwerks blockieren.*
+Unter Windows erfordern die Überlagerungs- und die transparenten Netzwerktreiber einen externen vSwitch, der an einen (virtuellen) Host des Netzwerkadapters angeschlossen ist. Wenn ein Überlagerungsnetzwerk erstellt wird, wird ein neuer Switch erstellt und einem offenen Netzwerkadapter hinzugefügt. Der transparente Netzwerkmodus verwendet einen Host-Netzwerkadapter. Gleichzeitig kann jeder Netzwerkadapter nur an einen Switch angebunden werden –wenn der Host nur über einen Netzwerkadapter verfügt, kann er jeweils nur an einen externen vSwitch angefügt werden, egal ob der vSwitch für ein Overlay-Netzwerk oder für ein transparentes Netzwerk gilt.
 
 Wenn ein Containerhost daher nur über einen Netzwerkadapter verfügt, kann ein Problem der transparenten Netzwerkblockierungserstellung eines Überlagerungsnetzwerks (oder umgekehrt) auftreten, da das transparente Netzwerk momentan die virtuelle der Netzwerkschnittstelle des Hosts belegt.
 

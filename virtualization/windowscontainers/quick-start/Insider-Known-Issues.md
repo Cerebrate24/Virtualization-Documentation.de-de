@@ -1,3 +1,17 @@
+---
+title: Bekannte Probleme der Insider-Builds
+description: Bekannte Probleme der Insider-Builds
+keywords: Docker, Container
+ms.topic: quickstart
+ms.prod: windows-containers
+ms.service: windows-containers
+ms.openlocfilehash: 0a7b5a2c7f430babbc7a94f63b150f74b58c6843
+ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85192757"
+---
 # <a name="known-issues-for-insider-builds"></a>Bekannte Probleme der Insider-Builds
 
 ## <a name="build-16237"></a>Build 16237
