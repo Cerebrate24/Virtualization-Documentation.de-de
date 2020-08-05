@@ -66,7 +66,7 @@
 ## Blogs aus 2015
 ### [Diskrete Gerätezuweisung: Gäste und Linux](team-blog/2015/20151124-discrete-device-assignment-guests-and-linux.md)
 ### [Diskrete Gerätezuweisung: GPUs](team-blog/2015/20151123-discrete-device-assignment-gpus.md)
-### [Diskrete Gerätezuweisung: Computer](team-blog/2015/20151120-discrete-device-assignment-machines-and-devices.md) und Geräte
+### [Diskrete Gerätezuweisung: Computer und Geräte](team-blog/2015/20151120-discrete-device-assignment-machines-and-devices.md)
 ### [Diskrete Gerätezuweisung: Einführung und Hintergrund](team-blog/2015/20151119-discrete-device-assignment-description-and-background.md)
 ### [Ankündigung der Veröffentlichung von Hyper-V-Containern in Windows Server 2016 Technical Preview 4](team-blog/2015/20151119-announcing-the-release-of-hyper-v-containers-in-windows-server-2016-technical-preview-4.md)
 ### [PSA: VMs mit gespeichertem Zustand von Builds 10560-10567 können nicht auf 10568 und höher wiederhergestellt werden.](team-blog/2015/20151030-psa-vms-with-saved-state-from-builds-10560-10567-will-not-restore-on-10568-and-above.md)
