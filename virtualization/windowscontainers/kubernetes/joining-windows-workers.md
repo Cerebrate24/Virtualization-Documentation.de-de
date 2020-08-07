@@ -4,16 +4,15 @@ author: daschott
 ms.author: daschott
 ms.date: 11/02/2018
 ms.topic: how-to
-ms.prod: containers
 description: Hinzufügen eines Windows-Knotens zu einem Kubernetes-Cluster mit v 1,14.
 keywords: kubernetes, 1,14, Windows, Getting Started
 ms.assetid: 3b05d2c2-4b9b-42b4-a61b-702df35f5b17
-ms.openlocfilehash: f808428547a0134e6fea2d9165a4b5cee35b6cfb
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 3f37a3e19800d7121ac65b12efeb0f14a287140b
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192647"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985304"
 ---
 # <a name="joining-windows-server-nodes-to-a-cluster"></a>Hinzufügen von Windows Server-Knoten zu einem Cluster #
 Nachdem Sie [einen Kubernetes-Master Knoten eingerichtet](./creating-a-linux-master.md) und [die gewünschte Netzwerklösung ausgewählt](./network-topologies.md)haben, können Sie Windows Server-Knoten zum bilden eines Clusters hinzufügen. Dies erfordert vor [dem beitreten eine Vorbereitung auf den Windows-Knoten](#preparing-a-windows-node) .
@@ -39,7 +38,7 @@ Wenn Sie einen Proxyserver verwenden, müssen die folgenden PowerShell-Umgebungs
 
 Wenn nach dem Neustart der folgende Fehler angezeigt wird:
 
-![Text](media/docker-svc-error.png)
+![text](media/docker-svc-error.png)
 
 Starten Sie den docker-Dienst dann manuell:
 
@@ -78,9 +77,9 @@ docker tag mcr.microsoft.com/windows/nanoserver:1809 microsoft/nanoserver:latest
 docker run microsoft/nanoserver:latest
 ```
 
-Die Ausgabe sollte folgendermaßen aussehen:
+Die Ausgabe sollte in etwa wie folgt aussehen:
 
-![Text](./media/docker-run-sample.png)
+![text](./media/docker-run-sample.png)
 
 > [!tip]
 > Wenn Sie den Container nicht ausführen können, finden Sie [entsprechende Informationen unter: übereinstimmendes Container Host Version mit Container Image](https://docs.microsoft.com/virtualization/windowscontainers/deploy-containers/version-compatibility#matching-container-host-version-with-container-image-versions)
@@ -162,7 +161,7 @@ wget https://raw.githubusercontent.com/Microsoft/SDN/master/Kubernetes/flannel/s
 
 Wenn Sie den [Windows-Knoten vorbereitet](#preparing-a-windows-node)haben und Ihr `c:\k` Verzeichnis wie unten aussieht, sind Sie bereit, dem Knoten beizutreten.
 
-![Text](./media/flannel-directory.png)
+![text](./media/flannel-directory.png)
 
 #### <a name="join-node"></a>Knoten beitreten ####
 Um den Prozess der Verknüpfung eines Windows-Knotens zu vereinfachen, müssen Sie nur ein einzelnes Windows-Skript ausführen, um `kubelet` `kube-proxy` `flanneld` den Knoten zu starten.

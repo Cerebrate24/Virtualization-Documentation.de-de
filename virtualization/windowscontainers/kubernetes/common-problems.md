@@ -4,15 +4,14 @@ author: gkudra-msft
 ms.author: gekudray
 ms.date: 11/02/2018
 ms.topic: troubleshooting
-ms.prod: containers
 description: Lösungen für allgemeine Probleme beim Bereitstellen von Kubernetes und beim Beitritt zu Windows-Knoten.
 keywords: kubernetes, 1,14, Linux, kompilieren
-ms.openlocfilehash: 2e8074fa018b85a6628280a0dfdbce7c8cd553cb
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 0b87db08f027e91a2d5047ce4d6bbf41abd1916d
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192696"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985054"
 ---
 # <a name="troubleshooting-kubernetes"></a>Problembehandlung für Kubernetes #
 Diese Seite führt Sie durch mehrere Probleme beim Setup, Networking oder der Bereitstellung von Kubernetes.

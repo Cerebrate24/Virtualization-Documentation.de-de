@@ -5,15 +5,13 @@ keywords: Docker, Container
 author: jmesser81
 ms.date: 03/27/2018
 ms.topic: overview
-ms.prod: windows-containers
-ms.service: windows-containers
 ms.assetid: 538871ba-d02e-47d3-a3bf-25cda4a40965
-ms.openlocfilehash: 2235ae8b48828535facaa9b2be3dfc7fde450516
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 5f9d554a4fcedd9bd233a849c6480589be61abbd
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192627"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87984745"
 ---
 # <a name="windows-container-networking"></a>Windows-Container Netzwerk
 
@@ -24,16 +22,16 @@ ms.locfileid: "85192627"
 
 Dieses Thema bietet einen Überblick darüber, wie docker Host Netzwerke unter Windows erstellt und verwaltet. Windows-Container funktionieren in Bezug auf Netzwerke ähnlich wie virtuelle Computer. Jeder Container verfügt über einen virtuellen Netzwerkadapter (vNIC). der mit einem virtuellen Hyper-V-Switch (vSwitch) verbunden ist. Windows unterstützt fünf verschiedene [Netzwerktreiber oder-Modi](./network-drivers-topologies.md) , die über docker erstellt werden können: *NAT*, *Overlay*, *transparent*, *l2bridge*und *l2tunnel*. Sie sollten den Netzwerktreiber auswählen, der Ihren Bedürfnissen im Hinblick auf Ihre physische Netzwerkinfrastruktur und die Netzwerkanforderungen (Netzwerk mit einem oder mehreren Hosts) am besten gerecht wird.
 
-![Text](media/windowsnetworkstack-simple.png)
+![text](media/windowsnetworkstack-simple.png)
 
 Wenn die Docker-Engine das erste Mal ausgeführt wird, wird ein standardmäßiges NAT-Netzwerk erstellt ('nat'), das einen internen vSwitch und eine Windows-Komponente mit dem Namen `WinNAT` verwendet. Wenn bereits vorhandene externe vSwitches auf dem Host vorhanden sind, die über PowerShell oder Hyper-V-Manager erstellt wurden, sind Sie auch für docker mithilfe des *transparenten* Netzwerk Treibers verfügbar und können angezeigt werden, wenn Sie den ``docker network ls`` Befehl ausführen.
 
-![Text](media/docker-network-ls.png)
+![text](media/docker-network-ls.png)
 
 - Ein **interner** Vswitch ist ein virtueller Switch, der nicht direkt mit einem Netzwerkadapter auf dem Container Host verbunden ist.
 - Bei einem externen Vswitch handelt es sich um einen **externen** Vswitch, der direkt mit einem Netzwerkadapter auf dem Container Host verbunden ist.
 
-![Text](media/get-vmswitch.png)
+![text](media/get-vmswitch.png)
 
 Das NAT-Netzwerk ist das Standardnetzwerk bei Containern, die unter Windows ausgeführt werden. Container, die unter Windows ohne Flags oder Argumente zur Implementierung bestimmter Konfigurationen ausgeführt werden, werden an das standardmäßige NAT-Netzwerk angeschlossen und einer IP-Adresse aus dem NAT-Netzwerk aus dessen internen Präfix-IP-Bereich zugewiesen. Der verwendete interne IP-Standardpräfix für NAT ist 172.16.0.0/16.
 
@@ -60,7 +58,7 @@ Der Host Netzwerkdienst (HNS) und der hostcompute-Dienst (HCS) arbeiten zusammen
     - Hierzu gehören: Lastenausgleich, ACLs, Kapselung usw.
     - Suchen Sie nach unseren [hier](https://docs.microsoft.com/windows-server/networking/technologies/hcn/hcn-top) veröffentlichten HNS-APIs und-Schemas.
 
-![Text](media/HNS-Management-Stack.png)
+![text](media/HNS-Management-Stack.png)
 
 ## <a name="unsupported-features-and-network-options"></a>Nicht unterstützte Features und Netzwerkoptionen
 
@@ -72,7 +70,7 @@ Die folgenden Netzwerkoptionen werden zurzeit **nicht** unter Windows unterstüt
 - [Hostmodusnetzwerk](https://docs.docker.com/ee/ucp/interlock/config/host-mode-networking/)
 - Netzwerke in der virtualisierten Azure-Infrastruktur über den transparenten Netzwerktreiber.
 
-| Get-Help        | Nicht unterstützte Option   |
+| Befehl        | Nicht unterstützte Option   |
 |---------------|:--------------------:|
 | ``docker run``|   ``--ip6``, ``--dns-option`` |
 | ``docker network create``| ``--aux-address``, ``--internal``, ``--ip-range``, ``--ipam-driver``, ``--ipam-opt``, ``--ipv6``, ``--opt encrypted`` |

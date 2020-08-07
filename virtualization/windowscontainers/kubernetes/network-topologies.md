@@ -4,16 +4,15 @@ author: daschott
 ms.author: daschott
 ms.date: 02/09/2018
 ms.topic: how-to
-ms.prod: containers
 description: Unterstützte Netzwerktopologien unter Windows und Linux.
 keywords: kubernetes, 1,14, Windows, Getting Started
 ms.assetid: 3b05d2c2-4b9b-42b4-a61b-702df35f5b17
-ms.openlocfilehash: c322edb6a5ead34d7988f83d8cb8fba7c99cec0d
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 5eeee17dc6dfc87357d80c8b8fd7a29f05fc4c35
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192537"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985294"
 ---
 # <a name="network-solutions"></a>Network Solutions #
 
@@ -114,7 +113,7 @@ Nach einigen Minuten sollten alle Pods als ausgeführt angezeigt werden, wenn da
 kubectl get pods --all-namespaces
 ```
 
-![Text](media/kube-master.png)
+![text](media/kube-master.png)
 
 Für das Flannel-daemonset sollte auch "NoDebug Selector" `beta.kubernetes.io/os=linux` angewendet werden.
 
@@ -122,7 +121,7 @@ Für das Flannel-daemonset sollte auch "NoDebug Selector" `beta.kubernetes.io/os
 kubectl get ds -n kube-system
 ```
 
-![Text](media/kube-daemonset.png)
+![text](media/kube-daemonset.png)
 
 > [!tip]
 > Für die verbleibenden Flannel-DS-*-daemonsets können diese entweder ignoriert oder gelöscht werden, da Sie nicht geplant werden, wenn keine Knoten vorhanden sind, die mit der Prozessorarchitektur übereinstimmen.
@@ -190,7 +189,7 @@ Nach einigen Minuten sollten alle Pods als ausgeführt angezeigt werden, wenn da
 kubectl get pods --all-namespaces
 ```
 
-![Text](media/kube-master.png)
+![text](media/kube-master.png)
 
 Für das Flannel-daemonset sollte auch "NoDebug Selector" angewendet werden.
 
@@ -198,7 +197,7 @@ Für das Flannel-daemonset sollte auch "NoDebug Selector" angewendet werden.
 kubectl get ds -n kube-system
 ```
 
-![Text](media/kube-daemonset.png)
+![text](media/kube-daemonset.png)
 
 > [!tip]
 > Für die verbleibenden Flannel-DS-*-daemonsets können diese entweder ignoriert oder gelöscht werden, da Sie nicht geplant werden, wenn keine Knoten vorhanden sind, die mit der Prozessorarchitektur übereinstimmen.

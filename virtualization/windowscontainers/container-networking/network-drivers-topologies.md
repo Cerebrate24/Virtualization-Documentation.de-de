@@ -5,15 +5,13 @@ keywords: Docker, Container
 author: jmesser81
 ms.date: 03/27/2018
 ms.topic: conceptual
-ms.prod: windows-containers
-ms.service: windows-containers
 ms.assetid: 538871ba-d02e-47d3-a3bf-25cda4a40965
-ms.openlocfilehash: c7be67f3c114e7f6b122dffff399b2c292c26369
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 1a45bbf5588085df8b740687fd0e889055c84262
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192168"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985124"
 ---
 # <a name="windows-container-network-drivers"></a>Treiber für Windows-Container Netzwerk
 
@@ -71,7 +69,7 @@ Die folgende Tabelle zeigt, wie die Netzwerkkonnektivität für interne (Contain
   | Docker-Windows-Netzwerktreiber | Typische Verwendung | Container-zu-Container (einzelner Knoten) | Container-zu-extern (einzelner Knoten + mehrere Knoten) | Container-zu-Container (mehrere Knoten) |
   |-------------------------------|:------------:|:------------------------------------:|:------------------------------------------------:|:-----------------------------------:|
   | **NAT (Standard)** | Gut für Entwickler | <ul><li>Gleiches Subnetz: überbrückt Verbindung über den virtuellen Hyper-V-Switch</li><li> Cross-Subnetz: nicht unterstützt (nur ein internes NAT-Präfix)</li></ul> | Weitergeleitet durch Verwaltungs-vNIC (an winnat gebunden) | Nicht direkt unterstützt: erfordert das verfügbar machen von Ports über den Host |
-  | **Sichtigen** | Gute für Entwickler oder kleine bereit Stellungen | <ul><li>Gleiches Subnetz: überbrückt Verbindung über den virtuellen Hyper-V-Switch</li><li>Cross-Subnetz: weitergeleitet durch den Container Host</li></ul> | Routing durch den Container Host mit direktem Zugriff auf (physischer) Netzwerkadapter | Routing durch den Container Host mit direktem Zugriff auf (physischer) Netzwerkadapter |
+  | **Transparent** | Gute für Entwickler oder kleine bereit Stellungen | <ul><li>Gleiches Subnetz: überbrückt Verbindung über den virtuellen Hyper-V-Switch</li><li>Cross-Subnetz: weitergeleitet durch den Container Host</li></ul> | Routing durch den Container Host mit direktem Zugriff auf (physischer) Netzwerkadapter | Routing durch den Container Host mit direktem Zugriff auf (physischer) Netzwerkadapter |
   | **Überlagerung** | Gut für mehrere Knoten; erforderlich für docker Swarm, verfügbar in Kubernetes | <ul><li>Gleiches Subnetz: überbrückt Verbindung über den virtuellen Hyper-V-Switch</li><li>Cross-Subnetz: Netzwerk Datenverkehr wird gekapselt und über Mgmt vNIC weitergeleitet.</li></ul> | Nicht direkt unterstützt: erfordert einen zweiten Container Endpunkt, der an das NAT-Netzwerk unter Windows Server 2016 oder VFP-NAT-Regel auf Windows Server 2019 angeschlossen ist.  | Gleiches/Cross-Subnetz: Netzwerk Datenverkehr wird mithilfe von vxlan gekapselt und über Mgmt vNIC weitergeleitet. |
   | **L2Bridge** | Verwendet für Kubernetes und Microsoft Sdn | <ul><li>Gleiches Subnetz: überbrückt Verbindung über den virtuellen Hyper-V-Switch</li><li> Cross-Subnetz: die Mac-Adresse für den Container wurde bei einem eingehenden und ausgehenden Datenverkehr neu geschrieben.</li></ul> | Mac-Adresse für Container bei Eingang und Ausgang neu geschrieben | <ul><li>Gleiches Subnetz: überbrückte Verbindung</li><li>Cross-Subnetz: weitergeleitet über Mgmt vNIC auf WSv1809 und höher</li></ul> |
   | **L2Tunnel**| Nur Azure | Identisch/Cross-Subnetz: an den virtuellen Hyper-V-Switch des physischen Hosts, an den die Richtlinie angewendet wird. | Datenverkehr muss über das Azure Virtual Network-Gateway geleitet werden | Identisch/Cross-Subnetz: an den virtuellen Hyper-V-Switch des physischen Hosts, an den die Richtlinie angewendet wird. |

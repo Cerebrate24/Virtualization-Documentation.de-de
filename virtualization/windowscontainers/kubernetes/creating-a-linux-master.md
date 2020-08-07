@@ -4,15 +4,14 @@ author: daschott
 ms.author: daschott
 ms.date: 02/09/2018
 ms.topic: how-to
-ms.prod: containers
 description: Erstellen eines Kubernetes-Cluster Masters
 keywords: kubernetes, 1,14, Master, Linux
-ms.openlocfilehash: a46c8e996162891cc596946d8601bcb590b2b8eb
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 383163f29ab439ddd817640fca7203269810dd51
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192387"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985084"
 ---
 # <a name="creating-a-kubernetes-master"></a>Erstellen eines Kubernetes-Masters #
 > [!NOTE]
@@ -78,7 +77,7 @@ kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12
 
 Dies kann einige Minuten dauern. Nach Abschluss des Vorgangs sollte ein Bildschirm wie dieser angezeigt werden, der bestätigt, dass Ihr Master initialisiert wurde:
 
-![Text](media/kubeadm-init.png)
+![text](media/kubeadm-init.png)
 
 > [!tip]
 > Beachten Sie diesen kubeadm Join-Befehl. Das kubeadm-Token läuft ab, können Sie verwenden, `kubeadm token create --print-join-command` um ein neues Token zu erstellen.
@@ -124,7 +123,7 @@ Nach erfolgreicher Ausführung sollten "knotenselektoren" von `kube-proxy` und a
 kubectl get ds -n kube-system
 ```
 
-![Text](media/kube-proxy-ds.png)
+![text](media/kube-proxy-ds.png)
 
 ### <a name="collect-cluster-information"></a>Sammeln von Cluster Informationen ###
 Um dem Master erfolgreich zukünftige Knoten hinzuzufügen, sollten Sie die folgenden Informationen nachverfolgen:

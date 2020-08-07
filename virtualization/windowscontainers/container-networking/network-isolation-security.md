@@ -5,15 +5,13 @@ keywords: Docker, Container
 author: jmesser81
 ms.date: 03/27/2018
 ms.topic: conceptual
-ms.prod: windows-containers
-ms.service: windows-containers
 ms.assetid: 538871ba-d02e-47d3-a3bf-25cda4a40965
-ms.openlocfilehash: 78f9240ccb184b182247617aba116d6ac5533a02
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: 5c60406c0cc839a84e25ff12abf53439c6a208cb
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192087"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985384"
 ---
 # <a name="network-isolation-and-security"></a>Netzwerkisolation und Sicherheit
 
@@ -21,7 +19,7 @@ ms.locfileid: "85192087"
 
 Jeder Container Endpunkt wird in seinem eigenen __Netzwerk Namespace__platziert. Die Verwaltungs Host-vNIC und der Host Netzwerk Stapel befinden sich im standardmäßigen Netzwerk Namespace. Um die Netzwerk Isolation zwischen Containern auf demselben Host zu erzwingen, wird für jeden Windows Server-Container ein Netzwerk Namespace erstellt, und Container werden unter Hyper-V-Isolation ausgeführt, in der der Netzwerkadapter für den Container installiert ist. Windows Server-Container verwenden eine Host-vNIC für die Verbindung mit dem virtuellen Switch. Die Hyper-V-Isolation verwendet eine synthetische VM-NIC (die nicht für die VM des-Hilfsprogramms verfügbar gemacht wird), um Sie an den virtuellen Switch
 
-![Text](media/network-compartment-visual.png)
+![text](media/network-compartment-visual.png)
 
 ```powershell
 Get-NetCompartment
@@ -48,13 +46,13 @@ Container, die in Hyper-V-Isolation ausgeführt werden, verfügen über einen ei
 
 * Standardmäßige allow all in der Windows-Firewall (wird auf dem virtuellen Computer des-Hilfsprogramms ausgeführt) und VFP
 
-![Text](media/windows-firewall-containers.png)
+![text](media/windows-firewall-containers.png)
 
 ### <a name="kubernetes-pods"></a>Kubernetes-Pods
 
 In einem [Kubernetes Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/)wird zuerst ein Infrastruktur Container erstellt, an den ein Endpunkt angefügt wird. Container, die zum selben Pod gehören, einschließlich Infrastruktur-und workercontainern, nutzen einen gemeinsamen Netzwerk Namespace (gleicher IP-und Port-Speicherplatz).
 
-![Text](media/pod-network-compartment.png)
+![text](media/pod-network-compartment.png)
 
 ### <a name="customizing-default-port-acls"></a>Anpassen von Standardport-ACLs
 

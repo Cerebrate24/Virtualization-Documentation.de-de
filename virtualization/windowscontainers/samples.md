@@ -1,25 +1,23 @@
 ---
-title: Beispiele für Windows-Container
+title: Windows-Containerbeispiele
 description: Hier finden Sie Links zu gängigen Projekten und Codebeispielen mithilfe von Windows-Containern.
 keywords: Docker, Container, Windows, Beispiele
 author: cwilhit
 ms.date: 12/19/2016
 ms.topic: article
-ms.prod: windows-containers
-ms.service: windows-containers
 ms.assetid: 5c6f6350-f8d6-4426-b53d-9fb09c2bf267
-ms.openlocfilehash: e68f99c095d3cc1e7bb3a08d48bef7e1f877b837
-ms.sourcegitcommit: 1ca9d7562a877c47f227f1a8e6583cb024909749
+ms.openlocfilehash: fd96865f903542418016b4f75216fd901b47fb57
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74909550"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985414"
 ---
-# <a name="windows-container-samples"></a>Beispiele für Windows-Container
+# <a name="windows-container-samples"></a>Windows-Containerbeispiele
 
-Dies ist eine Sammlung von Beispielen, die vom Windows-Team und Mitgliedern der Community übermittelt wurden.  Diese Beispiele werden „wie besehen“ und ohne Gewährleistungen oder Garantien zur Verfügung gestellt.  Sie können weitere Beispiele beisteuern oder die aktuellen Beispiele verbessern.
+Dies ist eine vom Windows-Team und von Mitgliedern der Community übermittelte Sammlung von Beispielen.  Diese Beispiele werden „wie besehen“ und ohne Gewährleistungen oder Garantien zur Verfügung gestellt.  Sie können weitere Beispiele beisteuern oder die aktuellen Beispiele verbessern.
 
-# <a name="categories"></a>Categories
+# <a name="categories"></a>Kategorien
 
 ## <a name="application-frameworks"></a>Anwendungsframeworks
 
@@ -27,17 +25,17 @@ Dies ist eine Sammlung von Beispielen, die vom Windows-Team und Mitgliedern der 
 
 [Ausschalten](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis)
 
-[IIS-Arr](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis-arr)
+[iis-arr](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis-arr)
 
-[IIS-HTTPS](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis-https)
+[iis-https](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis-https)
 
-[IIS-PHP](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis-php)
+[iis-php](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/iis-php)
 
 [Django](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/Django)
 
-[Apache-HTTP](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/apache-http)
+[apache-http](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/apache-http)
 
-[Apache-HTTP-PHP](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/apache-http-php)
+[apache-http-php](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/apache-http-php)
 
 [nginx](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/nginx)
 
@@ -49,15 +47,15 @@ Dies ist eine Sammlung von Beispielen, die vom Windows-Team und Mitgliedern der 
 
 [nodejs](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/nodejs)
 
-[Python](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/python)
+[Thon](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/python)
 
 [python-django](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/python-django)
 
-[Ränge](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/rails)
+[rails](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/rails)
 
 [CHRY](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/ruby)
 
-[Server-JRE-8u51-Windows-x64](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/server-jre-8u51-windows-x64)
+[server-jre-8u51-windows-x64](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/server-jre-8u51-windows-x64)
 
 ## <a name="databases"></a>Datenbanken
 
@@ -73,12 +71,12 @@ sqlserver-express - [Docker Hub-Bild](https://hub.docker.com/r/microsoft/mssql-s
 
 ## <a name="infrastructure-and-ci-tools"></a>Infrastruktur und CI-Tools
 
-[PowerShellDSC_iis-10,0](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/PowerShellDSC_iis-10.0)
+[PowerShellDSC_iis-10.0](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/PowerShellDSC_iis-10.0)
 
 ## <a name="just-for-fun"></a>Just for Fun
 
-[MineCraft](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/MineCraft) 
+[MineCraft](https://github.com/Microsoft/Virtualization-Documentation/tree/master/windows-container-samples/MineCraft)
 
-## <a name="other"></a>Andere
+## <a name="other"></a>Sonstige
 
 [DirectX](https://github.com/MicrosoftDocs/Virtualization-Documentation/tree/master/windows-container-samples/directx) (einschließlich GPU-Beschleunigung)

@@ -4,16 +4,15 @@ author: daschott
 ms.author: daschott
 ms.date: 11/02/2018
 ms.topic: how-to
-ms.prod: containers
 description: Bereitstellen von Kubernetes-Ressourcen auf einem Kubernetes-Cluster mit gemischtem Betriebssystem.
 keywords: kubernetes, 1,14, Windows, Getting Started
 ms.assetid: 3b05d2c2-4b9b-42b4-a61b-702df35f5b17
-ms.openlocfilehash: 13f2168bc2e731b65768a73bbb04ffe9363ded59
-ms.sourcegitcommit: 1bafb5de322763e7f8b0e840b96774e813c39749
+ms.openlocfilehash: a342a03153564b2f76af45a9b792b58ae8afc18c
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85192337"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87985334"
 ---
 # <a name="deploying-kubernetes-resources"></a>Bereitstellen von Kubernetes Ressourcen #
 Angenommen, Sie verfügen über einen Kubernetes-Cluster, der aus mindestens einem Master-und 1-Worker besteht, können Sie Kubernetes-Ressourcen bereitstellen.

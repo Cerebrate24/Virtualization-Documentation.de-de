@@ -5,19 +5,17 @@ keywords: Docker, Container, Windows, Beispiele
 author: taylorb-microsoft
 ms.date: 12/19/2016
 ms.topic: article
-ms.prod: windows-containers
-ms.service: windows-containers
 ms.assetid: cfbb2542-fead-48e7-8318-4da92a7b5b6f
-ms.openlocfilehash: 338dd0570f1a2e73295b2bacf2c4282b3fdd7956
-ms.sourcegitcommit: 16744984ede5ec94cd265b6bff20aee2f782ca88
+ms.openlocfilehash: a06168922306d2cc8f2f6ad4f314e7ddf8e7bf09
+ms.sourcegitcommit: 186ebcd006eeafb2b51a19787d59914332aad361
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/18/2020
-ms.locfileid: "77439297"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87984614"
 ---
 # <a name="community-videos-and-blogs"></a>Videos und Blogs der Community
 
-Diese Seite enthält Links zu Videos und Blogs, die von Mitgliedern der Container-Community erstellt wurden.  Wenn Sie eine hervorragende Ressource kennen oder selbst eine erstellt haben, übermitteln Sie eine Veröffentlichungsanforderung, um sie dieser Liste hinzuzufügen.
+Diese Seite enthält Links zu Videos und Blogs, die von Mitgliedern der Container-Community erstellt wurden.  Wenn Sie eine tolle Ressource kennen oder selbst eine erstellt haben, übermitteln Sie eine Veröffentlichungsanforderung, um sie dieser Liste hinzuzufügen.
 
 ## <a name="getting-started"></a>Erste Schritte
 
@@ -45,7 +43,7 @@ Gewusst [wie: anddosten von Windows-Anwendungen: die 5 Schritte](https://blog.si
 
 [Containerize Windows workloads with Image2Docker](https://blog.docker.com/2016/10/containerize-windows-workloads-image2docker/) (Windows-Workloads mit Image2Docker in Container verpacken) – Mano Marks
 
-[Use Docker Compose and Service Discovery on Windows to scale-out your multi-service container application](https://techcommunity.microsoft.com/t5/Containers/Use-Docker-Compose-and-Service-Discovery-on-Windows-to-scale-out/ba-p/382312) (Verwenden von Docker Compose und Service Discovery unter Windows, um ein Multi-Service-Containeranwendung zu skalieren) – Kallie Bracken und Jason Messer
+[Use Docker Compose and Service Discovery on Windows to scale-out your multi-service container application](https://techcommunity.microsoft.com/t5/Containers/Use-Docker-Compose-and-Service-Discovery-on-Windows-to-scale-out/ba-p/382312) (Docker Compose und Service Discovery in Windows nutzen, um Ihre Containeranwendung mit mehreren Diensten horizontal hochzuskalieren) – Kallie Bracken and Jason Messer
 
 [PowerShell-Konfiguration des gewünschten Zustands in Windows-Containern mit docker](https://dille.name/blog/2016/06/17/powershell-desired-state-configuration-psdsc-in-windows-containers-using-docker/) -Nicholas Dille
 
@@ -55,6 +53,6 @@ Gewusst [wie: anddosten von Windows-Anwendungen: die 5 Schritte](https://blog.si
 
 [How to protect a Windows 2016 Docker engine with TLS](https://stefanscherer.github.io/protecting-a-windows-2016-docker-engine-with-tls/) (So schützen Sie ein Windows 2016 Docker-Modul mit TLS) – Stefan Scherer
 
-[Using a Microsoft CA to secure Docker](https://dille.name/blog/2016/11/08/using-a-microsoft-ca-to-secure-docker/) (Absichern von Docker mit einer Microsoft-Zertifizierungsstelle) – Nicholas Dille 
+[Using a Microsoft CA to secure Docker](https://dille.name/blog/2016/11/08/using-a-microsoft-ca-to-secure-docker/) (Absichern von Docker mit einer Microsoft-Zertifizierungsstelle) – Nicholas Dille
 
 [Windows #Container Performance of Layers](https://dille.name/blog/2017/01/13/windows-container-performance-of-layers/) (Leistungsfähige Layer für Windows-Container) – Nicholas Dille
